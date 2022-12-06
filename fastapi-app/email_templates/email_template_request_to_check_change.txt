@@ -1,0 +1,40 @@
+﻿<html>
+
+<p><span>[English version is shown at bottom]</span><br>
+<br>
+Dear {checker_name}<br>
+<br>
+ท่านได้รับคำร้องขอตรวจทานเกี่ยวกับ 5M1E รายละเอียดดังนี้<br>
+<br>
+<strong>Request No.:</strong> {request_no}<br>
+<strong>ผู้รายงาน:</strong> {requester_name}<br>
+<strong>รายงานเมื่อ:</strong> {created_at}<br>
+<strong>ประเภท 5M1E:</strong> {5m1e_category}<br>
+<strong>หัวข้อ:</strong> {topic}<br>
+<strong>รายละเอียด:</strong><br> {detail}<br>
+<br>
+กรุณาตรวจทานและอนุมัติ<br>
+โดยท่านสามารถให้คำอนุมัติได้จาก <a href="https://www.google.com">ลิงก์</a> นี้<br>
+ขอบคุณสำหรับความร่วมมือ<br>
+<br>
+นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br>
+<hr>
+<span>[English version]</span><br>
+<br>
+You got a request to confirm about 5M1E change as below.<br>
+<br>
+<strong>Request No.:</strong> {request_no}<br>
+<strong>Reporter:</strong> {requester_name}<br>
+<strong>Date &amp; Time:</strong> {created_at}<br>
+<strong>5M1E Category:</strong> {5m1e_category}<br>
+<strong>Topic:</strong> {topic}<br>
+<strong>Detail:</strong><br> {detail}<br>
+<br>
+Please confirm and give approval for further action.<br>
+You can give approval by click in this <a href="https://www.google.com">link</a>.<br>
+Thank you for your corporation.<br>
+<br>
+This is automatic response of 5M1E report system, please don't reply this mail.<br>
+<hr>
+</p>
+</html>

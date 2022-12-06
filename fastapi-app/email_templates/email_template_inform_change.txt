@@ -1,0 +1,47 @@
+﻿<html>
+
+  <p><span>[English version is shown at bottom]</span><br>
+    <br>
+    Dear all concerned<br>
+    <br>
+    ขณะนี้ได้มีการเปลี่ยนแปลงเกิดขึ้นที่ {line_name}<br>
+    <br>
+    <b><u>รายละเอียดของคำร้อง</u></b><br>
+    <strong>Request No.:</strong> {request_no}<br>
+    <strong>ผู้รายงาน:</strong> {requester_name}<br>
+    <strong>รายงานเมื่อ:</strong> {created_at}<br>
+    <strong>ประเภท 5M1E:</strong> {5m1e_category}<br>
+    <strong>หัวข้อ:</strong> {topic}<br>
+    <strong>รายละเอียด:</strong><br> {detail}<br>
+    <p>
+      <strong>Product:</strong> {product_name}&emsp;&emsp;<strong>Line:</strong> {line_name}<br>
+      <strong>Process:</strong> {process_name}&emsp;&emsp;<strong>Machine:</strong> {machine_no}<br>
+      <strong>Part No.:</strong> {part_no}<br>
+      <strong>Note:</strong> {requester_note}
+    </p>
+    <br>
+    นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br>
+    <hr>
+    <br>
+    <span>[English version]</span><br>
+    <br>
+    There is a change in {line_name}.<br>
+    <br>
+    <b><u>Request Detail</u></b><br>
+    <strong>Request No.:</strong> {request_no}<br>
+    <strong>Date &amp; Time:</strong> {created_at}<br>
+    <strong>5M1E Category:</strong> {5m1e_category}<br>
+    <strong>Topic:</strong> {topic}<br>
+    <strong>Detail:</strong><br> {detail}<br>
+    <p>
+      <strong>Product:</strong> {product_name}&emsp;&emsp;<strong>Line:</strong> {line_name}<br>
+      <strong>Process:</strong> {process_name}&emsp;&emsp;<strong>Machine:</strong> {machine_no}<br>
+      <strong>Part No.:</strong> {part_no}<br>
+      <strong>Note:</strong> {requester_note}
+    </p>
+    <br>
+    This is automatic response of 5M1E report system, please don't reply this mail.<br>
+    <hr>
+  </p>
+
+</html>

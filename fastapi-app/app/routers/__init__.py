@@ -1,0 +1,9 @@
+from app.routers.users import users_routers
+from app.routers.static import static_routers
+from app.routers.request import request_routers
+
+__all__ = [
+    "users_routers",
+    "static_routers",
+    "request_routers"
+]

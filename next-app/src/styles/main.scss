@@ -1,0 +1,69 @@
+.link-group {
+  p {
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.form-5m1e-report {
+  .ant-form-item-required {
+    padding: 8px 16px;
+    background: black;
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: bold;
+    margin-bottom: 6px !important;
+    margin-left: 12px !important;
+    transform: skew(-10deg);
+  }
+
+  .ant-form-item-label {
+    label {
+      padding: 8px 16px;
+      background: black;
+      color: white !important;
+      font-size: 18px !important;
+      font-weight: bold;
+      margin-bottom: 6px !important;
+      margin-left: 12px !important;
+      transform: skew(-10deg);
+    }
+  }
+
+  .ant-radio-button-wrapper {
+    font-size: 18px !important;
+    height: 54px !important;
+    min-width: 120px !important;
+    margin: 0 12px;
+    margin-bottom: 12px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ant-form-item-explain-error {
+    margin-left: 12px !important;
+  }
+
+  .ant-radio-wrapper {
+    font-size: 18px !important;
+    margin: 0 12px;
+    margin-bottom: 12px;
+  }
+
+  .ant-checkbox-wrapper {
+    font-size: 18px !important;
+    margin: 0 12px;
+    margin-bottom: 12px;
+  }
+
+  .ant-select {
+    font-size: 18px !important;
+    margin: 0 12px;
+  }
+}

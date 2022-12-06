@@ -1,0 +1,166 @@
+{
+	"action": {
+		"11": {
+			"name": "Submit change point",
+			"description": "submit change point report",
+			"type": "Submit",
+			"request_process": "5M1E Change"
+		},
+		"12":{
+			"name": "Cancel change point",
+			"description": "cancel by requester",
+			"type": "Self Cancel",
+			"request_process": "5M1E Change"
+		},
+		"13":{
+			"name": "Approve change point",
+			"description": "approve change point by TL/MGR",
+			"type": "Approve",
+			"request_process": "5M1E Change"
+		},
+		"14":{
+			"name": "Reject change point",
+			"description": "reject change point by TL/MGR",
+			"type": "Reject",
+			"request_process": "5M1E Change"
+		},
+		"15":{
+			"name": "Cancel change point",
+			"description": "cancel by TL/MGR",
+			"type": "Cancel",
+			"request_process": "5M1E Change"
+		},
+		"16":{
+			"name": "Request confirmation",
+			"description": "MGR request supporter's confirmation",
+			"type": "Approve",
+			"request_process": "5M1E Change"
+		},
+		"17":{
+			"name": "Not request confirmation",
+			"description": "MGR not request supporter's confirmation",
+			"type": "Reject",
+			"request_process": "5M1E Change"
+		}
+	},
+	"activity": {
+		"11": {
+			"name": "Send change point request to TL/MGR",
+			"description": "email notify TL/MGR about the change point",
+			"type": "Send email",
+			"request_process": "5M1E Change",
+			"func": ""
+		},
+		"12": {
+			"name": "Send cancellation to TL/MGR",
+			"description": "email notify TL/MGR about cancellation",
+			"type": "Send email",
+			"request_process": "5M1E Change",
+			"func": ""
+		},
+		"13": {
+			"name": "Send information of change point",
+			"description": "email notify all concerned person about the change point",
+			"type": "Send email all",
+			"request_process": "5M1E Change",
+			"func": ""
+		},
+		"14": {
+			"name": "Send reject change point to requester",
+			"description": "email notify requester about reject",
+			"type": "Send email",
+			"request_process": "5M1E Change",
+			"func": ""
+		},
+		"15": {
+			"name": "Send cancellation to requester",
+			"description": "email notify requester about cancellation",
+			"type": "Send email",
+			"request_process": "5M1E Change",
+			"func": ""
+		},
+		"16": {
+			"name": "Send request confirmation",
+			"description": "email notify supporter about request confirmation",
+			"type": "Send email",
+			"request_process": "5M1E Change",
+			"func": ""
+		}
+	},
+	"state": {
+		"11": {
+			"name": "Waiting Submit",
+			"description": "waiting submit change point",
+			"type": "Start",
+			"request_process": "5M1E Change"
+		},
+		"12": {
+			"name": "Cancelled",
+			"description": "request cancelled",
+			"type": "Cancelled",
+			"request_process": "5M1E Change"
+		},
+		"13": {
+			"name": "Waiting Check",
+			"description": "waiting TL/MGR check change point",
+			"type": "Normal",
+			"request_process": "5M1E Change"
+		},
+		"14": {
+			"name": "Waiting Review",
+			"description": "waiting MGR to review change point",
+			"type": "Normal",
+			"request_process": "5M1E Change"
+		},
+		"15": {
+			"name": "Completed",
+			"description": "Change completed",
+			"type": "Completed",
+			"request_process": "5M1E Change"
+		}
+	},
+	"transition": {
+		"11": {
+			"current_state_id": "11",
+			"next_state_id": "13",
+			"action_id": "11",
+			"activity_id": "11",
+			"description": "submit change point request" 
+		},
+		"12": {
+			"current_state_id": "13",
+			"next_state_id": "12",
+			"action_id": "12",
+			"activity_id": "12",
+			"description": "self cancel request" 
+		},
+		"13": {
+			"current_state_id": "13",
+			"next_state_id": "14",
+			"action_id": "13",
+			"activity_id": "13",
+			"description": "approve change point request" 
+		},
+		"14": {
+			"current_state_id": "13",
+			"next_state_id": "11",
+			"action_id": "14",
+			"activity_id": "14",
+			"description": "reject change point request" 
+		},
+		"15": {
+			"current_state_id": "14",
+			"next_state_id": "15",
+			"action_id": "16",
+			"activity_id": "16",
+			"description": "select confirmation" 
+		},
+		"16": {
+			"current_state_id": "14",
+			"next_state_id": "15",
+			"action_id": "17",
+			"activity_id": "",
+			"description": "not select confirmation" 
+		}
+	}
+}
