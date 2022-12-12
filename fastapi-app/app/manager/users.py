@@ -18,7 +18,6 @@ class UserManager:
         self.password_manager = PasswordManager()
         self.crud = UsersCRUD()
         # set_db(get_pg_async_db)
-        # TODO create user manager
         # reset password
         # forget password
         # update detail
@@ -94,7 +93,6 @@ class UserManager:
             raise HTTPException(status_code=400, detail=ErrorCode.PASSWORD_INCORRECT)
 
     async def create(self, user: UserCreate, db: AsyncSession) -> str:
-        print("in create")
         try:
             helper = PasswordManager()
             user_detail: UserCreate = user
@@ -102,6 +100,7 @@ class UserManager:
             user_detail.user_pass = helper.hash_password(password=user.user_pass)
             user_detail.user_uuid = helper.generate_uuid(user_id=user.user_id)
             user_detail.created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+            print(user_detail)
             created_user = await self.crud.create_user(user=user_detail, db=db)
 
         except exceptions.UserAlreadyExists:

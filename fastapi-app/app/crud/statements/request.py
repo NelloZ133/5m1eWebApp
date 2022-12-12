@@ -56,6 +56,7 @@ def post_submit_request_stmt(request_id: UUID, submit_data: RequestCreateSubmit)
         ) RETURNING request_no, request_id
         """
 
+
 def post_save_request_stmt(request_id: UUID, submit_data: RequestCreateSubmit) -> str:
     return f"""
         WITH update_request AS (
@@ -69,7 +70,8 @@ def post_save_request_stmt(request_id: UUID, submit_data: RequestCreateSubmit) -
         )
 
         SELECT request_no FROM "request_no_{submit_data.request_process_name}" WHERE request_id = '{request_id}'
-        """    
+        """
+
 
 def post_update_request_stmt(request_id: UUID, submit_data: RequestCreateSubmit) -> str:
     return f"""
@@ -105,6 +107,8 @@ def post_update_request_stmt(request_id: UUID, submit_data: RequestCreateSubmit)
 
         SELECT request_no FROM "request_no_{submit_data.request_process_name}" WHERE request_id = '{request_id}'
         """
+
+
 def create_problem_change(change_request_id, problem_request_id) -> str:
     if problem_request_id is not None:
         return f"""
@@ -114,6 +118,7 @@ def create_problem_change(change_request_id, problem_request_id) -> str:
         return f"""
             INSERT INTO problem_changes(change_request_id) VALUES ('{change_request_id}')
         """
+
 
 def update_problem_change(change_request_id, problem_request_id) -> str:
     if problem_request_id is not None:
@@ -125,7 +130,8 @@ def update_problem_change(change_request_id, problem_request_id) -> str:
             UPDATE problem_changes set problem_request_id = NULL WHERE change_request_id = '{change_request_id}'
         """
 
-def get_all_requests_stmt() ->str:
+
+def get_all_requests_stmt() -> str:
     return f"""
         SELECT t.request_id,
 			np.request_no as request_problem_no,
@@ -147,10 +153,7 @@ def get_all_requests_stmt() ->str:
 			a.updated_at as action_updated_at,
             a.user_uuid as action_user_uuid,
             a.note,
-			a.is_active,
-			a.is_complete,
 			a.action_id,
-			a.transition_id,
             a.email_list
         FROM (
             SELECT r.request_id,
@@ -175,13 +178,11 @@ def get_all_requests_stmt() ->str:
         """
 
 
-# TODO check statement of get_all_requests_stmt
-def get_all_requests_by_type_stmt(process_id: list[int], process_name: str) -> str:
+def get_all_requests_by_type_stmt() -> str:
 
     return f"""
         SELECT *,
-            f.user_uuid as file_user_uuid,
-            c.user_uuid as concerned_user_uuid
+            f.user_uuid as file_user_uuid
             FROM (
                 SELECT *,
                     a.created_at as action_created_at,
@@ -200,109 +201,8 @@ def get_all_requests_by_type_stmt(process_id: list[int], process_name: str) -> s
                 LEFT JOIN request_actions a USING (request_id)
             ) s
             LEFT JOIN request_files f USING (request_id)
-            LEFT JOIN request_concerned c USING (request_id)
             LEFT JOIN "request_no_5M1E_problem" np USING (request_id)
             LEFT JOIN "request_no_5M1E_change" nc USING (request_id)
-			LEFT JOIN actions_groups g USING (action_id)
---             LEFT JOIN groups g USING (group_id)
-        """
-
-
-def get_request_stmt(id: str) -> str:
-    return f"""
-        SELECT t.request_id,
-            np.request_no as request_problem_no,
-			nc.request_no as request_change_no,
-            t.req_created_at,
-            t.req_updated_at,
-            t.is_locked,
-            t.request_process_id,
-            t.line_id,
-            t.user_uuid,
-            t.current_state_id,
-            t.request_data_id,
-            t.data_created_at,
-            t.data_updated_at,
-            t.request_data_value,
-            a.request_action_id,
-			a.created_at as action_created_at,
-			a.updated_at as action_updated_at,
-            a.user_uuid as action_user_uuid,
-            a.note,
-			a.is_active,
-			a.is_complete,
-			a.action_id,
-			a.transition_id,
-            a.email_list
-        FROM (
-            SELECT r.request_id,
-            r.created_at as req_created_at,
-            r.updated_at as req_updated_at,
-            r.is_locked,
-            r.request_process_id,
-            r.line_id,
-            r.user_uuid,
-            r.current_state_id,
-            d.request_data_id,
-            d.created_at as data_created_at,
-            d.updated_at as data_updated_at,
-            d.request_data_value
-            FROM requests r
-            JOIN request_datas d USING (request_id)
-            WHERE r.request_id = '{id}'
-        ) t 
-        LEFT JOIN request_actions a USING (request_id)
-        LEFT JOIN "request_no_5M1E_problem" np USING (request_id)
-        LEFT JOIN "request_no_5M1E_change" nc USING (request_id)
-        ORDER BY t.request_id, action_created_at
-        """
-
-
-def get_requests_by_type_stmt(process_id: list[int], skip: int, limit: int) -> str:
-    return f"""
-        SELECT t.request_id,
-            np.request_no as request_problem_no,
-			nc.request_no as request_change_no,
-            t.req_created_at,
-            t.req_updated_at,
-            t.is_locked,
-            t.request_process_id,
-            t.line_id,
-            t.user_uuid,
-            t.current_state_id,
-            t.request_data_id,
-            t.data_created_at,
-            t.data_updated_at,
-            t.request_data_value,
-            a.request_action_id,
-            a.created_at as action_created_at,
-            a.updated_at as action_updated_at,
-            a.is_active,
-            a.is_complete,
-            a.action_id,
-            a.transition_id,
-            a.email_list
-        FROM (
-            SELECT r.request_id,
-            r.created_at as req_created_at,
-            r.updated_at as req_updated_at,
-            r.is_locked,
-            r.request_process_id,
-            r.line_id,
-            r.user_uuid,
-            r.current_state_id,
-            d.request_data_id,
-            d.created_at as data_created_at,
-            d.updated_at as data_updated_at,
-            d.request_data_value
-            FROM requests r
-            JOIN request_datas d USING (request_id)
-            WHERE request_process_id IN {tuple(process_id)}
-            OFFSET {skip} LIMIT {limit}
-        ) t 
-        LEFT JOIN request_actions a USING (request_id)
-        LEFT JOIN "request_no_5M1E_problem" np USING (request_id)
-        LEFT JOIN "request_no_5M1E_change" nc USING (request_id)
         """
 
 

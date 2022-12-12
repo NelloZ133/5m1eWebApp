@@ -5,64 +5,110 @@ import { _5M1ESettingStore } from "../5m1e-setting.store";
 import { I5M1EProblemPermissionState } from "../interface/5m1e-problem-permission.interface";
 import { UserStore } from "../user.store";
 
-export const _5M1EProblemPermissionSlice: StateCreator<I5M1EProblemPermissionState> = (set, get) => ({
-  canSubmit (request) {
-    const { user } = UserStore.getState()
+export const _5M1EProblemPermissionSlice: StateCreator<
+  I5M1EProblemPermissionState
+> = (set, get) => ({
+  canSubmit(request) {
+    const { user } = UserStore.getState();
     if (!user?.user_uuid) {
-      return false
+      return false;
     }
-    const { isPositionGroupDirect } = _5M1ESettingStore.getState()
-    return isPositionGroupDirect(user.user_uuid) && request.user_uuid === user.user_uuid
+    const { isPositionGroupDirect } = _5M1ESettingStore.getState();
+    return (
+      isPositionGroupDirect(user.user_uuid) &&
+      request.user_uuid === user.user_uuid
+    );
   },
   canApprove(request) {
-    const { user } = UserStore.getState()
+    const { user } = UserStore.getState();
     if (!user?.user_uuid) {
-      return false
+      return false;
     }
-    const { isPositionLL, isPositionTL, isPositionMGR, isPositionFM, isPositionFD, isPositionGroupDirect, userJoinRolePositionDict } = _5M1ESettingStore.getState()
-    const userJoinRolePosition = userJoinRolePositionDict[user.user_uuid]
-    const submitUserUUID = request.actionList[0].user_uuid
-    const submitUserJoinRolePosition = userJoinRolePositionDict[submitUserUUID]
-    const userPoint = PositionMapToPoint[userJoinRolePosition?.position_name] || 0
-    const submitUserPoint = PositionMapToPoint[submitUserJoinRolePosition?.position_name] || 0
-    return request.user_uuid !== user.user_uuid && isPositionGroupDirect(user.user_uuid) && 
-      (isPositionLL(user.user_uuid) || isPositionTL(user.user_uuid) || isPositionMGR(user.user_uuid) || isPositionFM(user.user_uuid) || isPositionFD(user.user_uuid)) && (
+    const {
+      isPositionLL,
+      isPositionTL,
+      isPositionMGR,
+      isPositionFM,
+      isPositionFD,
+      isPositionGroupDirect,
+      userJoinRolePositionDict,
+    } = _5M1ESettingStore.getState();
+    const userJoinRolePosition = userJoinRolePositionDict[user.user_uuid];
+    const submitUserUUID = request.actionList[0].user_uuid;
+    const submitUserJoinRolePosition = userJoinRolePositionDict[submitUserUUID];
+    const userPoint =
+      PositionMapToPoint[userJoinRolePosition?.position_name] || 0;
+    const submitUserPoint =
+      PositionMapToPoint[submitUserJoinRolePosition?.position_name] || 0;
+    return (
+      request.user_uuid !== user.user_uuid &&
+      isPositionGroupDirect(user.user_uuid) &&
+      (isPositionLL(user.user_uuid) ||
+        isPositionTL(user.user_uuid) ||
+        isPositionMGR(user.user_uuid) ||
+        isPositionFM(user.user_uuid) ||
+        isPositionFD(user.user_uuid)) &&
       userPoint >= submitUserPoint
-    )
+    );
   },
   canReject(request) {
-    return get().canApprove(request)
+    return get().canApprove(request);
   },
   canCancel(request) {
-    const { user } = UserStore.getState()
+    const { user } = UserStore.getState();
     if (!user?.user_uuid) {
-      return false
+      return false;
     }
-    const { isPositionLL, isPositionTL, isPositionMGR, isPositionFM, isPositionFD, isPositionGroupDirect, userJoinRolePositionDict } = _5M1ESettingStore.getState()
-    const userJoinRolePosition = userJoinRolePositionDict[user.user_uuid]
-    const submitUserUUID = request.actionList[0].user_uuid
-    const submitUserJoinRolePosition = userJoinRolePositionDict[submitUserUUID]
-    const userPoint = PositionMapToPoint[userJoinRolePosition?.position_name] || 0
-    const submitUserPoint = PositionMapToPoint[submitUserJoinRolePosition?.position_name] || 0
-    return request.user_uuid === user.user_uuid || (isPositionGroupDirect(user.user_uuid) && 
-      (isPositionLL(user.user_uuid) || isPositionTL(user.user_uuid) || isPositionMGR(user.user_uuid) || isPositionFM(user.user_uuid) || isPositionFD(user.user_uuid)) && (
-      userPoint >= submitUserPoint
-    ))
+    const {
+      isPositionLL,
+      isPositionTL,
+      isPositionMGR,
+      isPositionFM,
+      isPositionFD,
+      isPositionGroupDirect,
+      userJoinRolePositionDict,
+    } = _5M1ESettingStore.getState();
+    const userJoinRolePosition = userJoinRolePositionDict[user.user_uuid];
+    const submitUserUUID = request.actionList[0].user_uuid;
+    const submitUserJoinRolePosition = userJoinRolePositionDict[submitUserUUID];
+    const userPoint =
+      PositionMapToPoint[userJoinRolePosition?.position_name] || 0;
+    const submitUserPoint =
+      PositionMapToPoint[submitUserJoinRolePosition?.position_name] || 0;
+    return (
+      request.user_uuid === user.user_uuid ||
+      (isPositionGroupDirect(user.user_uuid) &&
+        (isPositionLL(user.user_uuid) ||
+          isPositionTL(user.user_uuid) ||
+          isPositionMGR(user.user_uuid) ||
+          isPositionFM(user.user_uuid) ||
+          isPositionFD(user.user_uuid)) &&
+        userPoint >= submitUserPoint)
+    );
   },
   canSelectSupporter() {
-    const { user } = UserStore.getState()
+    const { user } = UserStore.getState();
     if (!user?.user_uuid) {
-      return false
+      return false;
     }
-    const { isPositionGroupDirect, isPositionMGR, isPositionFM, isPositionFD } = _5M1ESettingStore.getState()
-    return isPositionGroupDirect(user.user_uuid) && (isPositionMGR(user.user_uuid) || isPositionFM(user.user_uuid) || isPositionFD(user.user_uuid))
+    const { isPositionGroupDirect, isPositionMGR, isPositionFM, isPositionFD } =
+      _5M1ESettingStore.getState();
+    return (
+      isPositionGroupDirect(user.user_uuid) &&
+      (isPositionMGR(user.user_uuid) ||
+        isPositionFM(user.user_uuid) ||
+        isPositionFD(user.user_uuid))
+    );
   },
   canDoActionByGivenTransition(request, transition) {
     if (!transition.id) {
-      return false
+      return false;
     }
 
-    const TransitionIdToValidateActionFunc: Record<number, (request: _5M1ERequest) => boolean> = {
+    const TransitionIdToValidateActionFunc: Record<
+      number,
+      (request: _5M1ERequest) => boolean
+    > = {
       1: get().canSubmit,
       2: get().canCancel,
       3: get().canApprove,
@@ -74,8 +120,10 @@ export const _5M1EProblemPermissionSlice: StateCreator<I5M1EProblemPermissionSta
       13: get().canApprove,
       14: get().canReject,
       15: get().canSelectSupporter,
-      16: get().canSelectSupporter
-    }
-    return TransitionIdToValidateActionFunc?.[+transition.id]?.(request) ?? false
+      16: get().canSelectSupporter,
+    };
+    return (
+      TransitionIdToValidateActionFunc?.[+transition.id]?.(request) ?? false
+    );
   },
-})
+});

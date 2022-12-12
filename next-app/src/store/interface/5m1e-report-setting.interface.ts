@@ -12,7 +12,7 @@ export interface I5M1EReportSettingState {
   processDict: Record<number, Process>
   processMachineDict: Record<number, ProcessMachine>
   productDict: Record<number, Product>
-  productLineList: ProductLine[]
+  // productLineList: ProductLine[]
 
   problemCategoryNameList: () => string[]
   changePointCategoryNameList: () => string[]
