@@ -16,7 +16,7 @@ class UsersCRUD:
         if safe:
             except_column.append("user_pass")
         stmt = """SELECT * FROM users LEFT JOIN positions using (position_id)"""
-        rs = toArrayWithKey(await self.db.execute(stmt), except_column)
+        rs = toArrayWithKey(await db.execute(stmt), except_column)
         return rs
 
     async def get_user_by_user_id(
@@ -80,8 +80,7 @@ class UsersCRUD:
         return rs
 
     async def get_user_by_email(
-        self, email: str, safe: bool = True, db: AsyncSession = None
-    ) -> list:
+        self, email: str, safe: bool = True, db: AsyncSession = None) -> list:
         except_column = []
         if safe:
             except_column.append("user_pass")
@@ -112,7 +111,7 @@ class UsersCRUD:
 
     async def create_user(self, user: UserCreate, db: AsyncSession):
         stmt = f"""INSERT INTO users (user_uuid, user_id, user_pass, firstname, lastname, email, app_line_id, position_id, section_id, concern_line, created_at, is_active)
-            VALUES ('{user.user_uuid}','{user.user_id}', '{user.user_pass}', '{user.firstname}', '{user.lastname}', '{user.email}', '{user.app_line_id}', '{user.position_id}', '{user.section_id}', ARRAY {user.concern_line}, '{user.created_at}', '{user.is_active}')
+            VALUES ('{user.user_uuid}', '{user.user_id}', '{user.user_pass}', '{user.firstname}', '{user.lastname}', '{user.email}', '{user.app_line_id}', '{user.position_id}', '{user.section_id}', ARRAY {user.concern_line}, '{user.created_at}', '{user.is_active}')
         """
         await db.execute(stmt)
         await db.commit()

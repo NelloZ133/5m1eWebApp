@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import AsyncGenerator, List
 
-from app.schemas.users import UserLogin, UserCreate
+from app.schemas.users import UserLogin, UserCreate, UserRegister
 from app.manager.users import UserManager
 from app.dependencies import get_pg_async_db
 from app.errors import ErrorCode
@@ -70,9 +70,23 @@ def users_routers(db: AsyncGenerator) -> APIRouter:
         )
 
     @router.post("/register")
-    async def create_user(user: UserCreate, db: AsyncSession = Depends(db)):
-        created_user = await user_manager.create(user=user, db=db)
-
+    async def create_user(user: UserRegister, db: AsyncSession = Depends(db)):
+        user_detail = UserCreate(
+            user_uuid="",
+            created_at="",
+            user_id=user.user_id,
+            user_pass=user.user_pass,
+            firstname=user.firstname,
+            lastname=user.lastname,
+            email=user.email,
+            app_line_id=user.app_line_id,
+            position_id=user.position_id,
+            section_id=user.section_id,
+            concern_line=user.concern_line,
+            is_active=user.is_active,
+            is_admin=user.is_admin,
+        )
+        created_user = await user_manager.create(user=user_detail, db=db)
         return created_user
 
     return router

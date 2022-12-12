@@ -10,9 +10,9 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
     router = APIRouter()
     crud = staticdataCRUD()
 
-    @router.post("/temp")
-    async def dummy():
-        return {"msg": "test connection"}
+    # @router.post("/temp")
+    # async def dummy():
+    #     return {"msg": "test connection"}
 
     @router.get("/5m1e/settings", name="Setting data for 5M1E report")
     async def _5m1e_settings(db: AsyncSession = Depends(db)):
@@ -26,6 +26,7 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
             sc_symbols,
             processes_symbols,
             products,
+            # machines,
             models,
             models_customers,
             customers_join_plants,
@@ -42,6 +43,7 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
             crud.get_sc_symbols(db),
             crud.get_processes_symbols(db),
             crud.get_products(db),
+            # crud.get_machines(db),
             crud.get_models(db),
             crud.get_models_customers(db),
             crud.get_join_customers_plants(db),
@@ -60,6 +62,7 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
             "sc_symbols": sc_symbols,
             "processes_symbols": processes_symbols,
             "products": products,
+            # "machines": machines,
             "models": models,
             "models_customers": models_customers,
             "customers_join_plants": customers_join_plants,
@@ -103,98 +106,5 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
             "processes_machines": processes_machines,
         }
         return data
-
-    # @router.get("/5m1e/parts", name="Static data for parts")
-    # async def _5m1e_parts(db: AsyncSession = Depends(db)):
-    #     (parts) = await asyncio.gather(
-    #         crud.get_parts(db),
-    #     )
-
-    #     data = {
-    #         "parts": parts,
-    #     }
-    #     return data
-
-    # @router.get("/5m1e/dashboard", name="Static data for 5M1E Dashboard")
-    # async def _5m1e_dashboard(db: AsyncSession = Depends(db)):
-    #     (
-    #         users_join_roles_positions,
-    #         groups,
-    #         group_members,
-    #         department,
-    #         sections,
-    #         lines,
-    #         lines_users,
-    #         machines,
-    #         processes_join_types,
-    #         sc_symbols,
-    #         processes_symbols,
-    #         products,
-    #         parts,
-    #         models,
-    #         models_parts,
-    #         models_customers,
-    #         customers_join_plants,
-    #         request_processes,
-    #         list_items_problem,
-    #         list_items_changepoint,
-    #         state_types,
-    #         states_join_types,
-    #         actions_join_types,
-    #         transitions_join_transitions_actions,
-    #     ) = await asyncio.gather(
-    #         crud.get_join_users_roles_positions(db),
-    #         crud.get_groups(db),
-    #         crud.get_group_members(db),
-    #         crud.get_departments(db),
-    #         crud.get_sections(db),
-    #         crud.get_lines(db),
-    #         crud.get_lines_users(db),
-    #         crud.get_machines(db),
-    #         crud.get_join_processes_types(db),
-    #         crud.get_sc_symbols(db),
-    #         crud.get_processes_symbols(db),
-    #         crud.get_products(db),
-    #         crud.get_parts(db),
-    #         crud.get_models(db),
-    #         crud.get_models_parts(db),
-    #         crud.get_models_customers(db),
-    #         crud.get_join_customers_plants(db),
-    #         crud.get_request_processes(db),
-    #         crud.get_list_items([1], db),  # problem
-    #         crud.get_list_items([2], db),  # changepoint
-    #         crud.get_state_types(db),
-    #         crud.get_join_states_types([1, 2], db),
-    #         crud.get_join_actions_types([1, 2], db),
-    #         crud.get_join_transitions_transition_actions([1, 2], db),
-    #     )
-
-    #     data = {
-    #         "users_join_roles_positions": users_join_roles_positions,
-    #         "groups": groups,
-    #         "group_members": group_members,
-    #         "departments": department,
-    #         "sections": sections,
-    #         "lines": lines,
-    #         "lines_users": lines_users,
-    #         "machines": machines,
-    #         "processes_join_types": processes_join_types,
-    #         "sc_symbols": sc_symbols,
-    #         "processes_symbols": processes_symbols,
-    #         "products": products,
-    #         "parts": parts,
-    #         "models": models,
-    #         "models_parts": models_parts,
-    #         "models_customers": models_customers,
-    #         "customers_join_plants": customers_join_plants,
-    #         "request_processes": request_processes,
-    #         "list_items_problem": list_items_problem,
-    #         "list_items_changepoint": list_items_changepoint,
-    #         "state_types": state_types,
-    #         "states_join_types": states_join_types,
-    #         "actions_join_types": actions_join_types,
-    #         "transitions_join_transitions_actions": transitions_join_transitions_actions,
-    #     }
-    #     return data
 
     return router

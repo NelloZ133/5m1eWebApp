@@ -18,7 +18,7 @@ export interface IRequestProblemFormState {
   availableItemDetailList: () => ItemDetail[]
   availableProcessList: () => Process[]
   availableMachineList: () => string[]
-  availablePartList: () => Part[]
+  // availablePartList: () => Part[]
 
   setSelectedCategory: (value: string | null) => void
   setSelectedItemId: (value: number | null) => void
