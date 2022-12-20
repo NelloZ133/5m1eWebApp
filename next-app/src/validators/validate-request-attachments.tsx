@@ -1,26 +1,32 @@
-import { message, UploadFile } from "antd"
+import { message, UploadFile } from "antd";
 
 export function validateProblemAttachment(file: UploadFile): boolean {
-  const { type, size, url } = file
+  const { type, size, url } = file;
 
   if (!type || !size) {
     if (url) {
-      return true
+      return true;
     }
 
-    console.error(`Error while uploading file, ref type: ${type}, size: ${size}`, file)
+    console.error(
+      `Error while uploading file, ref type: ${type}, size: ${size}`,
+      file
+    );
     message.error(
       `Error while uploading file, ref type: ${type}, size: ${size}`
-    )
-    return false
+    );
+    return false;
   }
 
-  const unavailableType = ['application/zip', 'application/x-tar', 'application/gzip', 'application/vnd.rar']
+  const unavailableType = [
+    "application/zip",
+    "application/x-tar",
+    "application/gzip",
+    "application/vnd.rar",
+  ];
   const isAllowType = !unavailableType.includes(type);
   if (!isAllowType) {
-    message.error(
-      "File type not support, file must not be ZIP/TAR/GZIP/RAR."
-    );
+    message.error("File type not support, file must not be ZIP/TAR/GZIP/RAR.");
   }
 
   const isLessThan3M = size / 1024 / 1024 < 3;

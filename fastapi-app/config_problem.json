@@ -4,43 +4,43 @@
 			"name": "Submit problem",
 			"description": "submit problem report",
 			"type": "Submit",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"2":{
 			"name": "Cancel request",
 			"description": "cancel by requester",
 			"type": "Self Cancel",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"3":{
 			"name": "Approve request",
 			"description": "approve by TL/MGR",
 			"type": "Approve",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"4":{
 			"name": "Reject request",
 			"description": "reject by TL/MGR",
 			"type": "Reject",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"5":{
 			"name": "Cancel request",
 			"description": "cancel by TL/MGR",
 			"type": "Cancel",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"6":{
 			"name": "Select supporter",
 			"description": "MGR request supporter",
 			"type": "Approve",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"7":{
 			"name": "Not select supporter",
 			"description": "MGR not request supporter",
 			"type": "Reject",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		}
 	},
 	"activity": {
@@ -48,42 +48,42 @@
 			"name": "Send request to TL/MGR",
 			"description": "email notify TL/MGR about the problem",
 			"type": "Send email",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": "function or endpoint to perform this activity (not sure how to keep this yet)"
 		},
 		"2": {
 			"name": "Send cancellation to TL/MGR",
 			"description": "email notify TL/MGR about cancellation",
 			"type": "Send email",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": ""
 		},
 		"3": {
 			"name": "Send information of problem",
 			"description": "email notify all concerned person",
 			"type": "Send email all",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": ""
 		},
 		"4": {
 			"name": "Send reject to requester",
 			"description": "email notify requester about reject",
 			"type": "Send email",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": ""
 		},
 		"5": {
 			"name": "Send cancellation to requester",
 			"description": "email notify requester about cancellation",
 			"type": "Send email",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": ""
 		},
 		"6": {
 			"name": "Send action request to supporter",
 			"description": "email notify supporter about the action request",
 			"type": "Send email",
-			"request_process": "5M1E Report",
+			"request_process": "5M1E_problem",
 			"func": ""
 		}
 	},
@@ -92,31 +92,31 @@
 			"name": "Waiting Submit",
 			"description": "waiting submit problem",
 			"type": "Start",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"2": {
 			"name": "Cancelled",
 			"description": "request cancelled",
 			"type": "Cancelled",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"3": {
 			"name": "Waiting Check",
 			"description": "waiting TL/MGR check problem",
 			"type": "Normal",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"4": {
 			"name": "Waiting Supporter Selection",
 			"description": "waiting MGR to select supporter",
 			"type": "Completed",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		},
 		"5": {
 			"name": "Completed",
 			"description": "request completed",
 			"type": "Completed",
-			"request_process": "5M1E Report"
+			"request_process": "5M1E_problem"
 		}
 	},
 	"transition": {

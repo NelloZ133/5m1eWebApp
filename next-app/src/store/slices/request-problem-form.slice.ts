@@ -1,4 +1,10 @@
-import { ItemDetailOther, KPI_LIST } from "@/constant";
+import { ItemDetail } from "./../../types/5m1e-setting.type";
+import {
+  ItemDetailOther,
+  KPI_LIST,
+  AvailableProblemCategory,
+  AvailableProblemListItem,
+} from "@/constant";
 import { StateCreator } from "zustand";
 import { _5M1ESettingStore } from "../5m1e-setting.store";
 import { IRequestProblemFormState } from "../interface/request-problem-form.interface";
@@ -16,50 +22,36 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
   selectedItemDetailId: null,
 
   categoryList() {
-    return _5M1ESettingStore.getState().problemCategoryNameList();
+    return AvailableProblemCategory;
   },
   kpiList() {
     return KPI_LIST;
-  },
-  productList() {
-    return _5M1ESettingStore.getState().productList();
-  },
-  machineNameList() {
-    return _5M1ESettingStore.getState().machineNameList();
   },
   lineList() {
     return _5M1ESettingStore.getState().lineList();
   },
   availableLineList() {
     const { user } = UserStore.getState();
-    // const { userJoinRolePositionDict, productLineList } = _5M1ESettingStore.getState()
-    const { userJoinRolePositionDict } = _5M1ESettingStore.getState();
-    const selectedProductId = get().selectedProductId;
-    if (!user?.user_uuid || !selectedProductId) {
+    if (!user?.user_uuid) {
       return [];
     }
-
-    const userJoinRolePosition = userJoinRolePositionDict[user.user_uuid];
-    // const availableLineIdList = productLineList.filter(productLine => +productLine.product_id === +selectedProductId).map(productLine => productLine.line_id)
     return _5M1ESettingStore
       .getState()
       .lineList()
       .filter((line) => line.id && user.concern_line.includes(line.id));
   },
   availableCategoryItemList() {
-    return (
-      _5M1ESettingStore.getState().listItemProblemDict?.[
-        get().selectedCategory ?? ""
-      ] ?? []
+    return AvailableProblemListItem.filter(
+      (list_item) => list_item.category === get().selectedCategory
     );
   },
   availableItemDetailList() {
-    const matchDetails =
-      _5M1ESettingStore.getState().itemDetailDict?.[
-        get().selectedItemId ?? -1
-      ] ?? [];
-
-    return matchDetails.length ? [...matchDetails, ItemDetailOther] : [];
+    const list: ItemDetail[] = _5M1ESettingStore
+      .getState()
+      .itemDetailList()
+      .filter((item) => item.list_item_id === get().selectedItemId);
+    list.push(ItemDetailOther);
+    return list;
   },
   availableProcessList() {
     return _5M1ESettingStore
@@ -67,23 +59,6 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
       .processList()
       .filter((process) => process.line_id === get().selectedLineId);
   },
-  availableMachineList() {
-    const selectedProcessId = get().selectedProcessId;
-    if (!selectedProcessId) {
-      return [];
-    }
-    const processMachineList = Object.values(
-      _5M1ESettingStore.getState().processMachineDict
-    );
-    return processMachineList
-      .filter(
-        (processMachine) => +processMachine.process_id === +selectedProcessId
-      )
-      .map((processMachine) => processMachine.machine_no);
-  },
-  // availablePartList() {
-  //   return _5M1ESettingStore.getState().partList().filter(part => part.product_id === get().selectedProductId)
-  // },
 
   setSelectedCategory(selectedCategory) {
     set({ selectedCategory });

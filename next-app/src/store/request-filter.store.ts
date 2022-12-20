@@ -4,4 +4,4 @@ import { RequestFilterSlice } from "./slices/request-filter.slice";
 
 export const RequestFilterStore = create<IRequestFilterState>((...args) => ({
   ...RequestFilterSlice(...args),
-}))
+}));

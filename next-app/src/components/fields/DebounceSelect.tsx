@@ -7,6 +7,7 @@ import {
   searchPart,
   searchMachine,
   searchProduct,
+  searchUser,
 } from "@/functions/searchData";
 
 interface IDebounceProps {
@@ -70,8 +71,8 @@ const DebounceSelectPart: FC<IDebounceProps> = ({
       value={value}
       placeholder={placeholder}
       allowClear={allowClear}
-      fetchOptions={searchPart}
       onChange={onChange}
+      fetchOptions={searchPart}
     />
   );
 };
@@ -88,8 +89,8 @@ const DebounceSelectMachine: FC<IDebounceProps> = ({
       value={value}
       placeholder={placeholder}
       allowClear={allowClear}
-      fetchOptions={searchMachine}
       onChange={onChange}
+      fetchOptions={searchMachine}
     />
   );
 };
@@ -106,11 +107,34 @@ const DebounceSelectProduct: FC<IDebounceProps> = ({
       value={value}
       placeholder={placeholder}
       allowClear={allowClear}
-      fetchOptions={searchProduct}
       onChange={onChange}
+      fetchOptions={searchProduct}
+    />
+  );
+};
+
+const DebounceSelectUser: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={searchUser}
     />
   );
 };
 
 export default DebounceSelect;
-export { DebounceSelectPart, DebounceSelectMachine, DebounceSelectProduct };
+export {
+  DebounceSelectPart,
+  DebounceSelectMachine,
+  DebounceSelectProduct,
+  DebounceSelectUser,
+};

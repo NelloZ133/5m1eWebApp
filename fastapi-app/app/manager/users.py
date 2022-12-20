@@ -100,7 +100,7 @@ class UserManager:
             user_detail.user_pass = helper.hash_password(password=user.user_pass)
             user_detail.user_uuid = helper.generate_uuid(user_id=user.user_id)
             user_detail.created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-            print(user_detail)
+            # print(user_detail)
             created_user = await self.crud.create_user(user=user_detail, db=db)
 
         except exceptions.UserAlreadyExists:

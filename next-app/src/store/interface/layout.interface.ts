@@ -1,5 +1,5 @@
 export interface ILayoutState {
-  isLoading: boolean
+  isLoading: boolean;
 
-  setIsLoading: (isLoading: boolean) => void
+  setIsLoading: (isLoading: boolean) => void;
 }
