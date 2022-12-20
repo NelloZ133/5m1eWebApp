@@ -5,4 +5,4 @@ export const UploadButton = (
     <AiOutlinePlus />
     <div style={{ marginTop: 8 }}>Upload</div>
   </div>
-)
+);

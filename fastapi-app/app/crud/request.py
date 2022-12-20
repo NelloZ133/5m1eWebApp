@@ -3,7 +3,7 @@ import uuid
 import json
 from uuid import UUID
 from app.schemas.request import RequestCreateSubmit
-from app.functions import toArrayWithKey
+from app.functions import toArrayWithKey, toDictByColumnId
 from app.crud.statements import request as st
 
 
@@ -64,6 +64,12 @@ class RequestCRUD:
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
+    async def get_request(self, id: str, db: AsyncSession) -> dict:
+        stmt = st.get_request_stmt(id)
+        rs = toArrayWithKey(await db.execute(stmt))
+        rs = toDictByColumnId(rs, "request_id")
+        return rs
+
     async def get_count_all_requests(self, db: AsyncSession) -> int:
         stmt = "SELECT COUNT(*) c FROM requests"
         rs = toArrayWithKey(await db.execute(stmt))
@@ -104,48 +110,43 @@ class RequestCRUD:
         return rs
 
     async def get_searched_parts(
-        self, part_no: str, p_upper: str, p_lower: str, db: AsyncSession
+        self, part_no: str, p_upper: str, db: AsyncSession
     ):
         stmt = f"""SELECT DISTINCT part_no FROM parts 
-            WHERE (part_no LIKE '%{part_no}%') 
-            OR (part_no LIKE '%{p_upper}%') 
-            OR (part_no LIKE '%{p_lower}%') 
+            WHERE (part_no LIKE '%{part_no}%')
+            OR (UPPER(part_no) LIKE '%{p_upper}%')
             LIMIT 20"""
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
     async def get_searched_machines(
-        self, machine_no: str, m_upper: str, m_lower: str, db: AsyncSession
+        self, machine_no: str, m_upper: str, db: AsyncSession
     ):
         stmt = f"""SELECT DISTINCT machine_no FROM machines 
-            WHERE (machine_no LIKE '%{machine_no}%') 
-            OR (machine_no LIKE '%{m_upper}%') 
-            OR (machine_no LIKE '%{m_lower}%') 
+            WHERE (machine_no LIKE '%{machine_no}%')
+            OR (UPPER(machine_no) LIKE '%{m_upper}%')
             LIMIT 20"""
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
     async def get_searched_products(
-        self, product_name: str, p_upper: str, p_lower: str, db: AsyncSession
+        self, product_name: str, p_upper: str, db: AsyncSession
     ):
         stmt = f"""SELECT DISTINCT full_name FROM products 
-            WHERE (full_name LIKE '%{product_name}%') 
-            OR (full_name LIKE '%{p_upper}%') 
-            OR (full_name LIKE '%{p_lower}%') 
+            WHERE (full_name LIKE '%{product_name}%')
+            OR (UPPER(full_name) LIKE '%{p_upper}%')
             LIMIT 10"""
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
     async def get_searched_user(
-        self, name: str, n_upper: str, n_lower: str, db: AsyncSession
+        self, name: str, n_upper: str, db: AsyncSession
     ):
         stmt = f"""SELECT DISTINCT CONCAT(firstname, ' ', lastname) as full_name FROM users
-            WHERE (firstname LIKE '%{name}%') 
-            OR (firstname LIKE '%{n_upper}%') 
-            OR (firstname LIKE '%{n_lower}%') 
+            WHERE (firstname LIKE '%{name}%')
+            OR (UPPER(firstname) LIKE '%{n_upper}%')
             OR (lastname LIKE '%{name}%')
-            OR (lastname LIKE '%{n_upper}%')
-            OR (lastname LIKE '%{n_lower}%')
+            OR (UPPER(lastname) LIKE '%{n_upper}%')
             LIMIT 10"""
         rs = toArrayWithKey(await db.execute(stmt))
         return rs

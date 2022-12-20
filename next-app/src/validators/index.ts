@@ -1,1 +1,1 @@
-export * from './validate-request-attachments'
+export * from "./validate-request-attachments";

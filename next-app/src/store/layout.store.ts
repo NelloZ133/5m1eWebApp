@@ -4,4 +4,4 @@ import { LayoutSlice } from "./slices/layout.slice";
 
 export const LayoutStore = create<ILayoutState>((...args) => ({
   ...LayoutSlice(...args),
-}))
+}));

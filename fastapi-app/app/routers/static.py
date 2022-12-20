@@ -10,9 +10,9 @@ def static_routers(db: AsyncGenerator) -> APIRouter:
     router = APIRouter()
     crud = staticdataCRUD()
 
-    # @router.post("/temp")
-    # async def dummy():
-    #     return {"msg": "test connection"}
+    @router.post("/temp")
+    async def dummy():
+        return {"msg": "temp file uploaded"}
 
     @router.get("/5m1e/settings", name="Setting data for 5M1E report")
     async def _5m1e_settings(db: AsyncSession = Depends(db)):

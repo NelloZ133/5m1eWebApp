@@ -4,43 +4,43 @@
 			"name": "Submit change point",
 			"description": "submit change point report",
 			"type": "Submit",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"12":{
 			"name": "Cancel change point",
 			"description": "cancel by requester",
 			"type": "Self Cancel",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"13":{
 			"name": "Approve change point",
 			"description": "approve change point by TL/MGR",
 			"type": "Approve",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"14":{
 			"name": "Reject change point",
 			"description": "reject change point by TL/MGR",
 			"type": "Reject",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"15":{
 			"name": "Cancel change point",
 			"description": "cancel by TL/MGR",
 			"type": "Cancel",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"16":{
 			"name": "Request confirmation",
 			"description": "MGR request supporter's confirmation",
 			"type": "Approve",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"17":{
 			"name": "Not request confirmation",
 			"description": "MGR not request supporter's confirmation",
 			"type": "Reject",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		}
 	},
 	"activity": {
@@ -48,42 +48,42 @@
 			"name": "Send change point request to TL/MGR",
 			"description": "email notify TL/MGR about the change point",
 			"type": "Send email",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		},
 		"12": {
 			"name": "Send cancellation to TL/MGR",
 			"description": "email notify TL/MGR about cancellation",
 			"type": "Send email",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		},
 		"13": {
 			"name": "Send information of change point",
 			"description": "email notify all concerned person about the change point",
 			"type": "Send email all",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		},
 		"14": {
 			"name": "Send reject change point to requester",
 			"description": "email notify requester about reject",
 			"type": "Send email",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		},
 		"15": {
 			"name": "Send cancellation to requester",
 			"description": "email notify requester about cancellation",
 			"type": "Send email",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		},
 		"16": {
 			"name": "Send request confirmation",
 			"description": "email notify supporter about request confirmation",
 			"type": "Send email",
-			"request_process": "5M1E Change",
+			"request_process": "5M1E_change",
 			"func": ""
 		}
 	},
@@ -92,31 +92,31 @@
 			"name": "Waiting Submit",
 			"description": "waiting submit change point",
 			"type": "Start",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"12": {
 			"name": "Cancelled",
 			"description": "request cancelled",
 			"type": "Cancelled",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"13": {
 			"name": "Waiting Check",
 			"description": "waiting TL/MGR check change point",
 			"type": "Normal",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"14": {
 			"name": "Waiting Review",
 			"description": "waiting MGR to review change point",
 			"type": "Normal",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		},
 		"15": {
 			"name": "Completed",
 			"description": "Change completed",
 			"type": "Completed",
-			"request_process": "5M1E Change"
+			"request_process": "5M1E_change"
 		}
 	},
 	"transition": {

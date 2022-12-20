@@ -5,19 +5,18 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-interface ILoginForm
-{
-  username: string
-  password: string
+interface ILoginForm {
+  username: string;
+  password: string;
 }
 
 const LoginPage: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const onFinish = async (form: ILoginForm) => {
-    await login(form['username'], form['password'])
-    router.push('/home')
-  }
+    await login(form["username"], form["password"]);
+    router.push("/home");
+  };
 
   return (
     <>
@@ -27,10 +26,7 @@ const LoginPage: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
       </div>
-      <Layout
-        title="Login"
-        backable
-        hideAuthSection>
+      <Layout title="Login" backable hideAuthSection>
         <div className="h-full flex flex-col justify-center">
           <Form
             name="login"
@@ -43,7 +39,9 @@ const LoginPage: NextPage = () => {
             <Form.Item
               label="Username"
               name="username"
-              rules={[{ required: true, message: 'Please input your username!' }]}
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -51,7 +49,9 @@ const LoginPage: NextPage = () => {
             <Form.Item
               label="Password"
               name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
             >
               <Input.Password />
             </Form.Item>
@@ -65,7 +65,7 @@ const LoginPage: NextPage = () => {
         </div>
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

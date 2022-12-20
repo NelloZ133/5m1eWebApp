@@ -1,9 +1,10 @@
+
 export interface IRequestFilterState {
-  selectedRequestType: string | null
+  selectedRequestType: string | null;
 
-  availableCategory: () => string[]
+  availableCategory: () => string[];
 
-  setSelectedRequestType: (value: string | null) => void
+  setSelectedRequestType: (value: string | null) => void;
 
-  reset: () => void
+  reset: () => void;
 }

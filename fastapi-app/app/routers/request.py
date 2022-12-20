@@ -364,7 +364,7 @@ async def _send_mail(
                 print(f"Error when sending email: {e}")
     elif action_id == 3 or action_id == 13:
         lineId = int(request_data_value["lineId"])
-        productId = int(request_data_value["productId"])
+        # productId = int(request_data_value["productId"])
         processId = int(request_data_value["processId"])
         partId = request_data_value["partId"]
         req_note = request_data_value.get("note", "-")
@@ -374,9 +374,9 @@ async def _send_mail(
         lines = await staticCRUD.get_lines(db=db)
         line = lines.get(lineId, {"data": [{"line_name": "-"}]})
         line_name = line["line_name"]
-        products = await staticCRUD.get_products(db=db)
-        product = products.get(productId, {"data": [{"full_name": "-"}]})
-        product_name = product["full_name"]
+        # products = await staticCRUD.get_products(db=db)
+        # product = products.get(productId, {"data": [{"full_name": "-"}]})
+        product_name = request_data_value["productId"]
         processes = await staticCRUD.get_processes(db=db)
         process = processes.get(processId, {"data": [{"process_name": "-"}]})
         process_name = process["process_name"]
@@ -606,36 +606,32 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
     @router.get("/searchPart")
     async def get_searched_parts(part_no: str, db: AsyncSession = Depends(db)):
         p_upper = part_no.upper()
-        p_lower = part_no.lower()
         searched_part = await crud.get_searched_parts(
-            part_no=part_no, p_upper=p_upper, p_lower=p_lower, db=db
+            part_no=part_no, p_upper=p_upper, db=db
         )
         return searched_part
 
     @router.get("/searchMachine")
     async def get_searched_machines(machine_no: str, db: AsyncSession = Depends(db)):
         m_upper = machine_no.upper()
-        m_lower = machine_no.lower()
         searched_machines = await crud.get_searched_machines(
-            machine_no=machine_no, m_upper=m_upper, m_lower=m_lower, db=db
+            machine_no=machine_no, m_upper=m_upper, db=db
         )
         return searched_machines
 
     @router.get("/searchProduct")
     async def get_searched_products(product_name: str, db: AsyncSession = Depends(db)):
         p_upper = product_name.upper()
-        p_lower = product_name.lower()
         searched_products = await crud.get_searched_products(
-            product_name=product_name, p_upper=p_upper, p_lower=p_lower, db=db
+            product_name=product_name, p_upper=p_upper, db=db
         )
         return searched_products
 
     @router.get("/searchUser")
     async def get_searched_user(name: str, db: AsyncSession = Depends(db)):
         n_upper = name.upper()
-        n_lower = name.lower()
         searched_user = await crud.get_searched_user(
-            name=name, n_upper=n_upper, n_lower=n_lower, db=db
+            name=name, n_upper=n_upper, db=db
         )
         return searched_user
 
