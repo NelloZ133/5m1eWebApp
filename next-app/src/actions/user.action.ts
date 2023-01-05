@@ -15,7 +15,7 @@ export async function login(
     `users/login`,
     body
   );
-  console.log(data);
+  // console.log(data);
   setUser(data);
 
   return data;

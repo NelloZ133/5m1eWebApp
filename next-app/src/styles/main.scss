@@ -9,10 +9,151 @@
   }
 }
 
+.ant-form-item-control-input {
+  .ant-form-item-control-input-content {
+    .ant-btn-default {
+      margin-left: 115px;
+    }
+  }
+}
+
+.col-default {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  &.col-request-no {
+    width: 95px;
+  }
+  &.col-created {
+    width: 65px;
+  }
+  &.col-type {
+    width: 90px;
+  }
+  &.col-category {
+    width: 85px;
+  }
+  &.col-kpi {
+    width: 100px;
+  }
+  &.col-product {
+    width: 100px;
+  }
+  &.col-part {
+    width: 100px;
+  }
+  &.col-line {
+    width: 260px;
+  }
+  &.col-topic {
+    width: 200px;
+  }
+  &.col-machine {
+    width: 100px;
+  }
+  &.col-informer {
+    width: 80px;
+  }
+  &.col-status {
+    width: 120px;
+  }
+}
+.grid {
+  &.gap-4 {
+    gap: 1rem;
+  }
+}
+.filter-gap {
+  padding-top: 1rem;
+}
+
+.action-btn {
+  &.Submit {
+    background-color: rgb(0, 109, 222);
+    border-color: rgb(0, 139, 222);
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(18, 164, 241);
+      color: rgb(18, 164, 241);
+    }
+  }
+  &.Delete {
+    background-color: rgb(203, 13, 8);
+    border-color: rgb(233, 13, 8);
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(231, 0, 0);
+      color: rgb(231, 0, 0);
+    }
+  }
+  &.Self-Cancel {
+    background-color: rgb(201, 201, 201);
+    border-color: rgb(222, 222, 222);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(190, 190, 190);
+      color: rgb(190, 190, 190);
+    }
+  }
+  &.Approve {
+    background-color: rgb(55, 189, 17);
+    border-color: rgb(55, 219, 17);
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(53, 212, 0);
+      color: rgb(53, 212, 0);
+    }
+  }
+  &.Reject {
+    background-color: rgb(203, 13, 8);
+    border-color: rgb(233, 13, 8);
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(231, 0, 0);
+      color: rgb(231, 0, 0);
+    }
+  }
+  &.Cancel {
+    background-color: rgb(201, 201, 201);
+    border-color: rgb(222, 222, 222);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(190, 190, 190);
+      color: rgb(190, 190, 190);
+    }
+  }
+  &.Select {
+    background-color: rgb(250, 250, 250);
+    border-color: rgb(0, 139, 222);
+    color: rgb(0, 109, 222);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(18, 164, 241);
+      color: rgb(18, 164, 241);
+    }
+  }
+  &.Not-Select {
+    background-color: rgb(250, 250, 250);
+    border-color: rgb(5, 5, 5);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    &:hover {
+      border-color: rgb(50, 50, 50);
+      color: rgb(50, 50, 50);
+    }
+  }
+}
+
 .form-5m1e-report {
   .ant-form-item-required {
     padding: 8px 16px;
-    background: black;
+    background: rgb(73, 56, 56);
     color: white !important;
     font-size: 18px !important;
     font-weight: bold;
@@ -75,5 +216,18 @@
 
   .ant-upload-picture-card-wrapper {
     margin-left: 16px;
+  }
+}
+
+.ant-table-expanded-row-fixed {
+  background-color: rgb(240, 250, 255);
+  border-width: 1px;
+  border-color: rgb(200, 200, 200);
+}
+
+.report {
+  &.report-header {
+    font-weight: bold;
+    font-size: 16px;
   }
 }

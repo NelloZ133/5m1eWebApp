@@ -86,6 +86,9 @@ export const _5M1EProblemPermissionSlice: StateCreator<
         userPoint >= submitUserPoint)
     );
   },
+  canDelete(request) {
+    return get().canSubmit(request)
+  },
   canSelectSupporter() {
     const { user } = UserStore.getState();
     if (!user?.user_uuid) {
@@ -115,12 +118,14 @@ export const _5M1EProblemPermissionSlice: StateCreator<
       4: get().canReject,
       5: get().canSelectSupporter,
       6: get().canSelectSupporter,
+      7: get().canDelete,
       11: get().canSubmit,
       12: get().canCancel,
       13: get().canApprove,
       14: get().canReject,
       15: get().canSelectSupporter,
       16: get().canSelectSupporter,
+      17: get().canDelete,
     };
     return (
       TransitionIdToValidateActionFunc?.[+transition.id]?.(request) ?? false

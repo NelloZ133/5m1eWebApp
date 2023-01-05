@@ -1,15 +1,5 @@
 import { FC, useEffect } from "react";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  Radio,
-  DatePicker,
-  // TimePicker,
-  Space,
-} from "antd";
-// import type { DatePickerProps } from "antd";
+import { Button, Checkbox, Form, Input, Radio, DatePicker, Space } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useState } from "react";
 import { UploadFile } from "antd/lib/upload";
@@ -27,6 +17,7 @@ import { IRequestForm, IChangeRequestForm } from "@/types/request-form.type";
 import { _5M1ESettingStore } from "@/store";
 import { IRequestProblemFormState } from "@/store/interface/request-problem-form.interface";
 import { IRequestChangePointFormState } from "@/store/interface/request-change-point-form.interface";
+// import { Moment } from "moment";
 
 interface IProps {
   formStore: IRequestProblemFormState | IRequestChangePointFormState;
@@ -41,11 +32,11 @@ const _5M1EReportForm: FC<IProps> = ({
 }: IProps) => {
   const {
     selectedCategory,
-    selectedProductId,
+    selectedProduct,
     selectedProcessId,
-    selectedItemId,
+    selectedItem,
     selectedLineId,
-    selectedItemDetailId,
+    selectedItemDetail,
 
     categoryList,
     kpiList,
@@ -55,11 +46,11 @@ const _5M1EReportForm: FC<IProps> = ({
     availableProcessList,
 
     setSelectedCategory,
-    setSelectedItemId,
+    setSelectedItem,
     setSelectedLineId,
     setSelectedProcessId,
-    setSelectedProductId,
-    setSelectedItemDetailId,
+    setSelectedProduct,
+    setSelectedItemDetail,
 
     reset,
   } = formStore;
@@ -81,7 +72,7 @@ const _5M1EReportForm: FC<IProps> = ({
 
   const handleFormValuesProblem = () => {
     const itemDetail = form.getFieldValue("detail");
-    setSelectedItemDetailId(itemDetail ?? null);
+    setSelectedItemDetail(itemDetail ?? null);
 
     const category = form.getFieldValue("category");
     if (category !== selectedCategory) {
@@ -91,9 +82,10 @@ const _5M1EReportForm: FC<IProps> = ({
     }
 
     const item = form.getFieldValue("item");
-    if (item !== selectedItemId) {
-      setSelectedItemId(item);
-      form.setFieldValue("detail", null)
+    if (item !== selectedItem) {
+      setSelectedItem(item);
+      form.setFieldValue("detail", null);
+      form.setFieldValue("line", null);
     }
 
     const line = form.getFieldValue("line");
@@ -114,59 +106,63 @@ const _5M1EReportForm: FC<IProps> = ({
     }
 
     const product = form.getFieldValue("product");
-    if (product !== selectedProductId) {
-      setSelectedProductId(product);
+    if (product !== selectedProduct) {
+      setSelectedProduct(product);
       form.setFieldValue("part", null);
     }
   };
 
   const handleFormValuesChange = () => {
     const itemDetail = formC.getFieldValue("detail");
-    setSelectedItemDetailId(itemDetail ?? null);
+    setSelectedItemDetail(itemDetail ?? null);
 
     const category = formC.getFieldValue("category");
     if (category !== selectedCategory) {
       setSelectedCategory(category);
-      form.setFieldValue("detail", null);
-      form.setFieldValue("item", null);
+      formC.setFieldValue("detail", null);
+      formC.setFieldValue("item", null);
+    }
+
+    const item = formC.getFieldValue("item");
+    if (item !== selectedItem) {
+      setSelectedItem(item);
+      formC.setFieldValue("detail", null);
+      formC.setFieldValue("line", null);
     }
 
     const line = formC.getFieldValue("line");
     if (line !== selectedLineId) {
       setSelectedLineId(line);
-      form.setFieldValue("process", null);
-      form.setFieldValue("product", null);
-      form.setFieldValue("machine", null);
-      form.setFieldValue("part", null);
+      formC.setFieldValue("process", null);
+      formC.setFieldValue("product", null);
+      formC.setFieldValue("machine", null);
+      formC.setFieldValue("part", null);
     }
 
     const process = formC.getFieldValue("process");
     if (process !== selectedProcessId) {
       setSelectedProcessId(process);
-      form.setFieldValue("product", null);
-      form.setFieldValue("machine", null);
-      form.setFieldValue("part", null);
+      formC.setFieldValue("product", null);
+      formC.setFieldValue("machine", null);
+      formC.setFieldValue("part", null);
     }
 
     const product = formC.getFieldValue("product");
-    if (product !== selectedProductId) {
-      setSelectedProductId(product);
-      form.setFieldValue("part", null);
-    }
-    const item = formC.getFieldValue("item");
-    if (item !== selectedItemId) {
-      setSelectedItemId(item);
+    if (product !== selectedProduct) {
+      setSelectedProduct(product);
+      formC.setFieldValue("part", null);
     }
   };
 
   useEffect(() => {
-    setSelectedItemId(null)
-    setSelectedItemDetailId(null);
+    setSelectedItem(null);
+    setSelectedItemDetail(null);
   }, [selectedCategory]);
 
   useEffect(() => {
-    setSelectedItemDetailId(null);
-  }, [selectedItemId]);
+    setSelectedItemDetail(null);
+  }, [selectedItem]);
+
 
   if (formType === "change") {
     return (
@@ -178,7 +174,7 @@ const _5M1EReportForm: FC<IProps> = ({
         onChange={handleFormValuesChange}
         onReset={handleFormValuesChange}
         onFinish={(v) => {
-          console.log(v);
+          // console.log(v);
           onFinish({
             ...v,
             attachments: attachmentList,
@@ -248,17 +244,16 @@ const _5M1EReportForm: FC<IProps> = ({
           >
             <Radio.Group>
               {availableCategoryItemList().map((list_item, idx) => (
-                <Radio.Button
-                  key={`item-${idx}`}
-                  value={list_item.list_item_id}
-                >
+                <Radio.Button key={`item-${idx}`} value={list_item}>
                   {list_item.list_item_name}
                 </Radio.Button>
               ))}
             </Radio.Group>
           </Form.Item>
-        ) : null} {/* if not return default as null, it's will return 0. I don't know why but it's occur just like that */}
-        {(availableItemDetailList().length > 1 || selectedItemId === 41) && (
+        ) : null}
+        {/* if not return default as null, it's will return 0. I don't know why but it's occur just like that */}
+        {(availableItemDetailList().length > 1 ||
+          selectedItem?.list_item_id === 41) && (
           <Form.Item
             label="Detail"
             name="detail"
@@ -267,11 +262,11 @@ const _5M1EReportForm: FC<IProps> = ({
           >
             <Radio.Group>
               {availableItemDetailList().map((itemDetail, idx) => (
-                <Radio key={`detail-${idx}`} value={itemDetail.item_detail_id}>
-                  {itemDetail.item_detail_id === -1 ? (
+                <Radio key={`detail-${idx}`} value={itemDetail.item_detail}>
+                  {itemDetail.item_detail === "Other" ? (
                     <div className="flex items-center">
                       <div className="mr-2">{itemDetail.item_detail}</div>
-                      {selectedItemDetailId === -1 && (
+                      {selectedItemDetail === "Other" && (
                         <Input
                           placeholder="Detail..."
                           required
@@ -287,7 +282,7 @@ const _5M1EReportForm: FC<IProps> = ({
             </Radio.Group>
           </Form.Item>
         )}
-        {selectedItemDetailId !== null && (
+        {selectedItemDetail !== null && (
           <>
             <div className="w-full">
               <Form.Item label="More detail" name="full_detail">
@@ -323,7 +318,7 @@ const _5M1EReportForm: FC<IProps> = ({
               >
                 <DatePicker
                   showTime={{ format: "HH:mm" }}
-                  format="YYYY-MM-DD HH:mm"
+                  format="D/MM/Y HH:mm"
                 />
               </Form.Item>
               <Form.Item
@@ -367,9 +362,9 @@ const _5M1EReportForm: FC<IProps> = ({
                 required
               >
                 <Checkbox.Group>
-                  {kpiList().map((cat, idx) => (
-                    <Checkbox key={`kpi-${idx}`} value={cat}>
-                      {cat}
+                  {kpiList().map((kpi, idx) => (
+                    <Checkbox key={`kpi-${idx}`} value={kpi}>
+                      {kpi}
                     </Checkbox>
                   ))}
                 </Checkbox.Group>
@@ -468,7 +463,7 @@ const _5M1EReportForm: FC<IProps> = ({
         onChange={handleFormValuesProblem}
         onReset={handleFormValuesProblem}
         onFinish={(v) => {
-          console.log(v);
+          // console.log(v);
           onFinish({
             ...v,
             attachments: attachmentList,
@@ -476,7 +471,7 @@ const _5M1EReportForm: FC<IProps> = ({
           });
         }}
       >
-        {categoryList().length ? (
+        {categoryList().length && (
           <Form.Item
             label="Category"
             name="category"
@@ -491,45 +486,8 @@ const _5M1EReportForm: FC<IProps> = ({
               ))}
             </Radio.Group>
           </Form.Item>
-        ) : null}
-        {selectedCategory === "No change" ? (
-          <>
-            <div className="grid gap-6 grid-cols-2">
-              <Form.Item
-                label="Line"
-                name="line"
-                rules={[{ required: true, message: "Please select line" }]}
-                required
-              >
-                <Select
-                  items={availableLineList()}
-                  placeholder="select line..."
-                  valueKey="id"
-                  labelKey="line_name"
-                  onChange={handleFormValuesChange}
-                />
-              </Form.Item>
-              <Space />
-            </div>
-            <Form.Item label="Note" name="note">
-              <TextArea
-                className="mx-4"
-                style={{ height: 120, resize: "none" }}
-                placeholder="Input note here..."
-              />
-            </Form.Item>
-            <Form.Item>
-              <div className="flex w-full justify-end mb-4">
-                <Button className="mx-1" type="primary" htmlType="reset" danger>
-                  Reset
-                </Button>
-                <Button className="mx-1" type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </div>
-            </Form.Item>
-          </>
-        ) : availableCategoryItemList().length ? (
+        )}
+        {availableCategoryItemList().length ? (
           <Form.Item
             label="List"
             name="item"
@@ -538,17 +496,15 @@ const _5M1EReportForm: FC<IProps> = ({
           >
             <Radio.Group>
               {availableCategoryItemList().map((list_item, idx) => (
-                <Radio.Button
-                  key={`item-${idx}`}
-                  value={list_item.list_item_id}
-                >
+                <Radio.Button key={`item-${idx}`} value={list_item}>
                   {list_item.list_item_name}
                 </Radio.Button>
               ))}
             </Radio.Group>
           </Form.Item>
         ) : null}
-        {availableItemDetailList().length > 1 || selectedItemId !== null ? (
+        {/* if not return default as null, it's will return 0. I don't know why but it's occur just like that */}
+        {availableItemDetailList().length > 1 && (
           <Form.Item
             label="Detail"
             name="detail"
@@ -557,11 +513,11 @@ const _5M1EReportForm: FC<IProps> = ({
           >
             <Radio.Group>
               {availableItemDetailList().map((itemDetail, idx) => (
-                <Radio key={`detail-${idx}`} value={itemDetail.item_detail_id}>
-                  {itemDetail.item_detail_id === -1 ? (
+                <Radio key={`detail-${idx}`} value={itemDetail.item_detail}>
+                  {itemDetail.item_detail === "Other" ? (
                     <div className="flex items-center">
                       <div className="mr-2">{itemDetail.item_detail}</div>
-                      {selectedItemDetailId === -1 && (
+                      {selectedItemDetail === "Other" && (
                         <Input
                           placeholder="Detail..."
                           required
@@ -576,8 +532,8 @@ const _5M1EReportForm: FC<IProps> = ({
               ))}
             </Radio.Group>
           </Form.Item>
-        ) : null}
-        {selectedItemDetailId !== null && (
+        )}
+        {selectedItemDetail !== null && (
           <>
             <div className="w-full">
               <Form.Item label="More detail" name="full_detail">
@@ -588,83 +544,7 @@ const _5M1EReportForm: FC<IProps> = ({
                 />
               </Form.Item>
             </div>
-            <div className="grid gap-6 grid-cols-3">
-              <Form.Item
-                label="Who"
-                name="act_person"
-                rules={[
-                  { required: true, message: "Please identify who's doing" },
-                ]}
-                required
-              >
-                <DebounceSelectUser
-                  placeholder="type to search"
-                  allowClear={true}
-                  onChange={handleFormValuesChange}
-                />
-              </Form.Item>
-              <Form.Item
-                label="When"
-                name="act_time"
-                rules={[
-                  { required: true, message: "Please identify when it occurs" },
-                ]}
-                required
-              >
-                <DatePicker
-                  showTime={{ format: "HH:mm" }}
-                  format="YYYY-MM-DD HH:mm"
-                />
-              </Form.Item>
-              <Form.Item
-                label="Action Result"
-                name="act_result"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please select the action result",
-                  },
-                ]}
-              >
-                <Radio.Group>
-                  <Radio value="ok">OK</Radio>
-                  <Radio value="ng">NG</Radio>
-                </Radio.Group>
-              </Form.Item>
-            </div>
-            <div className="grid gap-12 grid-cols-2">
-              <Form.Item
-                label="Responsible Person"
-                name="resp_person"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please identify in-charge person",
-                  },
-                ]}
-                required
-              >
-                <DebounceSelectUser
-                  placeholder="type to search"
-                  allowClear={true}
-                  onChange={handleFormValuesChange}
-                />
-              </Form.Item>
-              <Form.Item
-                label="KPI"
-                name="kpi"
-                rules={[{ required: true, message: "Please specify KPI" }]}
-                required
-              >
-                <Checkbox.Group>
-                  {kpiList().map((cat, idx) => (
-                    <Checkbox key={`kpi-${idx}`} value={cat}>
-                      {cat}
-                    </Checkbox>
-                  ))}
-                </Checkbox.Group>
-              </Form.Item>
-            </div>
+
             <div className="grid gap-6 grid-cols-2">
               <Form.Item
                 label="Line"
@@ -677,7 +557,7 @@ const _5M1EReportForm: FC<IProps> = ({
                   placeholder="select line..."
                   valueKey="id"
                   labelKey="line_name"
-                  onChange={handleFormValuesChange}
+                  onChange={handleFormValuesProblem}
                 />
               </Form.Item>
               <Form.Item label="Process" name="process">
@@ -686,7 +566,7 @@ const _5M1EReportForm: FC<IProps> = ({
                   placeholder="will be shown after select line"
                   valueKey="id"
                   labelKey="process_name"
-                  onChange={handleFormValuesChange}
+                  onChange={handleFormValuesProblem}
                   allowClear={true}
                 />
               </Form.Item>
@@ -701,21 +581,21 @@ const _5M1EReportForm: FC<IProps> = ({
                 <DebounceSelectProduct
                   placeholder="type to search"
                   allowClear={true}
-                  onChange={handleFormValuesChange}
+                  onChange={handleFormValuesProblem}
                 />
               </Form.Item>
               <Form.Item label="Machine" name="machine">
                 <DebounceSelectMachine
                   placeholder="type to search"
                   allowClear={true}
-                  onChange={handleFormValuesChange}
+                  onChange={handleFormValuesProblem}
                 />
               </Form.Item>
               <Form.Item label="Part" name="part">
                 <DebounceSelectPart
                   placeholder="type to search"
                   allowClear={true}
-                  onChange={handleFormValuesChange}
+                  onChange={handleFormValuesProblem}
                 />
               </Form.Item>
               <Form.Item label="Attachment" name="attachments">

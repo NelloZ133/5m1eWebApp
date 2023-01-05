@@ -15,11 +15,11 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
   get
 ) => ({
   selectedCategory: null,
-  selectedItemId: null,
+  selectedItem: null,
   selectedLineId: null,
   selectedProcessId: null,
-  selectedProductId: null,
-  selectedItemDetailId: null,
+  selectedProduct: null,
+  selectedItemDetail: null,
 
   categoryList() {
     return AvailableProblemCategory;
@@ -49,7 +49,7 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
     const list: ItemDetail[] = _5M1ESettingStore
       .getState()
       .itemDetailList()
-      .filter((item) => item.list_item_id === get().selectedItemId);
+      .filter((item) => item.list_item_id === get().selectedItem?.list_item_id);
     list.push(ItemDetailOther);
     return list;
   },
@@ -63,8 +63,8 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
   setSelectedCategory(selectedCategory) {
     set({ selectedCategory });
   },
-  setSelectedItemId(selectedItemId) {
-    set({ selectedItemId });
+  setSelectedItem(selectedItem) {
+    set({ selectedItem });
   },
   setSelectedProcessId(selectedProcessId) {
     set({ selectedProcessId });
@@ -72,21 +72,21 @@ export const RequestProblemFormSlice: StateCreator<IRequestProblemFormState> = (
   setSelectedLineId(selectedLineId) {
     set({ selectedLineId });
   },
-  setSelectedProductId(selectedProductId) {
-    set({ selectedProductId });
+  setSelectedProduct(selectedProduct) {
+    set({ selectedProduct });
   },
-  setSelectedItemDetailId(selectedItemDetailId) {
-    set({ selectedItemDetailId });
+  setSelectedItemDetail(selectedItemDetail) {
+    set({ selectedItemDetail });
   },
 
   reset() {
     set({
       selectedCategory: null,
-      selectedItemId: null,
+      selectedItem: null,
       selectedLineId: null,
       selectedProcessId: null,
-      selectedProductId: null,
-      selectedItemDetailId: null,
+      selectedProduct: null,
+      selectedItemDetail: null,
     });
   },
 });

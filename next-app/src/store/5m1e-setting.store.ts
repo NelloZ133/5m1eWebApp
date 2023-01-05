@@ -122,6 +122,8 @@ export const _5M1ESettingStore = create<
     return get().canCreateProblemRequest();
   },
 
+  
+
   fetchSetting() {
     fetch5M1EReportSetting();
     fetch5M1ESystemSetting();

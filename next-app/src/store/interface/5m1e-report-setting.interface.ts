@@ -25,6 +25,8 @@ export interface I5M1EReportSettingState {
 
   getRequestProcessByName: (name: string) => RequestProcess | undefined;
   getItemDetailById: (detailId: number) => ItemDetail | undefined;
-  getProblemListItemById: (listItemId: number) => ListItem | undefined;
-  getChangePointListItemById: (listItemId: number) => ListItem | undefined;
+  getProblemListItemById: (listItemId: number) => ListItem;
+  getProblemListItemByName: (listItemName: string) => ListItem;
+  getChangePointListItemById: (listItemId: number) => ListItem;
+  getChangePointListItemByName: (listItemName: string) => ListItem;
 }

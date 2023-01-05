@@ -630,9 +630,47 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
     @router.get("/searchUser")
     async def get_searched_user(name: str, db: AsyncSession = Depends(db)):
         n_upper = name.upper()
-        searched_user = await crud.get_searched_user(
-            name=name, n_upper=n_upper, db=db
-        )
+        searched_user = await crud.get_searched_user(name=name, n_upper=n_upper, db=db)
         return searched_user
+
+    @router.get("/filterProduct")
+    async def get_filtered_product(product_name: str, db: AsyncSession = Depends(db)):
+        p_upper = product_name.upper()
+        filtered_product = await crud.get_filtered_product(
+            product_name=product_name, p_upper=p_upper, db=db
+        )
+        return filtered_product
+
+    @router.get("/filterPart")
+    async def get_filtered_part(part_no: str, db: AsyncSession = Depends(db)):
+        p_upper = part_no.upper()
+        filtered_part = await crud.get_filtered_part(
+            part_no=part_no, p_upper=p_upper, db=db
+        )
+        return filtered_part
+
+    @router.get("/filterLine")
+    async def get_filterd_line(line_name: str, db: AsyncSession = Depends(db)):
+        l_upper = line_name.upper()
+        filtered_line = await crud.get_filtered_line(
+            line_name=line_name, l_upper=l_upper, db=db
+        )
+        return filtered_line
+
+    @router.get("/filterProcess")
+    async def get_filtered_process(process_name: str, db: AsyncSession = Depends(db)):
+        p_upper = process_name.upper()
+        filtered_process = await crud.get_filtered_process(
+            process_name=process_name, p_upper=p_upper, db=db
+        )
+        return filtered_process
+
+    @router.get("/filterMachine")
+    async def get_fitlered_machine(machine_no: str, db: AsyncSession = Depends(db)):
+        m_upper = machine_no.upper()
+        filtered_machine = await crud.get_filtered_machine(
+            machine_no=machine_no, m_upper=m_upper, db=db
+        )
+        return filtered_machine
 
     return router
