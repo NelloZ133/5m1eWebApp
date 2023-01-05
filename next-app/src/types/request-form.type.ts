@@ -1,5 +1,7 @@
 import { UploadFile } from "antd";
-import { ItemDetail, ListItem } from "./5m1e-setting.type";
+import { Moment } from "moment";
+
+import { ListItem } from "./5m1e-setting.type";
 
 export interface ISubmitRequestFormParam {
   request_process_name: string;
@@ -33,14 +35,15 @@ export interface IUpdateRequestFormParam extends ISubmitRequestFormParam {
   request_id: string;
 }
 
-export interface IUpdateChangeRequestFormParam extends ISubmitChangeRequestFormParam {
+export interface IUpdateChangeRequestFormParam
+  extends ISubmitChangeRequestFormParam {
   request_id: string;
 }
 
 export interface IRequestForm {
   category: string;
   item: ListItem;
-  detail: ItemDetail;
+  detail: string;
   detail_other: string;
   full_detail: string;
   kpi: string[];
@@ -57,7 +60,7 @@ export interface IRequestForm {
 export interface IChangeRequestForm {
   category: string;
   item: ListItem;
-  detail: ItemDetail;
+  detail: string;
   detail_other: string;
   full_detail: string;
   act_person: string;
@@ -67,7 +70,7 @@ export interface IChangeRequestForm {
   process: number;
   machine: string;
   part: string;
-  act_time: string;
+  act_time: Moment;
   act_result: string;
   resp_person: string;
   attachments: UploadFile[];
@@ -79,11 +82,12 @@ export interface IRequestFilterForm {
   requestType?: string;
   category?: string;
   kpi?: string;
-  topic?: string;
+  product?: string;
   part?: string;
   line?: string;
+  process?: string;
+  machine?: string;
   informer?: string;
-  manager?: string;
 }
 
 export interface ISelectProblemRequestForm {
@@ -93,16 +97,16 @@ export interface ISelectProblemRequestForm {
 export type RequestData = {
   problem_request_id: string | null;
   category: string;
-  itemId: number;
-  detailId: number;
+  item: string;
+  detail: string;
   detailOther: string;
   fullDetail: string;
   kpi: string[];
-  productId: string;
+  product: string;
   lineId: number;
   processId: number;
   machine: string;
-  partId: string;
+  partNo: string;
   attachmentList: string[];
   supporterList?: string[];
   confirmationList?: string[];
@@ -112,17 +116,17 @@ export type RequestData = {
 export type RequestChangeData = {
   problem_request_id: string | null;
   category: string;
-  itemId: number;
-  detailId: number;
+  item: string;
+  detail: string;
   detailOther: string;
   fullDetail: string;
   actPerson: string;
   kpi: string[];
-  productId: string;
+  product: string;
   lineId: number;
   processId: number;
   machine: string;
-  partId: string;
+  partNo: string;
   actTime: string;
   actResult: string;
   respPerson: string;

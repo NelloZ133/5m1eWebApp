@@ -5,7 +5,7 @@ import { LayoutStore } from "@/store/layout.store";
 import { RequestConfigStore } from "@/store/request-config.store";
 import { RequestTransition } from "@/types/request-config.type";
 import { _5M1ERequest, _5M1EChangeRequest } from "@/types/request.type";
-import { Button, message } from "antd";
+import { Button, message, Divider } from "antd";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { ActionModal } from "./action-modal";
@@ -127,12 +127,16 @@ export const ActionPanel: FC<IProps> = ({ request }: IProps) => {
           canDoActionByGivenTransition(request, transition)
         )
         .map((transition, index) => (
-          <Button
-            key={`action-btn-${index}`}
-            onClick={() => handleClickAction(transition)}
-          >
-            {action[transition.action_id].name}
-          </Button>
+          <div>
+            <Button
+              className={`action-btn ${action[transition.action_id].type}`}
+              key={`action-btn-${index}`}
+              onClick={() => handleClickAction(transition)}
+            >
+              {action[transition.action_id].name}
+            </Button>
+            <Divider type="vertical" />
+          </div>
         ))}
       {isRequestProblemFinished(
         transition?.[

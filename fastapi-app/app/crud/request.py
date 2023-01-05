@@ -109,9 +109,7 @@ class RequestCRUD:
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
-    async def get_searched_parts(
-        self, part_no: str, p_upper: str, db: AsyncSession
-    ):
+    async def get_searched_parts(self, part_no: str, p_upper: str, db: AsyncSession):
         stmt = f"""SELECT DISTINCT part_no FROM parts 
             WHERE (part_no LIKE '%{part_no}%')
             OR (UPPER(part_no) LIKE '%{p_upper}%')
@@ -139,14 +137,63 @@ class RequestCRUD:
         rs = toArrayWithKey(await db.execute(stmt))
         return rs
 
-    async def get_searched_user(
-        self, name: str, n_upper: str, db: AsyncSession
-    ):
+    async def get_searched_user(self, name: str, n_upper: str, db: AsyncSession):
         stmt = f"""SELECT DISTINCT CONCAT(firstname, ' ', lastname) as full_name FROM users
             WHERE (firstname LIKE '%{name}%')
             OR (UPPER(firstname) LIKE '%{n_upper}%')
             OR (lastname LIKE '%{name}%')
             OR (UPPER(lastname) LIKE '%{n_upper}%')
+            LIMIT 10"""
+        rs = toArrayWithKey(await db.execute(stmt))
+        return rs
+
+    async def get_filtered_product(
+        self, product_name: str, p_upper: str, db: AsyncSession
+    ):
+        stmt = f"""SELECT DISTINCT request_data_value ->> 'product' AS product_name
+            FROM request_datas
+            WHERE (request_data_value ->> 'product' LIKE '%{product_name}%')
+            OR (UPPER(request_data_value ->> 'product') LIKE '%{p_upper}%')
+            LIMIT 10"""
+        rs = toArrayWithKey(await db.execute(stmt))
+        return rs
+
+    async def get_filtered_part(self, part_no: str, p_upper: str, db: AsyncSession):
+        stmt = f"""SELECT DISTINCT request_data_value ->> 'partNo' AS part_no
+            FROM request_datas
+            WHERE (request_data_value ->> 'partNo' LIKE '%{part_no}%')
+            OR (UPPER(request_data_value ->> 'partNo') LIKE '%{p_upper}%')
+            LIMIT 10"""
+        rs = toArrayWithKey(await db.execute(stmt))
+        return rs
+
+    async def get_filtered_line(self, line_name: str, l_upper: str, db: AsyncSession):
+        stmt = f"""SELECT DISTINCT l.line_name FROM lines l
+            JOIN request_datas r ON l.line_id = (r.request_data_value ->> 'lineId')::INT
+            WHERE (l.line_name LIKE '%{line_name}%')
+            OR (UPPER(l.line_name) LIKE '%{l_upper}%')
+            LIMIT 10"""
+        rs = toArrayWithKey(await db.execute(stmt))
+        return rs
+
+    async def get_filtered_process(
+        self, process_name: str, p_upper: str, db: AsyncSession
+    ):
+        stmt = f"""SELECT DISTINCT p.process_name FROM processes p
+            JOIN request_datas r ON p.process_id = (r.request_data_value ->> 'processId')::INT
+            WHERE (p.process_name LIKE '%{process_name}%')
+            OR (UPPER(p.process_name) LIKE '%{p_upper}%')
+            LIMIT 10"""
+        rs = toArrayWithKey(await db.execute(stmt))
+        return rs
+
+    async def get_filtered_machine(
+        self, machine_no: str, m_upper: str, db: AsyncSession
+    ):
+        stmt = f"""SELECT DISTINCT request_data_value ->> 'machine' AS machine_no
+            FROM request_datas
+            WHERE (request_data_value ->> 'machine' LIKE '%{machine_no}%')
+            OR (UPPER(request_data_value ->> 'machine') LIKE '%{m_upper}%')
             LIMIT 10"""
         rs = toArrayWithKey(await db.execute(stmt))
         return rs

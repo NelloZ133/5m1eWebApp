@@ -1,8 +1,15 @@
-import { Select } from "@/components/fields";
+import {
+  Select,
+  DebounceSelectFilterProduct,
+  DebounceSelectFilterPart,
+  DebounceSelectFilterLine,
+  DebounceSelectFilterProcess,
+  DebounceSelectFilterMachine,
+} from "@/components/fields";
 import { FilterRequestType, KPI_LIST } from "@/constant";
 import { RequestFilterStore } from "@/store/request-filter.store";
 import { IRequestFilterForm } from "@/types/request-form.type";
-import { Button, Form, Input, Radio } from "antd";
+import { Button, Form, Input, Radio, Space, Divider } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { FC, useEffect } from "react";
 
@@ -33,15 +40,6 @@ export const RequestFilter: FC<IProps> = ({ onFinish }: IProps) => {
         onReset={reset}
       >
         <div className="grid gap-4 grid-cols-4">
-          <Form.Item label="Type" name="requestType">
-            <Radio.Group>
-              {FilterRequestType.map((reqName, index) => (
-                <Radio.Button key={`request-${index}`} value={reqName}>
-                  {reqName}
-                </Radio.Button>
-              ))}
-            </Radio.Group>
-          </Form.Item>
           <Form.Item label="Category" name="category">
             <Select
               items={availableCategory()}
@@ -57,32 +55,64 @@ export const RequestFilter: FC<IProps> = ({ onFinish }: IProps) => {
               allowClear
             />
           </Form.Item>
-          <Form.Item label="Topic" name="topic">
-            <Input placeholder="Search by topic" />
+          <Form.Item label="Product" name="product">
+            <DebounceSelectFilterProduct
+              placeholder="type to search product..."
+              allowClear={true}
+            />
           </Form.Item>
           <Form.Item label="Part" name="part">
-            <Input placeholder="Search by part" />
+            <DebounceSelectFilterPart
+              placeholder="type to search part..."
+              allowClear={true}
+            />
           </Form.Item>
           <Form.Item label="Line" name="line">
-            <Input placeholder="Search by line" />
+            <DebounceSelectFilterLine
+              placeholder="type to search line..."
+              allowClear={true}
+            />
+          </Form.Item>
+          <Form.Item label="Process" name="process">
+            <DebounceSelectFilterProcess
+              placeholder="type to search process..."
+              allowClear={true}
+            />
+          </Form.Item>
+          <Form.Item label="Machine" name="machine">
+            <DebounceSelectFilterMachine
+              placeholder="type to search machine..."
+              allowClear={true}
+            />
           </Form.Item>
           <Form.Item label="Informer" name="informer">
             <Input placeholder="Search by informer" />
           </Form.Item>
-          <Form.Item label="Manager" name="manager">
-            <Input placeholder="Search by manager" />
-          </Form.Item>
         </div>
-        <Form.Item>
-          <div className="flex justify-end">
+        <div className="filter-gap" />
+        <div className="grid gap-4 grid-cols-4">
+          <Form.Item label="Type" name="requestType">
+            <Radio.Group>
+              <Space split={<Divider type="vertical" />}>
+                {FilterRequestType.map((reqName, index) => (
+                  <Radio.Button key={`request-${index}`} value={reqName}>
+                    {reqName}
+                  </Radio.Button>
+                ))}
+              </Space>
+            </Radio.Group>
+          </Form.Item>
+          <span />
+          <span />
+          <Form.Item>
             <Button className="mx-1" htmlType="reset">
               Clear filter
             </Button>
             <Button className="mx-1" type="primary" htmlType="submit">
               Search
             </Button>
-          </div>
-        </Form.Item>
+          </Form.Item>
+        </div>
       </Form>
     </>
   );

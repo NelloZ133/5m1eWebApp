@@ -1,7 +1,7 @@
 import { ItemDetail, ListItem } from "./types/5m1e-setting.type";
 import { _5M1ERequestSelect } from "./types/request.type";
 
-export const FilterRequestType = ["All", "Problem", "Change Point"];
+export const FilterRequestType = ["All", "Problem", "Change"];
 export const AvailableProblemCategory = [
   "Man",
   "Machine",

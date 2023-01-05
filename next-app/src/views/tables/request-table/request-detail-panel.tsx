@@ -15,12 +15,14 @@ import { IRequestUploadResponse } from "@/types/upload.type";
 import { Button, message } from "antd";
 import { FC, useMemo, useState } from "react";
 import { AiFillEdit, AiFillSave } from "react-icons/ai";
+// import { useEffectOnce } from "usehooks-ts";
 import { ActionHistory } from "./action-history";
 import { ActionPanel } from "./action-panel";
 
 interface IProps {
   request: _5M1ERequest | _5M1EChangeRequest;
 }
+
 export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
   const { canEditRequest } = RequestConfigStore();
   const requestProblemFormStore = RequestProblemFormStore();
@@ -120,10 +122,16 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
 
   return (
     <>
-      {canEditRequest(request?.actionList?.[request.actionList?.length - 1]) ? (
+      {canEditRequest(
+        request?.actionList?.[request.actionList?.length - 1]
+      ) && (
         <div className="flex justify-end mb-4">
           {!isEditing ? (
-            <Button onClick={() => setIsEditing(true)}>
+            <Button
+              onClick={() => {
+                setIsEditing(true);
+              }}
+            >
               <div className="flex items-center">
                 <AiFillEdit />
                 <div className="ml-2">Edit</div>
@@ -131,7 +139,7 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
             </Button>
           ) : null}
         </div>
-      ) : null}
+      )}
       {is5M1ERequest(request) ? (
         <Update5M1EReportForm
           request={request}
@@ -140,7 +148,7 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
           onFinish={handleSave}
           onReset={handleCancel}
         >
-          {isEditing ? (
+          {isEditing && (
             <div className="flex justify-end mb-4">
               <Button htmlType="reset">
                 <div className="flex items-center">
@@ -154,7 +162,7 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
                 </div>
               </Button>
             </div>
-          ) : null}
+          )}
         </Update5M1EReportForm>
       ) : (
         <Update5M1EReportForm
@@ -164,7 +172,7 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
           onFinish={handleSaveChange}
           onReset={handleCancel}
         >
-          {isEditing ? (
+          {isEditing && (
             <div className="flex justify-end mb-4">
               <Button htmlType="reset">
                 <div className="flex items-center">
@@ -178,17 +186,15 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
                 </div>
               </Button>
             </div>
-          ) : null}
+          )}
         </Update5M1EReportForm>
       )}
-      {request.actionList.length > 1 ? (
-        <ActionHistory request={request} />
-      ) : null}
-      {!isEditing ? (
+      {request.actionList.length > 1 && <ActionHistory request={request} />}
+      {!isEditing && (
         <div className="flex justify-end">
           <ActionPanel request={request} />
         </div>
-      ) : null}
+      )}
     </>
   );
 };

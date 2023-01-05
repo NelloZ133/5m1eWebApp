@@ -8,6 +8,11 @@ import {
   searchMachine,
   searchProduct,
   searchUser,
+  filterProduct,
+  filterMachine,
+  filterProcess,
+  filterLine,
+  filterPart,
 } from "@/functions/searchData";
 
 interface IDebounceProps {
@@ -131,10 +136,105 @@ const DebounceSelectUser: FC<IDebounceProps> = ({
   );
 };
 
+const DebounceSelectFilterProduct: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={filterProduct}
+    />
+  );
+};
+
+const DebounceSelectFilterPart: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={filterPart}
+    />
+  );
+};
+
+const DebounceSelectFilterLine: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={filterLine}
+    />
+  );
+};
+
+const DebounceSelectFilterProcess: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={filterProcess}
+    />
+  );
+};
+
+const DebounceSelectFilterMachine: FC<IDebounceProps> = ({
+  value,
+  placeholder,
+  allowClear,
+  onChange,
+}: IDebounceProps) => {
+  return (
+    <DebounceSelect
+      showSearch
+      value={value}
+      placeholder={placeholder}
+      allowClear={allowClear}
+      onChange={onChange}
+      fetchOptions={filterMachine}
+    />
+  );
+};
+
 export default DebounceSelect;
 export {
   DebounceSelectPart,
   DebounceSelectMachine,
   DebounceSelectProduct,
   DebounceSelectUser,
+  DebounceSelectFilterProduct,
+  DebounceSelectFilterPart,
+  DebounceSelectFilterLine,
+  DebounceSelectFilterProcess,
+  DebounceSelectFilterMachine,
 };

@@ -1,3 +1,4 @@
+import { DefaultListItem } from "./../../constant";
 import {
   AvailableProblemCategory,
   AvailableChangeCategory,
@@ -68,14 +69,45 @@ export const _5M1EReportSettingSlice: StateCreator<I5M1EReportSettingState> = (
   },
 
   getProblemListItemById(listItemId) {
-    return get()
+    const found = get()
       .listItemProblemList()
       .find((listItem) => listItem.list_item_id === listItemId);
+    if (found !== undefined) {
+      return found;
+    } else {
+      return DefaultListItem;
+    }
+  },
+
+  getProblemListItemByName(listItemName) {
+    const found = get()
+      .listItemProblemList()
+      .find((listItem) => listItem.list_item_name === listItemName);
+    if (found !== undefined) {
+      return found;
+    } else {
+      return DefaultListItem;
+    }
   },
 
   getChangePointListItemById(listItemId) {
-    return get()
+    const found = get()
       .listItemChangePointList()
       .find((listItem) => listItem.list_item_id === listItemId);
+    if (found !== undefined) {
+      return found;
+    } else {
+      return DefaultListItem;
+    }
+  },
+  getChangePointListItemByName(listItemName) {
+    const found = get()
+      .listItemChangePointList()
+      .find((listItem) => listItem.list_item_name === listItemName);
+    if (found !== undefined) {
+      return found;
+    } else {
+      return DefaultListItem;
+    }
   },
 });

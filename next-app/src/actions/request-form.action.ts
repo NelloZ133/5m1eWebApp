@@ -45,24 +45,24 @@ async function draftRequestForm(
     data_value: {
       problem_request_id: problemRequestId,
       category: form.category,
-      itemId: form.item.list_item_id,
-      detailId: form.detail.item_detail_id,
+      item: form.item.list_item_name,
+      detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
       kpi: form.kpi,
-      productId: form.product,
+      product: form.product,
       lineId: form.line,
       processId: form.process,
       machine: form.machine,
-      partId: form.part,
+      partNo: form.part,
       attachmentList: form.attachmentUrlList ?? [],
       note: form.note,
     },
     action_note: "",
   };
-
+  // console.log("submitted problem body = ", body);
   const { data } = await axiosInstance.post<any>(`request/submit`, body);
-  console.log("submitted problem data = ", data);
+  // console.log("submitted problem data = ", data);
   return data;
 }
 
@@ -103,8 +103,9 @@ export async function updateRequestForm(
     },
     action_note: actionNote,
   };
+  // console.log("updated problem body = ", body);
   const { data } = await axiosInstance.post<any>(`request/update`, body);
-  console.log("updated problem data = ", data);
+  // console.log("updated problem data = ", data);
   return data;
 }
 
@@ -129,23 +130,24 @@ export async function updateRequestFormValue(
     data_value: {
       problem_request_id: request.request_data_value.problem_request_id,
       category: form.category,
-      itemId: form.item.list_item_id,
-      detailId: form.detail.item_detail_id,
+      item: form.item.list_item_name,
+      detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
       kpi: form.kpi,
-      productId: form.product,
+      product: form.product,
       lineId: form.line,
       processId: form.process,
       machine: form.machine,
-      partId: form.part,
+      partNo: form.part,
       attachmentList: form.attachmentUrlList ?? [],
       note: form.note,
     },
     action_note: "",
   };
+  // console.log("save problem body =", body);
   const { data } = await axiosInstance.post<any>(`request/save`, body);
-  console.log("save problem data =", data);
+  // console.log("save problem data =", data);
   return data;
 }
 
@@ -164,7 +166,45 @@ async function draftChangeRequestForm(
   const action = getActionByName(startActionName);
   const transition = getTransitionByActionId(action?.id ?? 0);
 
-  console.log(form)
+  if (form.category === "No change") {
+    const body: ISubmitChangeRequestFormParam = {
+      request_process_name: requestProcess?.request_process_short_name ?? "",
+      request_process_id: requestProcess?.id ?? 0,
+      action_user_uuid: user?.user_uuid ?? "",
+      line_id: form.line,
+      user_uuid: user?.user_uuid ?? "",
+      email_list: [],
+      transition_id: transition?.id ?? 0,
+      action_id: action?.id ?? 0,
+      current_state_id: +(transition?.current_state_id ?? 0),
+      data_value: {
+        problem_request_id: problemRequestId,
+        category: form.category,
+        item: "ไม่มีการเปลี่ยนแปลง",
+        detail: "",
+        detailOther: "",
+        fullDetail: "",
+        actPerson: "",
+        kpi: [""],
+        product: "",
+        lineId: form.line,
+        processId: 0,
+        machine: "",
+        partNo: "",
+        actTime: "",
+        actResult: "",
+        respPerson: "",
+        attachmentList: [],
+        note: form.note,
+      },
+      action_note: "",
+    };
+    // console.log("submitted change body =", body);
+    const { data } = await axiosInstance.post<any>(`request/submit`, body);
+    // console.log("submitted change data =", data);
+    return data;
+  }
+
   const body: ISubmitChangeRequestFormParam = {
     request_process_name: requestProcess?.request_process_short_name ?? "",
     request_process_id: requestProcess?.id ?? 0,
@@ -178,18 +218,18 @@ async function draftChangeRequestForm(
     data_value: {
       problem_request_id: problemRequestId,
       category: form.category,
-      itemId: form.item.list_item_id,
-      detailId: form.detail.item_detail_id,
+      item: form.item.list_item_name,
+      detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
       actPerson: form.act_person,
       kpi: form.kpi,
-      productId: form.product,
+      product: form.product,
       lineId: form.line,
       processId: form.process,
       machine: form.machine,
-      partId: form.part,
-      actTime: form.act_time,
+      partNo: form.part,
+      actTime: form.act_time.local().format("D/MM/Y, HH:mm"),
       actResult: form.act_result,
       respPerson: form.resp_person,
       attachmentList: form.attachmentUrlList ?? [],
@@ -197,9 +237,9 @@ async function draftChangeRequestForm(
     },
     action_note: "",
   };
-
+  // console.log("submitted change body =", body);
   const { data } = await axiosInstance.post<any>(`request/submit`, body);
-  console.log("submitted change data =", data);
+  // console.log("submitted change data =", data);
   return data;
 }
 
@@ -240,8 +280,9 @@ export async function updateChangeRequestForm(
     },
     action_note: actionNote,
   };
+  // console.log("updated change body =", body);
   const { data } = await axiosInstance.post<any>(`request/update`, body);
-  console.log("updated change data =", data);
+  // console.log("updated change data =", data);
   return data;
 }
 
@@ -266,18 +307,18 @@ export async function updateChangeRequestFormValue(
     data_value: {
       problem_request_id: request.request_data_value.problem_request_id,
       category: form.category,
-      itemId: form.item.list_item_id,
-      detailId: form.detail.item_detail_id,
+      item: form.item.list_item_name,
+      detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
       actPerson: form.act_person,
       kpi: form.kpi,
-      productId: form.product,
+      product: form.product,
       lineId: form.line,
       processId: form.process,
       machine: form.machine,
-      partId: form.part,
-      actTime: form.act_time,
+      partNo: form.part,
+      actTime: form.act_time.local().format("D/MM/Y, HH:mm"),
       actResult: form.act_result,
       respPerson: form.resp_person,
       attachmentList: form.attachmentUrlList ?? [],
@@ -285,8 +326,9 @@ export async function updateChangeRequestFormValue(
     },
     action_note: "",
   };
+  // console.log("save change body =", body);
   const { data } = await axiosInstance.post<any>(`request/save`, body);
-  console.log("save change data =", data);
+  // console.log("save change data =", data);
   return data;
 }
 

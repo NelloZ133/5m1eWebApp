@@ -1,4 +1,4 @@
-import { ItemDetail, ListItem } from "./../../types/5m1e-setting.type";
+import { ItemDetail} from "./../../types/5m1e-setting.type";
 import {
   ItemDetailOther,
   KPI_LIST,
@@ -14,11 +14,11 @@ export const RequestChangePointFormSlice: StateCreator<
   IRequestChangePointFormState
 > = (set, get) => ({
   selectedCategory: null,
-  selectedItemId: null,
+  selectedItem: null,
   selectedLineId: null,
   selectedProcessId: null,
-  selectedProductId: null,
-  selectedItemDetailId: null,
+  selectedProduct: null,
+  selectedItemDetail: null,
 
   categoryList() {
     return AvailableChangeCategory;
@@ -48,7 +48,7 @@ export const RequestChangePointFormSlice: StateCreator<
     const list: ItemDetail[] = _5M1ESettingStore
       .getState()
       .itemDetailList()
-      .filter((item) => item.list_item_id === get().selectedItemId);
+      .filter((item) => item.list_item_id === get().selectedItem?.list_item_id);
     list.push(ItemDetailOther);
     return list;
   },
@@ -62,8 +62,8 @@ export const RequestChangePointFormSlice: StateCreator<
   setSelectedCategory(selectedCategory) {
     set({ selectedCategory });
   },
-  setSelectedItemId(selectedItemId) {
-    set({ selectedItemId });
+  setSelectedItem(selectedItem) {
+    set({ selectedItem });
   },
   setSelectedLineId(selectedLineId) {
     set({ selectedLineId });
@@ -71,20 +71,20 @@ export const RequestChangePointFormSlice: StateCreator<
   setSelectedProcessId(selectedProcessId) {
     set({ selectedProcessId });
   },
-  setSelectedProductId(selectedProductId) {
-    set({ selectedProductId });
+  setSelectedProduct(selectedProduct) {
+    set({ selectedProduct });
   },
-  setSelectedItemDetailId(selectedItemDetailId) {
-    set({ selectedItemDetailId });
+  setSelectedItemDetail(selectedItemDetail) {
+    set({ selectedItemDetail });
   },
 
   reset() {
     set({
       selectedCategory: null,
-      selectedItemId: null,
+      selectedItem: null,
       selectedLineId: null,
-      selectedProductId: null,
-      selectedItemDetailId: null,
+      selectedProduct: null,
+      selectedItemDetail: null,
     });
   },
 });
