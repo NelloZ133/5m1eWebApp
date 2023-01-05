@@ -125,5 +125,56 @@
       "type": "Deleted",
       "request_process": "5M1E_change"
     }
+  },
+  "transition": {
+    "11": {
+      "current_state_id": "11",
+      "next_state_id": "16",
+      "action_id": "18",
+      "activity_id": "",
+      "description": "delete change request"
+    },
+    "12": {
+      "current_state_id": "11",
+      "next_state_id": "13",
+      "action_id": "11",
+      "activity_id": "11",
+      "description": "submit change request"
+    },
+    "14": {
+      "current_state_id": "13",
+      "next_state_id": "12",
+      "action_id": "15",
+      "activity_id": "15",
+      "description": "cancel change request"
+    },
+    "15": {
+      "current_state_id": "13",
+      "next_state_id": "11",
+      "action_id": "14",
+      "activity_id": "14",
+      "description": "reject change request"
+    },
+    "16": {
+      "current_state_id": "13",
+      "next_state_id": "14",
+      "action_id": "13",
+      "activity_id": "13",
+      "description": "approve change request"
+    },
+    "17": {
+      "current_state_id": "14",
+      "next_state_id": "15",
+      "action_id": "17",
+      "activity_id": "",
+      "description": "not request confirmation"
+    },
+    "18": {
+      "current_state_id": "14",
+      "next_state_id": "15",
+      "action_id": "16",
+      "activity_id": "16",
+      "description": "request confirmation"
+    }
   }
 }
