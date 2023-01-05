@@ -120,8 +120,7 @@
       "name": "Send reject to requester",
       "description": "email notify requester about reject",
       "type": "Send email",
-      "request_process": "5M1E_problem",
-      "func": ""
+      "request_process": "5M1E_problem"
     },
     "5": {
       "name": "Send cancellation to requester",
@@ -297,7 +296,6 @@
       "activity_id": "6",
       "description": "select supporter"
     },
-
     "11": {
       "current_state_id": "11",
       "next_state_id": "16",
