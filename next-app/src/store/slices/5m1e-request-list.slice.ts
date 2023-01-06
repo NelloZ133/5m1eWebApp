@@ -39,5 +39,6 @@ export const _5M1ERequestListSlice: StateCreator<I5M1ERequestListState> = (
     set({
       requestList: computedActReqList,
     });
+    console.log(computedActReqList);
   },
 });

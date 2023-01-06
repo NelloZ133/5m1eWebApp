@@ -12,7 +12,7 @@ import { RequestChangePointFormStore } from "@/store/request-change-point-form.s
 import { IRequestForm, IChangeRequestForm } from "@/types/request-form.type";
 import { _5M1EChangeRequest, _5M1ERequest } from "@/types/request.type";
 import { IRequestUploadResponse } from "@/types/upload.type";
-import { Button, message } from "antd";
+import { Button, Space, message } from "antd";
 import { FC, useMemo, useState } from "react";
 import { AiFillEdit, AiFillSave } from "react-icons/ai";
 // import { useEffectOnce } from "usehooks-ts";
@@ -79,6 +79,14 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
 
   const handleSaveChange = async (form: IChangeRequestForm) => {
     if (is5M1EChangeRequest(request)) {
+      if (request.request_data_value.category === "No change") {
+        await updateChangeRequestFormValue(request, {
+          ...form,
+        });
+        await getAllRequest();
+        setIsEditing(false);
+        return;
+      }
       const attachmentToUploadList: any[] = [];
       let attachmentList: string[] = [];
       form.attachments.forEach((attachment) => {
@@ -174,17 +182,19 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
         >
           {isEditing && (
             <div className="flex justify-end mb-4">
-              <Button htmlType="reset">
-                <div className="flex items-center">
-                  <div className="ml-2">Cancel</div>
-                </div>
-              </Button>
-              <Button htmlType="submit">
-                <div className="flex items-center">
-                  <AiFillSave />
-                  <div className="ml-2">Save</div>
-                </div>
-              </Button>
+              <Space>
+                <Button htmlType="reset">
+                  <div className="flex items-center">
+                    <div className="ml">Cancel</div>
+                  </div>
+                </Button>
+                <Button htmlType="submit">
+                  <div className="flex items-center">
+                    <AiFillSave />
+                    <div className="ml-2">Save</div>
+                  </div>
+                </Button>
+              </Space>
             </div>
           )}
         </Update5M1EReportForm>

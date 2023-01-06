@@ -292,6 +292,48 @@ export async function updateChangeRequestFormValue(
 ): Promise<any> {
   const { requestProcessDict } = _5M1ESettingStore.getState();
 
+  if (form.category === "No change") {
+    const body: IUpdateChangeRequestFormParam = {
+      request_id: request.request_id,
+      request_process_name:
+        requestProcessDict[request.request_process_id]
+          .request_process_short_name,
+      request_process_id: request.request_process_id,
+      action_user_uuid: request.action_user_uuid,
+      line_id: form.line,
+      user_uuid: request.user_uuid,
+      email_list: eval(request.email_list),
+      transition_id: request.transition_id,
+      action_id: request.action_id,
+      current_state_id: request.current_state_id,
+      data_value: {
+        problem_request_id: "",
+        category: form.category,
+        item: "ไม่มีการเปลี่ยนแปลง",
+        detail: "",
+        detailOther: "",
+        fullDetail: "",
+        actPerson: "",
+        kpi: [""],
+        product: "",
+        lineId: form.line,
+        processId: 0,
+        machine: "",
+        partNo: "",
+        actTime: "",
+        actResult: "",
+        respPerson: "",
+        attachmentList: [],
+        note: form.note,
+      },
+      action_note: "",
+    };
+    // console.log("save change body =", body);
+    const { data } = await axiosInstance.post<any>(`request/save`, body);
+    // console.log("save change data =", data);
+    return data;
+  }
+
   const body: IUpdateChangeRequestFormParam = {
     request_id: request.request_id,
     request_process_name:

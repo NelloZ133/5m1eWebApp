@@ -1,6 +1,6 @@
 import { Select } from "@/components/fields";
 import { _5M1ESettingStore } from "@/store";
-import { Form, Input, Modal, Spin } from "antd";
+import { Form, Input, Modal, Spin, Button } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { FC, useEffect } from "react";
 
@@ -59,14 +59,9 @@ export const ActionModal: FC<IProps> = ({
 
   return (
     <>
-      <Modal
-        title={title}
-        open={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
+      <Modal title={title} footer={null} open={visible} onCancel={handleCancel}>
         <Spin spinning={isLoading ?? false}>
-          <Form form={form}>
+          <Form form={form} onFinish={handleOk}>
             {showEmailSelect ? (
               <Form.Item
                 label="Mailing List"
@@ -74,6 +69,7 @@ export const ActionModal: FC<IProps> = ({
                 rules={[
                   { required: true, message: "Please select notify people" },
                 ]}
+                required
               >
                 <Select
                   items={availableEmailForSubmitList()}
@@ -91,6 +87,7 @@ export const ActionModal: FC<IProps> = ({
                 rules={[
                   { required: true, message: "Please input action note" },
                 ]}
+                required
               >
                 <Input placeholder="Action Note..." />
               </Form.Item>
@@ -100,6 +97,7 @@ export const ActionModal: FC<IProps> = ({
                 label="Supporter"
                 name="supporterList"
                 rules={[{ required: true, message: "Please select supporter" }]}
+                required
               >
                 <Select
                   items={availableSupporterList()}
@@ -117,6 +115,7 @@ export const ActionModal: FC<IProps> = ({
                 rules={[
                   { required: true, message: "Please select confirmation" },
                 ]}
+                required
               >
                 <Select
                   items={availableSupporterList()}
@@ -127,6 +126,14 @@ export const ActionModal: FC<IProps> = ({
                 />
               </Form.Item>
             ) : null}
+            <div className="flex w-full justify-end mb-4">
+              <Button className="mx-1" type="primary" htmlType="reset" danger>
+                Reset
+              </Button>
+              <Button className="mx-1" type="primary" htmlType="submit">
+                OK
+              </Button>
+            </div>
           </Form>
         </Spin>
       </Modal>

@@ -1,6 +1,7 @@
 import { RequestConfigStore, _5M1ESettingStore } from "@/store";
 import { _5M1EChangeRequest, _5M1ERequest } from "@/types/request.type";
-import { Tag } from "antd";
+import { AvailableChangeCategory } from "@/constant";
+import { Space, Tag, Tooltip } from "antd";
 import { ColumnType } from "antd/lib/table";
 import moment from "moment";
 
@@ -10,6 +11,49 @@ export function RequestColumnList(): ColumnType<
   const { requestProcessDict, lineDict, getUserJoinRolePositionByUUID } =
     _5M1ESettingStore.getState();
   const { state, action } = RequestConfigStore.getState();
+
+  function tagColorSetting(value: string): string {
+    let color: string = "";
+
+    if (value === "Problem") {
+      color = "red";
+    } else if (value === "Change Point") {
+      color = "blue";
+    } else if (value === AvailableChangeCategory[0]) {
+      color = "geekblue";
+    } else if (value === AvailableChangeCategory[1]) {
+      color = "green";
+    } else if (value === AvailableChangeCategory[2]) {
+      color = "orange";
+    } else if (value === AvailableChangeCategory[3]) {
+      color = "gold";
+    } else if (value === AvailableChangeCategory[4]) {
+      color = "cyan";
+    } else if (value === AvailableChangeCategory[5]) {
+      color = "purple";
+    } else if (value === AvailableChangeCategory[6]) {
+      color = "#697586";
+    } else if (value === AvailableChangeCategory[7]) {
+      color = "default";
+    } else if (value === "Waiting Submit") {
+      color = "default";
+    } else if (value === "Waiting Check") {
+      color = "#ffca3a";
+    } else if (value === "Waiting Select Sup.") {
+      color = "#1982c4";
+    } else if (value === "Waiting Review") {
+      color = "#8c69af";
+    } else if (value === "Cancelled") {
+      color = "#ff595e";
+    } else if (value === "Completed") {
+      color = "#8ac926";
+    } else {
+      color = "default";
+    }
+
+    return color;
+  }
+
   return [
     {
       title: "Request No.",
@@ -58,7 +102,15 @@ export function RequestColumnList(): ColumnType<
         ),
       render: (_, record) => (
         <div className="col-default col-type">
-          <Tag>
+          <Tag
+            color={tagColorSetting(
+              requestProcessDict?.[
+                record.request_process_id
+              ]?.request_process_name
+                .replace("5M1E ", "")
+                .replace(" Report", "")
+            )}
+          >
             {requestProcessDict?.[
               record.request_process_id
             ]?.request_process_name
@@ -79,7 +131,9 @@ export function RequestColumnList(): ColumnType<
         ),
       render: (_, record) => (
         <div className="col-default col-category">
-          <Tag>{record.request_data_value.category}</Tag>
+          <Tag color={tagColorSetting(record.request_data_value.category)}>
+            {record.request_data_value.category}
+          </Tag>
         </div>
       ),
     },
@@ -89,7 +143,11 @@ export function RequestColumnList(): ColumnType<
       key: "kpi",
       render: (_, record) => (
         <div className="col-default col-kpi">
-          <Tag>{record.request_data_value.kpi}</Tag>
+          {record.request_data_value.kpi?.map((kpi) => (
+            <Tooltip title={kpi}>
+              <Tag>{kpi[0]}</Tag>
+            </Tooltip>
+          ))}
         </div>
       ),
     },
@@ -167,7 +225,14 @@ export function RequestColumnList(): ColumnType<
       ellipsis: true,
       render: (_, record) => (
         <div className="col-default col-status">
-          <Tag>
+          <Tag
+            color={tagColorSetting(
+              state?.[
+                record.actionList[record.actionList.length - 1].current_state_id
+              ]?.name
+            )}
+            style={{ color: "rgb(30, 30, 30)" }}
+          >
             {
               state?.[
                 record.actionList[record.actionList.length - 1].current_state_id

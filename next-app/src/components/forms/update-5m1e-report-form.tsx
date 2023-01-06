@@ -321,6 +321,7 @@ const Update5M1EReportForm: FC<IProps> = ({
           // console.log(v);
           onFinish({
             ...v,
+            category: "No change",
           });
         }}
       >

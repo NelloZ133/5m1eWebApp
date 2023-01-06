@@ -86,8 +86,11 @@ export const _5M1EProblemPermissionSlice: StateCreator<
         userPoint >= submitUserPoint)
     );
   },
+  canSelfCancel(request) {
+    return get().canSubmit(request);
+  },
   canDelete(request) {
-    return get().canSubmit(request)
+    return get().canSubmit(request);
   },
   canSelectSupporter() {
     const { user } = UserStore.getState();
@@ -112,20 +115,20 @@ export const _5M1EProblemPermissionSlice: StateCreator<
       number,
       (request: _5M1ERequest) => boolean
     > = {
-      1: get().canSubmit,
-      2: get().canCancel,
-      3: get().canApprove,
-      4: get().canReject,
-      5: get().canSelectSupporter,
-      6: get().canSelectSupporter,
-      7: get().canDelete,
-      11: get().canSubmit,
-      12: get().canCancel,
-      13: get().canApprove,
-      14: get().canReject,
-      15: get().canSelectSupporter,
-      16: get().canSelectSupporter,
-      17: get().canDelete,
+      1: get().canDelete,
+      2: get().canSubmit,
+      4: get().canCancel,
+      5: get().canReject,
+      6: get().canApprove,
+      7: get().canSelectSupporter,
+      8: get().canSelectSupporter,
+      11: get().canDelete,
+      12: get().canSubmit,
+      14: get().canCancel,
+      15: get().canReject,
+      16: get().canApprove,
+      17: get().canSelectSupporter,
+      18: get().canSelectSupporter,
     };
     return (
       TransitionIdToValidateActionFunc?.[+transition.id]?.(request) ?? false
