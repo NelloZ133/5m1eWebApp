@@ -14,7 +14,7 @@ import { LayoutStore } from "@/store/layout.store";
 import { _5M1ERequest } from "@/types/request.type";
 
 const _5M1EReportOverview: NextPage = () => {
-  const { fetchSetting, canSubmit } = _5M1ESettingStore.getState();
+  const { fetchSetting, canSubmit } = _5M1ESettingStore();
   const { user } = UserStore.getState();
   const { setIsLoading } = LayoutStore();
   const { requestList } = _5M1ERequestStore();

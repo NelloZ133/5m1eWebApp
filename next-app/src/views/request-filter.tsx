@@ -93,7 +93,7 @@ export const RequestFilter: FC<IProps> = ({ onFinish }: IProps) => {
         <div className="grid gap-4 grid-cols-4">
           <Form.Item label="Type" name="requestType">
             <Radio.Group>
-              <Space split={<Divider type="vertical" />}>
+              <Space >
                 {FilterRequestType.map((reqName, index) => (
                   <Radio.Button key={`request-${index}`} value={reqName}>
                     {reqName}

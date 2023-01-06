@@ -31,10 +31,13 @@
     width: 90px;
   }
   &.col-category {
-    width: 85px;
+    width: 90px;
   }
   &.col-kpi {
-    width: 100px;
+    width: 115px;
+    .ant-tag {
+      margin-right: 4px;
+    }
   }
   &.col-product {
     width: 100px;
