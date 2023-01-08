@@ -86,9 +86,6 @@ export const _5M1EProblemPermissionSlice: StateCreator<
         userPoint >= submitUserPoint)
     );
   },
-  canSelfCancel(request) {
-    return get().canSubmit(request);
-  },
   canDelete(request) {
     return get().canSubmit(request);
   },

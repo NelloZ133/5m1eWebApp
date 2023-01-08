@@ -6,10 +6,12 @@ export const RequestFlowConfigSlice: StateCreator<IRequestFlowConfigState> = (
   get
 ) => ({
   PromptActionNoteActionNameList: [
-    "Approve request",
-    "Reject request",
+    "Approve problem",
+    "Reject problem",
+    "Cancel problem",
     "Approve change point",
     "Reject change point",
+    "Cancel change point",
   ],
   PromptMailActionNameList: ["Submit problem", "Submit change point"],
   PromptSelectSupporterActionNameList: ["Select supporter"],

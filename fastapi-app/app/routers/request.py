@@ -155,23 +155,37 @@ async def _send_mail(
     )
     requester_name = requester["firstname"] + " " + requester["lastname"]
     created_at = request_response[-1]["req_created_at"]
+    action_user_uuid = request_response[-1]["action_user_uuid"]
+    action_user = await user_manager.get_by_user_uuid(action_user_uuid, db=db)
+    checker_name = action_user["firstname"] + " " + action_user["lastname"]
+    action_created_at = request_response[-1]["action_created_at"]
+    reason = request_response[-1]["note"]
+
     request_data_value = request_response[-1]["request_data_value"]
     category = request_data_value["category"]
+    detail = request_data_value["detail"]
+    detailOther = request_data_value["detailOther"]
+    full_detail = request_data_value.get("fullDetail", "-")
+    topic = request_data_value["item"]
+    lineId = int(request_data_value["lineId"])
+    lines = await staticCRUD.get_lines(db=db)
+    line = lines.get(lineId, {"data": [{"line_name": "-"}]})
+    line_name = line["line_name"]
+    processId = int(request_data_value["processId"])
+    processes = await staticCRUD.get_processes(db=db)
+    process = processes.get(processId, {"data": [{"process_name": "-"}]})
+    process_name = process["process_name"]
+    product_name = request_data_value["product"]
+    partNo = request_data_value.get("partNo", "-")
+    machine_no = request_data_value.get("machine", "-")
     attachments = request_data_value["attachmentList"]
+    req_note = request_data_value.get("note", "-")
+    if detail != "":
+        item_detail = detail
+    else:
+        item_detail = detailOther or "-"
 
-    if action_id == 1 or action_id == 11:
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
+    if action_id == 1 or action_id == 11: #submit
         html = ""
         if action_id == 1:
             subject = "You got a request to confirm about 5M1E problem"
@@ -194,6 +208,7 @@ async def _send_mail(
         html = html.replace("{5m1e_category}", category)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         overview_url = f"{FRONTEND_BASE_URL}/5m1e/report"
         html = html.replace("https://www.google.com", overview_url)
         email_list = email_list_data
@@ -206,25 +221,9 @@ async def _send_mail(
                     target=send_mail, args=(email, subject, send_html, attachments)
                 )
                 t.start()
-                # send_mail(email, "You got a request to confirm about 5M1E problem", send_html, attachments)
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif (action_id == 2 or action_id == 12) and (user_uuid == action_user_uuid):
-        print(f"Request response: {request_response}")
-        action_created_at = request_response[-1]["action_created_at"]
-        reason = "-"
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
+    elif (action_id == 2 or action_id == 12) and (user_uuid == action_user_uuid): #cancel by user
         html = ""
         with open(
             "email_templates/email_template_self_cancel.txt", encoding="utf-8"
@@ -239,6 +238,7 @@ async def _send_mail(
         html = html.replace("{5m1e_category}", category)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         email_list_str = request_response[-2].get("email_list", "[]")
         email_list = json.loads(email_list_str)
         for email in email_list:
@@ -256,27 +256,9 @@ async def _send_mail(
                     ),
                 )
                 t.start()
-                # send_mail(email, "You got a request to confirm about 5M1E problem", send_html, attachments)
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif (action_id == 2 or action_id == 12) and (user_uuid != action_user_uuid):
-        action_created_at = request_response[-1]["action_created_at"]
-        reason = request_response[-1]["note"]
-        action_user_uuid = request_response[-1]["action_user_uuid"]
-        action_user = await user_manager.get_by_user_uuid(action_user_uuid, db=db)
-        checker_name = action_user["firstname"] + " " + action_user["lastname"]
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
+    elif (action_id == 2 or action_id == 12) and (user_uuid != action_user_uuid): #cancel by other user
         html = ""
         with open(
             "email_templates/email_template_cancel_request.txt", encoding="utf-8"
@@ -291,6 +273,7 @@ async def _send_mail(
         html = html.replace("{5m1e_category}", category)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         email_list = [requester["email"]]
         for email in email_list:
             send_html = html.replace("{checker_name}", checker_name)
@@ -305,27 +288,9 @@ async def _send_mail(
                     ),
                 )
                 t.start()
-                # send_mail(email, "Your 5M1E confirmation request has been cancelled", send_html, attachments)
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif action_id == 4 or action_id == 14:
-        action_created_at = request_response[-1]["action_created_at"]
-        reason = request_response[-1]["note"]
-        action_user_uuid = request_response[-1]["action_user_uuid"]
-        action_user = await user_manager.get_by_user_uuid(action_user_uuid, db=db)
-        checker_name = action_user["firstname"] + " " + action_user["lastname"]
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
+    elif action_id == 4 or action_id == 14: #reject
         html = ""
         if action_id == 4:
             subject = "Your 5M1E request has been rejected"
@@ -351,6 +316,7 @@ async def _send_mail(
         html = html.replace("{5m1e_category}", category)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         email_list = [requester["email"]]
         for email in email_list:
             send_html = html.replace("{checker_name}", checker_name)
@@ -359,39 +325,9 @@ async def _send_mail(
                     target=send_mail, args=(email, subject, send_html, attachments)
                 )
                 t.start()
-                # send_mail(email, "Your 5M1E request has been rejected", send_html, attachments)
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif action_id == 3 or action_id == 13:
-        lineId = int(request_data_value["lineId"])
-        # productId = int(request_data_value["productId"])
-        processId = int(request_data_value["processId"])
-        partId = request_data_value["partId"]
-        req_note = request_data_value.get("note", "-")
-        machine_no = request_data_value.get("machine", "-")
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        lines = await staticCRUD.get_lines(db=db)
-        line = lines.get(lineId, {"data": [{"line_name": "-"}]})
-        line_name = line["line_name"]
-        # products = await staticCRUD.get_products(db=db)
-        # product = products.get(productId, {"data": [{"full_name": "-"}]})
-        product_name = request_data_value["productId"]
-        processes = await staticCRUD.get_processes(db=db)
-        process = processes.get(processId, {"data": [{"process_name": "-"}]})
-        process_name = process["process_name"]
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
+    elif action_id == 3 or action_id == 13: #approve
         html = ""
         if action_id == 3:
             subject = f"There is a problem in {line_name}"
@@ -414,10 +350,11 @@ async def _send_mail(
         html = html.replace("{line_name}", line_name)
         html = html.replace("{product_name}", product_name)
         html = html.replace("{process_name}", process_name)
-        html = html.replace("{part_no}", partId)
+        html = html.replace("{part_no}", partNo)
         html = html.replace("{requester_note}", req_note)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         html = html.replace("{machine_no}", machine_no)
         concern_user = await user_manager.get_by_line_id(line_id=lineId, db=db)
         email_list = [u["email"] for u in concern_user]
@@ -427,44 +364,10 @@ async def _send_mail(
                 target=send_mail, args=(email_list, subject, send_html, attachments)
             )
             t.start()
-            # send_mail(email, f"There is a problem in {line_name}", send_html, attachments)
         except Exception as e:
             print(f"Error when sending email: {e}")
-    elif action_id == 6 or action_id == 16:
-        lineId = int(request_data_value["lineId"])
-        productId = int(request_data_value["productId"])
-        processId = int(request_data_value["processId"])
-        partId = request_data_value["partId"]
-        req_note = request_data_value.get("note", "-")
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        machine_no = request_data_value.get("machine", "-")
-        lines = await staticCRUD.get_lines(db=db)
-        line = lines.get(lineId, {"data": [{"line_name": "-"}]})
-        line_name = line["line_name"]
-        products = await staticCRUD.get_products(db=db)
-        product = products.get(productId, {"data": [{"full_name": "-"}]})
-        product_name = product["full_name"]
-        processes = await staticCRUD.get_processes(db=db)
-        process = processes.get(processId, {"data": [{"process_name": "-"}]})
-        process_name = process["process_name"]
-        action_created_at = request_response[-1]["action_created_at"]
-        reason = request_response[-1]["note"]
-        action_user_uuid = request_response[-1]["action_user_uuid"]
-        action_user = await user_manager.get_by_user_uuid(action_user_uuid, db=db)
+    elif action_id == 6 or action_id == 16: #select supporter or request confirmation
         manager_name = action_user["firstname"] + " " + action_user["lastname"]
-        itemId = int(request_data_value["itemId"])
-        detailId = int(request_data_value["detailId"])
-        items = await staticCRUD.get_all_list_items(db=db)
-        item = items.get(itemId, {"data": [{"list_item_name": "-"}]})
-        topic = item["data"][0]["list_item_name"]
-        if detailId > 0:
-            details = await staticCRUD.get_item_details_by_id(db=db)
-            detail = details.get(detailId, {"data": [{"item_detail": "-"}]})
-            item_detail = detail["data"][0]["item_detail"]
-        else:
-            detail = request_data_value["detailOther"].strip()
-            item_detail = detail or "-"
         html = ""
         if action_id == 6:
             subject = "There is a support request about 5M1E problem"
@@ -488,13 +391,14 @@ async def _send_mail(
         html = html.replace("{line_name}", line_name)
         html = html.replace("{product_name}", product_name)
         html = html.replace("{process_name}", process_name)
-        html = html.replace("{part_no}", partId)
+        html = html.replace("{part_no}", partNo)
         html = html.replace("{requester_note}", req_note)
         html = html.replace("{manager_name}", manager_name)
         html = html.replace("{action_created_at}", action_created_at)
         html = html.replace("{reason}", reason)
         html = html.replace("{topic}", topic)
         html = html.replace("{detail}", item_detail)
+        html = html.replace("{full_detail}", full_detail)
         html = html.replace("{machine_no}", machine_no)
         email_list = email_list_data
         for email in email_list:
@@ -506,7 +410,6 @@ async def _send_mail(
                     target=send_mail, args=(email, subject, send_html, attachments)
                 )
                 t.start()
-                # send_mail(email, "There is a support request about 5M1E problem", send_html, attachments)
             except Exception as e:
                 print(f"Error when sending email: {e}")
 
@@ -603,7 +506,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         rs = await crud.get_count_all_requests(db)
         return rs[0]["c"]
 
-    @router.get("/searchPart")
+    @router.get("/searchPart", dependencies=[Depends(api_key_auth)])
     async def get_searched_parts(part_no: str, db: AsyncSession = Depends(db)):
         p_upper = part_no.upper()
         searched_part = await crud.get_searched_parts(
@@ -611,7 +514,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return searched_part
 
-    @router.get("/searchMachine")
+    @router.get("/searchMachine", dependencies=[Depends(api_key_auth)])
     async def get_searched_machines(machine_no: str, db: AsyncSession = Depends(db)):
         m_upper = machine_no.upper()
         searched_machines = await crud.get_searched_machines(
@@ -619,7 +522,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return searched_machines
 
-    @router.get("/searchProduct")
+    @router.get("/searchProduct", dependencies=[Depends(api_key_auth)])
     async def get_searched_products(product_name: str, db: AsyncSession = Depends(db)):
         p_upper = product_name.upper()
         searched_products = await crud.get_searched_products(
@@ -627,7 +530,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return searched_products
 
-    @router.get("/searchUser")
+    @router.get("/searchUser", dependencies=[Depends(api_key_auth)])
     async def get_searched_user(name: str, db: AsyncSession = Depends(db)):
         n_upper = name.upper()
         searched_user = await crud.get_searched_user(name=name, n_upper=n_upper, db=db)
@@ -641,7 +544,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return filtered_product
 
-    @router.get("/filterPart")
+    @router.get("/filterPart", dependencies=[Depends(api_key_auth)])
     async def get_filtered_part(part_no: str, db: AsyncSession = Depends(db)):
         p_upper = part_no.upper()
         filtered_part = await crud.get_filtered_part(
@@ -649,7 +552,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return filtered_part
 
-    @router.get("/filterLine")
+    @router.get("/filterLine", dependencies=[Depends(api_key_auth)])
     async def get_filterd_line(line_name: str, db: AsyncSession = Depends(db)):
         l_upper = line_name.upper()
         filtered_line = await crud.get_filtered_line(
@@ -657,7 +560,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return filtered_line
 
-    @router.get("/filterProcess")
+    @router.get("/filterProcess", dependencies=[Depends(api_key_auth)])
     async def get_filtered_process(process_name: str, db: AsyncSession = Depends(db)):
         p_upper = process_name.upper()
         filtered_process = await crud.get_filtered_process(
@@ -665,7 +568,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         )
         return filtered_process
 
-    @router.get("/filterMachine")
+    @router.get("/filterMachine", dependencies=[Depends(api_key_auth)])
     async def get_fitlered_machine(machine_no: str, db: AsyncSession = Depends(db)):
         m_upper = machine_no.upper()
         filtered_machine = await crud.get_filtered_machine(

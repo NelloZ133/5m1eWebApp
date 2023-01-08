@@ -9,7 +9,7 @@
     "12": {
       "name": "Cancel change point",
       "description": "cancel by <<requester>>",
-      "type": "Self-Cancel",
+      "type": "Cancel",
       "request_process": "5M1E_change"
     },
     "13": {
@@ -144,8 +144,8 @@
     "14": {
       "current_state_id": "13",
       "next_state_id": "12",
-      "action_id": "15",
-      "activity_id": "15",
+      "action_id": "12",
+      "activity_id": "12",
       "description": "cancel change request"
     },
     "15": {

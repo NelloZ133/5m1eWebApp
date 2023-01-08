@@ -158,17 +158,19 @@ export const RequestDetailPanel: FC<IProps> = ({ request }: IProps) => {
         >
           {isEditing && (
             <div className="flex justify-end mb-4">
-              <Button htmlType="reset">
-                <div className="flex items-center">
-                  <div className="ml-2">Cancel</div>
-                </div>
-              </Button>
-              <Button htmlType="submit">
-                <div className="flex items-center">
-                  <AiFillSave />
-                  <div className="ml-2">Save</div>
-                </div>
-              </Button>
+              <Space>
+                <Button htmlType="reset">
+                  <div className="flex items-center">
+                    <div className="ml">Cancel</div>
+                  </div>
+                </Button>
+                <Button htmlType="submit">
+                  <div className="flex items-center">
+                    <AiFillSave />
+                    <div className="ml-2">Save</div>
+                  </div>
+                </Button>
+              </Space>
             </div>
           )}
         </Update5M1EReportForm>

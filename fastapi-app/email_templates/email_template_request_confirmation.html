@@ -1,4 +1,4 @@
-﻿<html>
+<html>
   <head>
     <style>
       header h1 {
@@ -23,7 +23,7 @@
         /* font-style: normal; */
       }
       .emphasize-text {
-        font-weight: 600;
+        font-weight: 400;
         /* font-size: medium; */
         text-decoration: underline;
         color: blue;
@@ -51,7 +51,7 @@
 
   <body>
     <header>
-      <span class="subject">[Information] 5M1E Change Report</span>
+      <span class="subject">[Request support] 5M1E Change Report</span>
     </header>
 
     <main>
@@ -61,13 +61,20 @@
           >[English version is shown at bottom]<br /><br
         /></span>
 
-        <span class="regular-text">Dear all concerned<br /><br /></span>
+        <span class="regular-text">Dear {supporter_name}<br /><br /></span>
 
-        <span class="regular-text">ขณะนี้ได้มีการเปลี่ยนแปลงเกิดขึ้นที่</span>
-        <span class="emphasize-text"
-          >{line_name}<br />
-          <br
+        <span class="regular-text"
+          >ท่านได้รับคำร้องขอการตรวจสอบเกี่ยวกับ 5M1E รายละเอียดดังนี้<br /><br
         /></span>
+
+        <span class="prefix-text">ผู้ร้องขอ:</span>
+        <span class="regular-text">{manager_name}<br /></span>
+
+        <span class="prefix-text">ร้องขอเมื่อ:</span>
+        <span class="regular-text">{action_created_at}<br /></span>
+
+        <span class="prefix-text">สิ่งที่ร้องขอ:</span>
+        <span class="emphasize-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
@@ -118,6 +125,10 @@
         <span class="prefix-text">Note:</span>
         <span class="regular-text">{requester_note}<br /><br /></span>
 
+        <span class="regular-text">กรุณาตรวจสอบตามที่มีการร้องขอ<br /></span>
+
+        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /></span>
+
         <span class="regular-text"
           >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
         /></span>
@@ -126,9 +137,20 @@
       <p>
         <span class="description">[English version]<br /><br /></span>
 
-        <span class="regular-text">There is a change in</span>
-        <span class="emphasize-text">{line_name}</span>
-        <span class="regular-text">.<br /><br /></span>
+        <span class="regular-text">Dear {supporter_name}<br /><br /></span>
+
+        <span class="regular-text"
+          >There is a confirmation request about 5M1E change as below.<br /><br
+        /></span>
+
+        <span class="prefix-text">Requester:</span>
+        <span class="regular-text">{manager_name}<br /></span>
+
+        <span class="prefix-text">Date & Time:</span>
+        <span class="regular-text">{action_created_at}<br /></span>
+
+        <span class="prefix-text">Request:</span>
+        <span class="emphasize-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">Request Detail<br /></span>
 
@@ -178,6 +200,12 @@
 
         <span class="prefix-text">Note:</span>
         <span class="regular-text">{requester_note}<br /><br /></span>
+
+        <span class="regular-text"
+          >Please confirm change point as request<br
+        /></span>
+
+        <span class="regular-text">Thank you for your corperation<br /></span>
 
         <span class="regular-text"
           >This is automatic response of 5M1E report system, please don't reply
