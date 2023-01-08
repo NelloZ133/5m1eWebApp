@@ -1,4 +1,4 @@
-﻿<html>
+<html>
   <head>
     <style>
       header h1 {
@@ -10,7 +10,7 @@
       .subject {
         font-weight: 700;
         font-size: xx-large;
-        color: red;
+        color: black;
       }
       .description {
         font-weight: 400;
@@ -26,7 +26,7 @@
         font-weight: 600;
         /* font-size: medium; */
         text-decoration: underline;
-        color: red;
+        color: blue;
       }
       .prefix-text {
         font-weight: 600;
@@ -51,7 +51,7 @@
 
   <body>
     <header>
-      <span class="subject">[Rejected] 5M1E Change Request</span>
+      <span class="subject">[Information] 5M1E Change Report</span>
     </header>
 
     <main>
@@ -61,24 +61,21 @@
           >[English version is shown at bottom]<br /><br
         /></span>
 
-        <span class="regular-text">Dear {requester_name}<br /><br /></span>
+        <span class="regular-text">Dear all concerned<br /><br /></span>
 
-        <span class="regular-text">คำร้องขอเกี่ยวกับ 5M1E ของท่าน</span>
-        <span class="emphasize-text">ถูกปฏิเสธ<br /><br /></span>
-
-        <span class="prefix-text">ผู้ตรวจทาน:</span>
-        <span class="regular-text">{checker_name}<br /></span>
-
-        <span class="prefix-text">ตรวจทานเมื่อ:</span>
-        <span class="regular-text">{action_created_at}<br /></span>
-
-        <span class="prefix-text">เหตุผล:</span>
-        <span class="regular-text">{reason}<br /><br /></span>
+        <span class="regular-text">ขณะนี้ได้มีการเปลี่ยนแปลงเกิดขึ้นที่</span>
+        <span class="emphasize-text"
+          >{line_name}<br />
+          <br
+        /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
         <span class="prefix-text">Request No.:</span>
         <span class="regular-text">{request_no}<br /></span>
+
+        <span class="prefix-text">ผู้รายงาน:</span>
+        <span class="regular-text">{requester_name}<br /></span>
 
         <span class="prefix-text">รายงานเมื่อ:</span>
         <span class="regular-text">{created_at}<br /></span>
@@ -90,10 +87,36 @@
         <span class="regular-text">{topic}<br /></span>
 
         <span class="prefix-text">รายละเอียด:<br /></span>
+        <span class="regular-text">{act_person}<br /></span>
         <span class="regular-text">{detail}<br /></span>
-        <span class="regular-text">{full_detail}<br /><br /></span>
+        <span class="regular-text">{full_detail}<br /></span>
 
-        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
+        <span class="prefix-text">Line:</span>
+        <span class="regular-text">{line_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Process:</span>
+        <span class="regular-text">{process_name}<br /></span>
+
+        <span class="prefix-text">Product:</span>
+        <span class="regular-text">{product_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Part No.:</span>
+        <span class="regular-text">{part_no}<br /></span>
+
+        <span class="prefix-text">Machine:</span>
+        <span class="regular-text">{machine_no}<br /></span>
+
+        <span class="prefix-text">เมื่อ:</span>
+        <span class="regular-text">{act_time}&emsp;&emsp;</span>
+
+        <span class="prefix-text">ผลลัพธ์:</span>
+        <span class="regular-text">{result}<br /></span>
+
+        <span class="prefix-text">รับผิดชอบโดย:</span>
+        <span class="regular-text">{responsible_person}<br /><br /></span>
+
+        <span class="prefix-text">Note:</span>
+        <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text"
           >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
@@ -103,27 +126,19 @@
       <p>
         <span class="description">[English version]<br /><br /></span>
 
-        <span class="regular-text"
-          >Your 5M1E request has been</span
-        >
-        <span class="emphasize-text">rejected</span>
+        <span class="regular-text">There is a change in</span>
+        <span class="emphasize-text">{line_name}</span>
         <span class="regular-text">.<br /><br /></span>
-
-        <span class="prefix-text">Checker:</span>
-        <span class="regular-text">{checker_name}<br /></span>
-
-        <span class="prefix-text">Date &amp; Time:</span>
-        <span class="regular-text">{action_created_at}<br /></span>
-
-        <span class="prefix-text">Reason:</span>
-        <span class="regular-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">Request Detail<br /></span>
 
         <span class="prefix-text">Request No.:</span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">Date &amp; Time:</span>
+        <span class="prefix-text">Informer:</span>
+        <span class="regular-text">{requester_name}<br /></span>
+
+        <span class="prefix-text">Inform Date:</span>
         <span class="regular-text">{created_at}<br /></span>
 
         <span class="prefix-text">5M1E Category:</span>
@@ -133,12 +148,36 @@
         <span class="regular-text">{topic}<br /></span>
 
         <span class="prefix-text">Detail:<br /></span>
+        <span class="regular-text">{act_person}<br /></span>
         <span class="regular-text">{detail}<br /></span>
-        <span class="regular-text">{full_detail}<br /><br /></span>
+        <span class="regular-text">{full_detail}<br /></span>
 
-        <span class="regular-text"
-          >Thank you for your corporation.<br /><br
-        /></span>
+        <span class="prefix-text">Line:</span>
+        <span class="regular-text">{line_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Process:</span>
+        <span class="regular-text">{process_name}<br /></span>
+
+        <span class="prefix-text">Product:</span>
+        <span class="regular-text">{product_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Part No.:</span>
+        <span class="regular-text">{part_no}<br /></span>
+
+        <span class="prefix-text">Machine:</span>
+        <span class="regular-text">{machine_no}<br /></span>
+
+        <span class="prefix-text">When:</span>
+        <span class="regular-text">{act_time}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Result:</span>
+        <span class="regular-text">{result}<br /></span>
+
+        <span class="prefix-text">Responsible by:</span>
+        <span class="regular-text">{responsible_person}<br /><br /></span>
+
+        <span class="prefix-text">Note:</span>
+        <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text"
           >This is automatic response of 5M1E report system, please don't reply

@@ -7,25 +7,25 @@
       "request_process": "5M1E_problem"
     },
     "2": {
-      "name": "Cancel request",
+      "name": "Cancel problem",
       "description": "cancel by <<requester>>",
-      "type": "Self-Cancel",
+      "type": "Cancel",
       "request_process": "5M1E_problem"
     },
     "3": {
-      "name": "Approve request",
+      "name": "Approve problem",
       "description": "approve by TL/MGR",
       "type": "Approve",
       "request_process": "5M1E_problem"
     },
     "4": {
-      "name": "Reject request",
+      "name": "Reject problem",
       "description": "reject by TL/MGR",
       "type": "Reject",
       "request_process": "5M1E_problem"
     },
     "5": {
-      "name": "Cancel request",
+      "name": "Cancel problem",
       "description": "cancel by TL/MGR",
       "type": "Cancel",
       "request_process": "5M1E_problem"
@@ -143,8 +143,8 @@
     "4": {
       "current_state_id": "3",
       "next_state_id": "2",
-      "action_id": "5",
-      "activity_id": "5",
+      "action_id": "2",
+      "activity_id": "2",
       "description": "cancel problem request"
     },
     "5": {

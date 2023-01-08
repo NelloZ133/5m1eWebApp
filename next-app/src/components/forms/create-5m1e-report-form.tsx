@@ -174,7 +174,7 @@ const _5M1EReportForm: FC<IProps> = ({
         onChange={handleFormValuesChange}
         onReset={handleFormValuesChange}
         onFinish={(v) => {
-          // console.log(v);
+          console.log(v);
           onFinish({
             ...v,
             attachments: attachmentList,
@@ -463,7 +463,7 @@ const _5M1EReportForm: FC<IProps> = ({
         onChange={handleFormValuesProblem}
         onReset={handleFormValuesProblem}
         onFinish={(v) => {
-          // console.log(v);
+          console.log(v);
           onFinish({
             ...v,
             attachments: attachmentList,

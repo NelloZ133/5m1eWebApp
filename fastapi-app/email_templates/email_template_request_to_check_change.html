@@ -1,4 +1,4 @@
-﻿<html>
+<html>
   <head>
     <style>
       header h1 {
@@ -10,7 +10,7 @@
       .subject {
         font-weight: 700;
         font-size: xx-large;
-        color: red;
+        color: black;
       }
       .description {
         font-weight: 400;
@@ -26,7 +26,7 @@
         font-weight: 600;
         /* font-size: medium; */
         text-decoration: underline;
-        color: red;
+        color: blue;
       }
       .prefix-text {
         font-weight: 600;
@@ -51,7 +51,7 @@
 
   <body>
     <header>
-      <span class="subject">[Rejected] 5M1E Change Request</span>
+      <span class="subject">[Request to check] 5M1E Change Request</span>
     </header>
 
     <main>
@@ -61,24 +61,19 @@
           >[English version is shown at bottom]<br /><br
         /></span>
 
-        <span class="regular-text">Dear {requester_name}<br /><br /></span>
+        <span class="regular-text">Dear {checker_name}<br /><br /></span>
 
-        <span class="regular-text">คำร้องขอเกี่ยวกับ 5M1E ของท่าน</span>
-        <span class="emphasize-text">ถูกปฏิเสธ<br /><br /></span>
-
-        <span class="prefix-text">ผู้ตรวจทาน:</span>
-        <span class="regular-text">{checker_name}<br /></span>
-
-        <span class="prefix-text">ตรวจทานเมื่อ:</span>
-        <span class="regular-text">{action_created_at}<br /></span>
-
-        <span class="prefix-text">เหตุผล:</span>
-        <span class="regular-text">{reason}<br /><br /></span>
+        <span class="regular-text"
+          >ท่านได้รับคำร้องขอตรวจทานเกี่ยวกับ 5M1E รายละเอียดดังนี้<br /><br
+        /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
         <span class="prefix-text">Request No.:</span>
         <span class="regular-text">{request_no}<br /></span>
+
+        <span class="prefix-text">ผู้รายงาน:</span>
+        <span class="regular-text">{requester_name}<br /></span>
 
         <span class="prefix-text">รายงานเมื่อ:</span>
         <span class="regular-text">{created_at}<br /></span>
@@ -93,7 +88,14 @@
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /><br /></span>
 
-        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
+        <span class="regular-text">กรุณาตรวจทานและอนุมัติ<br /></span>
+
+        <span class="regular-text"
+          >โดยท่านสามารถให้คำอนุมัติได้จาก
+          <a href="https://www.google.com">ลิงก์</a> นี้<br
+        /></span>
+
+        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /></span>
 
         <span class="regular-text"
           >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
@@ -104,26 +106,18 @@
         <span class="description">[English version]<br /><br /></span>
 
         <span class="regular-text"
-          >Your 5M1E request has been</span
-        >
-        <span class="emphasize-text">rejected</span>
-        <span class="regular-text">.<br /><br /></span>
-
-        <span class="prefix-text">Checker:</span>
-        <span class="regular-text">{checker_name}<br /></span>
-
-        <span class="prefix-text">Date &amp; Time:</span>
-        <span class="regular-text">{action_created_at}<br /></span>
-
-        <span class="prefix-text">Reason:</span>
-        <span class="regular-text">{reason}<br /><br /></span>
+          >You got a request to confirm about 5M1E change as below.<br /><br
+        /></span>
 
         <span class="prefix-text-header">Request Detail<br /></span>
 
         <span class="prefix-text">Request No.:</span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">Date &amp; Time:</span>
+        <span class="prefix-text">Informer:</span>
+        <span class="regular-text">{requester_name}<br /></span>
+
+        <span class="prefix-text">Inform Date:</span>
         <span class="regular-text">{created_at}<br /></span>
 
         <span class="prefix-text">5M1E Category:</span>
@@ -137,8 +131,15 @@
         <span class="regular-text">{full_detail}<br /><br /></span>
 
         <span class="regular-text"
-          >Thank you for your corporation.<br /><br
+          >Please confirm and give approval for further action.<br
         /></span>
+
+        <span class="regular-text"
+          >You can give approval by click in this
+          <a href="https://www.google.com">link</a> .<br
+        /></span>
+
+        <span class="regular-text">Thank you for your corporation.<br /></span>
 
         <span class="regular-text"
           >This is automatic response of 5M1E report system, please don't reply

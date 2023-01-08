@@ -1,59 +1,224 @@
 ﻿<html>
+  <head>
+    <style>
+      header h1 {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      main p {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .subject {
+        font-weight: 700;
+        font-size: xx-large;
+        color: black;
+      }
+      .description {
+        font-weight: 400;
+        font-size: small;
+        font-style: italic;
+      }
+      .regular-text {
+        font-weight: 400;
+        /* font-size: medium; */
+        /* font-style: normal; */
+      }
+      .emphasize-text {
+        font-weight: 400;
+        /* font-size: medium; */
+        text-decoration: underline;
+        color: blue;
+      }
+      .prefix-text {
+        font-weight: 600;
+        /* font-size: medium; */
+        /* text-decoration: underline; */
+      }
+      .prefix-text-header {
+        font-weight: 600;
+        font-size: medium;
+        text-decoration: underline;
+      }
+      .signature {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 500;
+        font-size: small;
+        font-style: italic;
+        text-decoration: solid;
+        color: #e29399;
+      }
+    </style>
+  </head>
 
-  <p><span>[English version is shown at bottom]</span><br>
-    <br>
-    Dear {supporter_name}<br>
-    <br>
-    ท่านได้รับคำร้องขอการตรวจสอบเกี่ยวกับ 5M1E รายละเอียดดังนี้<br>
-    <br>
-    <strong>ผู้ร้องขอ:</strong> {manager_name}<br>
-    <strong>ร้องขอเมื่อ:</strong> {action_created_at}<br>
-    <strong>สิ่งที่ร้องขอ:</strong> {reason}<br>
-    <br>
-    <b><u>รายละเอียดของคำร้อง</u></b><br>
-    <strong>Request No.:</strong> {request_no}<br>
-    <strong>ผู้รายงาน:</strong> {requester_name}<br>
-    <strong>รายงานเมื่อ:</strong> {created_at}<br>
-    <strong>ประเภท 5M1E:</strong> {5m1e_category}<br>
-    <strong>หัวข้อ:</strong> {topic}<br>
-    <strong>รายละเอียด:</strong><br> {detail}<br>
-    <p>
-      <strong>Product:</strong> {product_name}&emsp;&emsp;<strong>Line:</strong> {line_name}<br>
-      <strong>Process:</strong> {process_name}&emsp;&emsp;<strong>Machine:</strong> {machine_no}<br>
-      <strong>Part No.:</strong> {part_no}<br>
-      <strong>Note:</strong> {requester_note}
-    </p>
-    กรุณาตรวจสอบตามที่มีการร้องขอ<br>
-    ขอบคุณสำหรับความร่วมมือ<br>
-    <br>
-    นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br>
-    <hr>
-    <br>
-    <span>[English version]</span><br>
-    <br>
-    There is a confirmation request about 5M1E change as below.<br>
-    <br>
-    <strong>Requester:</strong> {manager_name}<br>
-    <strong>Date & Time:</strong> {action_created_at}<br>
-    <strong>Request:</strong> {reason}<br>
-    <br>
-    <b><u>Request Detail</u></b><br>
-    <strong>Request No.:</strong> {request_no}<br>
-    <strong>Date &amp; Time:</strong> {created_at}<br>
-    <strong>5M1E Category:</strong> {5m1e_category}<br>
-    <strong>Topic:</strong> {topic}<br>
-    <strong>Detail:</strong><br> {detail}<br>
-    <p>
-      <strong>Product:</strong> {product_name}&emsp;&emsp;<strong>Line:</strong> {line_name}<br>
-      <strong>Process:</strong> {process_name}&emsp;&emsp;<strong>Machine:</strong> {machine_no}<br>
-      <strong>Part No.:</strong> {part_no}<br>
-      <strong>Note:</strong> {requester_note}
-    </p>
-    Please confirm change point as request<br>
-    Thank you for your operation<br>
-    <br>
-    This is automatic response of 5M1E report system, please don't reply this mail.<br>
-    <hr>
-  </p>
+  <body>
+    <header>
+      <span class="subject">[Request support] 5M1E Change Report</span>
+    </header>
 
+    <main>
+      <hr />
+      <p>
+        <span class="description"
+          >[English version is shown at bottom]<br /><br
+        /></span>
+
+        <span class="regular-text">Dear {supporter_name}<br /><br /></span>
+
+        <span class="regular-text"
+          >ท่านได้รับคำร้องขอการตรวจสอบเกี่ยวกับ 5M1E รายละเอียดดังนี้<br /><br
+        /></span>
+
+        <span class="prefix-text">ผู้ร้องขอ:</span>
+        <span class="regular-text">{manager_name}<br /></span>
+
+        <span class="prefix-text">ร้องขอเมื่อ:</span>
+        <span class="regular-text">{action_created_at}<br /></span>
+
+        <span class="prefix-text">สิ่งที่ร้องขอ:</span>
+        <span class="emphasize-text">{reason}<br /><br /></span>
+
+        <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
+
+        <span class="prefix-text">Request No.:</span>
+        <span class="regular-text">{request_no}<br /></span>
+
+        <span class="prefix-text">ผู้รายงาน:</span>
+        <span class="regular-text">{requester_name}<br /></span>
+
+        <span class="prefix-text">รายงานเมื่อ:</span>
+        <span class="regular-text">{created_at}<br /></span>
+
+        <span class="prefix-text">ประเภท 5M1E:</span>
+        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+
+        <span class="prefix-text">หัวข้อ:</span>
+        <span class="regular-text">{topic}<br /></span>
+
+        <span class="prefix-text">รายละเอียด:<br /></span>
+        <span class="regular-text">{act_person}<br /></span>
+        <span class="regular-text">{detail}<br /></span>
+        <span class="regular-text">{full_detail}<br /></span>
+
+        <span class="prefix-text">Line:</span>
+        <span class="regular-text">{line_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Process:</span>
+        <span class="regular-text">{process_name}<br /></span>
+
+        <span class="prefix-text">Product:</span>
+        <span class="regular-text">{product_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Part No.:</span>
+        <span class="regular-text">{part_no}<br /></span>
+
+        <span class="prefix-text">Machine:</span>
+        <span class="regular-text">{machine_no}<br /></span>
+
+        <span class="prefix-text">เมื่อ:</span>
+        <span class="regular-text">{act_time}&emsp;&emsp;</span>
+
+        <span class="prefix-text">ผลลัพธ์:</span>
+        <span class="regular-text">{result}<br /></span>
+
+        <span class="prefix-text">รับผิดชอบโดย:</span>
+        <span class="regular-text">{responsible_person}<br /><br /></span>
+
+        <span class="prefix-text">Note:</span>
+        <span class="regular-text">{requester_note}<br /><br /></span>
+
+        <span class="regular-text">กรุณาตรวจสอบตามที่มีการร้องขอ<br /></span>
+
+        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /></span>
+
+        <span class="regular-text"
+          >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
+        /></span>
+      </p>
+      <hr />
+      <p>
+        <span class="description">[English version]<br /><br /></span>
+
+        <span class="regular-text">Dear {supporter_name}<br /><br /></span>
+
+        <span class="regular-text"
+          >There is a confirmation request about 5M1E change as below.<br /><br
+        /></span>
+
+        <span class="prefix-text">Requester:</span>
+        <span class="regular-text">{manager_name}<br /></span>
+
+        <span class="prefix-text">Date & Time:</span>
+        <span class="regular-text">{action_created_at}<br /></span>
+
+        <span class="prefix-text">Request:</span>
+        <span class="emphasize-text">{reason}<br /><br /></span>
+
+        <span class="prefix-text-header">Request Detail<br /></span>
+
+        <span class="prefix-text">Request No.:</span>
+        <span class="regular-text">{request_no}<br /></span>
+
+        <span class="prefix-text">Informer:</span>
+        <span class="regular-text">{requester_name}<br /></span>
+
+        <span class="prefix-text">Inform Date:</span>
+        <span class="regular-text">{created_at}<br /></span>
+
+        <span class="prefix-text">5M1E Category:</span>
+        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Topic:</span>
+        <span class="regular-text">{topic}<br /></span>
+
+        <span class="prefix-text">Detail:<br /></span>
+        <span class="regular-text">{act_person}<br /></span>
+        <span class="regular-text">{detail}<br /></span>
+        <span class="regular-text">{full_detail}<br /></span>
+
+        <span class="prefix-text">Line:</span>
+        <span class="regular-text">{line_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Process:</span>
+        <span class="regular-text">{process_name}<br /></span>
+
+        <span class="prefix-text">Product:</span>
+        <span class="regular-text">{product_name}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Part No.:</span>
+        <span class="regular-text">{part_no}<br /></span>
+
+        <span class="prefix-text">Machine:</span>
+        <span class="regular-text">{machine_no}<br /></span>
+
+        <span class="prefix-text">When:</span>
+        <span class="regular-text">{act_time}&emsp;&emsp;</span>
+
+        <span class="prefix-text">Result:</span>
+        <span class="regular-text">{result}<br /></span>
+
+        <span class="prefix-text">Responsible by:</span>
+        <span class="regular-text">{responsible_person}<br /><br /></span>
+
+        <span class="prefix-text">Note:</span>
+        <span class="regular-text">{requester_note}<br /><br /></span>
+
+        <span class="regular-text"
+          >Please confirm change point as request<br
+        /></span>
+
+        <span class="regular-text">Thank you for your corperation<br /></span>
+
+        <span class="regular-text"
+          >This is automatic response of 5M1E report system, please don't reply
+          this mail.<br
+        /></span>
+      </p>
+      <hr />
+    </main>
+
+    <footer>
+      <p class="signature">
+        <span> Powered by PE-2 Automation & DX Development </span>
+      </p>
+    </footer>
+  </body>
 </html>
