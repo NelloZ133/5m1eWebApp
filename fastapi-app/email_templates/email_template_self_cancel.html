@@ -1,15 +1,16 @@
 <html>
   <head>
     <style>
-      header h1 {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      header {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       main p {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        line-height: 1.6;
       }
       .subject {
         font-weight: 700;
-        font-size: xx-large;
+        font-size: x-large;
         color: red;
       }
       .description {
@@ -19,28 +20,28 @@
       }
       .regular-text {
         font-weight: 400;
-        /* font-size: medium; */
-        /* font-style: normal; */
+        font-size: 16px;
+        /* font-style:       normal; */
       }
       .emphasize-text {
         font-weight: 600;
-        /* font-size: medium; */
+        font-size: 16px;
         text-decoration: underline;
         color: red;
       }
       .prefix-text {
         font-weight: 600;
-        /* font-size: medium; */
-        /* text-decoration: underline; */
+        font-size: 16px;
+        /* text-decoration:       underline; */
       }
       .prefix-text-header {
         font-weight: 600;
-        font-size: medium;
+        font-size: 16px;
         text-decoration: underline;
       }
       .signature {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-size: small;
         font-style: italic;
         text-decoration: solid;
@@ -64,38 +65,35 @@
         <span class="regular-text">Dear {checker_name}<br /><br /></span>
 
         <span class="regular-text"
-          >คำร้องขอตรวจทานเกี่ยวกับ 5M1E ที่ท่านได้รับ</span
-        >
+          >คำร้องขอตรวจทานเกี่ยวกับ 5M1E ที่ท่านได้รับ
+        </span>
         <span class="emphasize-text">ถูกยกเลิก</span>
-        <span class="regular-text">โดยผู้ร้องขอแล้ว<br /><br /></span>
+        <span class="regular-text"> โดยผู้ร้องขอแล้ว<br /><br /></span>
 
-        <span class="prefix-text">ยกเลิกเมื่อ:</span>
+        <span class="prefix-text">ยกเลิกเมื่อ: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
-        <span class="prefix-text">เหตุผล:</span>
+        <span class="prefix-text">เหตุผล: </span>
         <span class="regular-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
-        <span class="prefix-text">Request No.:</span>
+        <span class="prefix-text">Request No.: </span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">รายงานเมื่อ:</span>
+        <span class="prefix-text">รายงานเมื่อ: </span>
         <span class="regular-text">{created_at}<br /></span>
 
-        <span class="prefix-text">ประเภท 5M1E:</span>
-        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+        <span class="prefix-text">ประเภท 5M1E: </span>
+        <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
 
-        <span class="prefix-text">หัวข้อ:</span>
-        <span class="regular-text">{topic}<br /></span>
-
-        <span class="prefix-text">รายละเอียด:<br /></span>
+        <span class="prefix-text">รายละเอียด: <br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /><br /></span>
 
         <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
 
-        <span class="regular-text"
+        <span class="description"
           >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
         /></span>
       </p>
@@ -107,27 +105,24 @@
         <span class="emphasize-text">cancelled</span>
         <span class="regular-text">.<br /><br /></span>
 
-        <span class="prefix-text">Date &amp; Time:</span>
+        <span class="prefix-text">Date &amp; Time: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
-        <span class="prefix-text">Reason:</span>
+        <span class="prefix-text">Reason: </span>
         <span class="regular-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">Request Detail<br /></span>
 
-        <span class="prefix-text">Request No.:</span>
+        <span class="prefix-text">Request No.: </span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">Inform Date:</span>
+        <span class="prefix-text">Inform Date: </span>
         <span class="regular-text">{created_at}<br /></span>
 
-        <span class="prefix-text">5M1E Category:</span>
-        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+        <span class="prefix-text">5M1E Category: </span>
+        <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
 
-        <span class="prefix-text">Topic:</span>
-        <span class="regular-text">{topic}<br /></span>
-
-        <span class="prefix-text">Detail:<br /></span>
+        <span class="prefix-text">Detail: <br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /><br /></span>
 
@@ -135,7 +130,7 @@
           >Thank you for your corporation.<br /><br
         /></span>
 
-        <span class="regular-text"
+        <span class="description"
           >This is automatic response of 5M1E report system, please don't reply
           this mail.<br
         /></span>
