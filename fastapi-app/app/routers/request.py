@@ -180,12 +180,17 @@ async def _send_mail(
     machine_no = request_data_value.get("machine", "-")
     attachments = request_data_value["attachmentList"]
     req_note = request_data_value.get("note", "-")
+    act_person = request_data_value.get("actPerson", "-")
+    act_time = request_data_value.get("actTime", "-")
+    result = request_data_value.get("actResult", "-")
+    responsible_person = request_data_value.get("respPerson", "-")
+
     if detail != "":
         item_detail = detail
     else:
         item_detail = detailOther or "-"
 
-    if action_id == 1 or action_id == 11: #submit
+    if action_id == 1 or action_id == 11:  # submit
         html = ""
         if action_id == 1:
             subject = "You got a request to confirm about 5M1E problem"
@@ -223,7 +228,9 @@ async def _send_mail(
                 t.start()
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif (action_id == 2 or action_id == 12) and (user_uuid == action_user_uuid): #cancel by user
+    elif (action_id == 2 or action_id == 12) and (
+        user_uuid == action_user_uuid
+    ):  # cancel by user
         html = ""
         with open(
             "email_templates/email_template_self_cancel.txt", encoding="utf-8"
@@ -258,7 +265,9 @@ async def _send_mail(
                 t.start()
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif (action_id == 2 or action_id == 12) and (user_uuid != action_user_uuid): #cancel by other user
+    elif (action_id == 2 or action_id == 12) and (
+        user_uuid != action_user_uuid
+    ):  # cancel by other user
         html = ""
         with open(
             "email_templates/email_template_cancel_request.txt", encoding="utf-8"
@@ -290,7 +299,7 @@ async def _send_mail(
                 t.start()
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif action_id == 4 or action_id == 14: #reject
+    elif action_id == 4 or action_id == 14:  # reject
         html = ""
         if action_id == 4:
             subject = "Your 5M1E request has been rejected"
@@ -327,7 +336,8 @@ async def _send_mail(
                 t.start()
             except Exception as e:
                 print(f"Error when sending email: {e}")
-    elif action_id == 3 or action_id == 13: #approve
+    elif action_id == 3 or action_id == 13:  # approve
+
         html = ""
         if action_id == 3:
             subject = f"There is a problem in {line_name}"
@@ -356,6 +366,10 @@ async def _send_mail(
         html = html.replace("{detail}", item_detail)
         html = html.replace("{full_detail}", full_detail)
         html = html.replace("{machine_no}", machine_no)
+        html = html.replace("{act_person}", act_person)
+        html = html.replace("{act_time}", act_time)
+        html = html.replace("{result}", result)
+        html = html.replace("{responsible_person}", responsible_person)
         concern_user = await user_manager.get_by_line_id(line_id=lineId, db=db)
         email_list = [u["email"] for u in concern_user]
         try:
@@ -366,7 +380,7 @@ async def _send_mail(
             t.start()
         except Exception as e:
             print(f"Error when sending email: {e}")
-    elif action_id == 6 or action_id == 16: #select supporter or request confirmation
+    elif action_id == 6 or action_id == 16:  # select supporter or request confirmation
         manager_name = action_user["firstname"] + " " + action_user["lastname"]
         html = ""
         if action_id == 6:
@@ -400,6 +414,10 @@ async def _send_mail(
         html = html.replace("{detail}", item_detail)
         html = html.replace("{full_detail}", full_detail)
         html = html.replace("{machine_no}", machine_no)
+        html = html.replace("{act_person}", act_person)
+        html = html.replace("{act_time}", act_time)
+        html = html.replace("{result}", result)
+        html = html.replace("{responsible_person}", responsible_person)
         email_list = email_list_data
         for email in email_list:
             recv = await user_manager.get_by_email(email, db=db)
@@ -536,7 +554,7 @@ def request_routers(db: AsyncGenerator) -> APIRouter:
         searched_user = await crud.get_searched_user(name=name, n_upper=n_upper, db=db)
         return searched_user
 
-    @router.get("/filterProduct")
+    @router.get("/filterProduct", dependencies=[Depends(api_key_auth)])
     async def get_filtered_product(product_name: str, db: AsyncSession = Depends(db)):
         p_upper = product_name.upper()
         filtered_product = await crud.get_filtered_product(

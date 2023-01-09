@@ -69,7 +69,7 @@ def users_routers(db: AsyncGenerator) -> APIRouter:
             refresh_token="",
         )
 
-    @router.post("/register")
+    @router.post("/register", dependencies=[Depends(api_key_auth)])
     async def create_user(user: UserRegister, db: AsyncSession = Depends(db)):
         user_detail = UserCreate(
             user_uuid="",

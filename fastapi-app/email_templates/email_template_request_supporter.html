@@ -1,15 +1,16 @@
 <html>
   <head>
     <style>
-      header h1 {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      header {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       main p {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        line-height: 1.6;
       }
       .subject {
         font-weight: 700;
-        font-size: xx-large;
+        font-size: x-large;
         color: black;
       }
       .description {
@@ -19,28 +20,28 @@
       }
       .regular-text {
         font-weight: 400;
-        /* font-size: medium; */
-        /* font-style: normal; */
+        font-size: 16px;
+        /* font-style:     normal; */
       }
       .emphasize-text {
-        font-weight: 400;
-        /* font-size: medium; */
+        font-weight: 600;
+        font-size: 16px;
         text-decoration: underline;
-        color: red;
+        color: blue;
       }
       .prefix-text {
         font-weight: 600;
-        /* font-size: medium; */
-        /* text-decoration: underline; */
+        font-size: 16px;
+        /* text-decoration:     underline; */
       }
       .prefix-text-header {
         font-weight: 600;
-        font-size: medium;
+        font-size: 16px;
         text-decoration: underline;
       }
       .signature {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-size: small;
         font-style: italic;
         text-decoration: solid;
@@ -67,59 +68,56 @@
           >ท่านได้รับคำร้องขอการสนับสนุนเกี่ยวกับ 5M1E รายละเอียดดังนี้<br /><br
         /></span>
 
-        <span class="prefix-text">ผู้ร้องขอ:</span>
+        <span class="prefix-text">ผู้ร้องขอ: </span>
         <span class="regular-text">{manager_name}<br /></span>
 
-        <span class="prefix-text">ร้องขอเมื่อ:</span>
+        <span class="prefix-text">ร้องขอเมื่อ: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
-        <span class="prefix-text">สิ่งที่ร้องขอ:</span>
+        <span class="prefix-text">สิ่งที่ร้องขอ: </span>
         <span class="emphasize-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
-        <span class="prefix-text">Request No.:</span>
+        <span class="prefix-text">Request No.: </span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">ผู้รายงาน:</span>
+        <span class="prefix-text">ผู้รายงาน: </span>
         <span class="regular-text">{requester_name}<br /></span>
 
-        <span class="prefix-text">รายงานเมื่อ:</span>
+        <span class="prefix-text">รายงานเมื่อ: </span>
         <span class="regular-text">{created_at}<br /></span>
 
-        <span class="prefix-text">ประเภท 5M1E:</span>
-        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+        <span class="prefix-text">ประเภท 5M1E: </span>
+        <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
 
-        <span class="prefix-text">หัวข้อ:</span>
-        <span class="regular-text">{topic}<br /></span>
-
-        <span class="prefix-text">รายละเอียด:<br /></span>
+        <span class="prefix-text">รายละเอียด: <br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /></span>
 
-        <span class="prefix-text">Line:</span>
+        <span class="prefix-text">Line: </span>
         <span class="regular-text">{line_name}&emsp;&emsp;</span>
 
-        <span class="prefix-text">Process:</span>
+        <span class="prefix-text">Process: </span>
         <span class="regular-text">{process_name}<br /></span>
 
-        <span class="prefix-text">Product:</span>
+        <span class="prefix-text">Product: </span>
         <span class="regular-text">{product_name}&emsp;&emsp;</span>
 
-        <span class="prefix-text">Part No.:</span>
+        <span class="prefix-text">Part No.: </span>
         <span class="regular-text">{part_no}<br /></span>
 
-        <span class="prefix-text">Machine:</span>
+        <span class="prefix-text">Machine: </span>
         <span class="regular-text">{machine_no}<br /></span>
 
-        <span class="prefix-text">Note:</span>
+        <span class="prefix-text">Note: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text">กรุณาตรวจสอบตามที่มีการร้องขอ<br /></span>
 
-        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /></span>
+        <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
 
-        <span class="regular-text"
+        <span class="description"
           >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
         /></span>
       </p>
@@ -133,61 +131,60 @@
           >There is a support request about 5M1E problem as below.<br /><br
         /></span>
 
-        <span class="prefix-text">Requester:</span>
+        <span class="prefix-text">Requester: </span>
         <span class="regular-text">{manager_name}<br /></span>
 
-        <span class="prefix-text">Date & Time:</span>
+        <span class="prefix-text">Date & Time: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
-        <span class="prefix-text">Request:</span>
+        <span class="prefix-text">Request: </span>
         <span class="emphasize-text">{reason}<br /><br /></span>
 
         <span class="prefix-text-header">Request Detail<br /></span>
 
-        <span class="prefix-text">Request No.:</span>
+        <span class="prefix-text">Request No.: </span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">Informer:</span>
+        <span class="prefix-text">Informer: </span>
         <span class="regular-text">{requester_name}<br /></span>
 
-        <span class="prefix-text">Inform Date:</span>
+        <span class="prefix-text">Inform Date: </span>
         <span class="regular-text">{created_at}<br /></span>
 
-        <span class="prefix-text">5M1E Category:</span>
-        <span class="regular-text">{5m1e_category}&emsp;&emsp;</span>
+        <span class="prefix-text">5M1E Category: </span>
+        <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
 
-        <span class="prefix-text">Topic:</span>
-        <span class="regular-text">{topic}<br /></span>
-
-        <span class="prefix-text">Detail:<br /></span>
+        <span class="prefix-text">Detail: <br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /></span>
 
-        <span class="prefix-text">Line:</span>
+        <span class="prefix-text">Line: </span>
         <span class="regular-text">{line_name}&emsp;&emsp;</span>
 
-        <span class="prefix-text">Process:</span>
+        <span class="prefix-text">Process: </span>
         <span class="regular-text">{process_name}<br /></span>
 
-        <span class="prefix-text">Product:</span>
+        <span class="prefix-text">Product: </span>
         <span class="regular-text">{product_name}&emsp;&emsp;</span>
 
-        <span class="prefix-text">Part No.:</span>
+        <span class="prefix-text">Part No.: </span>
         <span class="regular-text">{part_no}<br /></span>
 
-        <span class="prefix-text">Machine:</span>
+        <span class="prefix-text">Machine: </span>
         <span class="regular-text">{machine_no}<br /></span>
 
-        <span class="prefix-text">Note:</span>
+        <span class="prefix-text">Note: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text"
           >Please provide support as request<br
         /></span>
 
-        <span class="regular-text">Thank you for your corperation<br /></span>
-
         <span class="regular-text"
+          >Thank you for your corperation<br /><br
+        /></span>
+
+        <span class="description"
           >This is automatic response of 5M1E report system, please don't reply
           this mail.<br
         /></span>

@@ -235,23 +235,23 @@ const Update5M1EReportForm: FC<IProps> = ({
     if (line !== selectedLineId) {
       setSelectedLineId(line);
       form.setFieldValue("process", null);
-      form.setFieldValue("product", null);
-      form.setFieldValue("machine", null);
-      form.setFieldValue("part", null);
+      // form.setFieldValue("product", null);
+      // form.setFieldValue("machine", null);
+      // form.setFieldValue("part", null);
     }
 
     const process = form.getFieldValue("process");
     if (process !== selectedProcessId) {
       setSelectedProcessId(process);
-      form.setFieldValue("product", null);
-      form.setFieldValue("machine", null);
-      form.setFieldValue("part", null);
+      // form.setFieldValue("product", null);
+      // form.setFieldValue("machine", null);
+      // form.setFieldValue("part", null);
     }
 
     const product = form.getFieldValue("product");
     if (product !== selectedProduct) {
       setSelectedProduct(product);
-      form.setFieldValue("part", null);
+      // form.setFieldValue("part", null);
     }
   };
 
@@ -277,23 +277,23 @@ const Update5M1EReportForm: FC<IProps> = ({
     if (line !== selectedLineId) {
       setSelectedLineId(line);
       formC.setFieldValue("process", null);
-      formC.setFieldValue("product", null);
-      formC.setFieldValue("machine", null);
-      formC.setFieldValue("part", null);
+      // formC.setFieldValue("product", null);
+      // formC.setFieldValue("machine", null);
+      // formC.setFieldValue("part", null);
     }
 
     const process = formC.getFieldValue("process");
     if (process !== selectedProcessId) {
       setSelectedProcessId(process);
-      formC.setFieldValue("product", null);
-      formC.setFieldValue("machine", null);
-      formC.setFieldValue("part", null);
+      // formC.setFieldValue("product", null);
+      // formC.setFieldValue("machine", null);
+      // formC.setFieldValue("part", null);
     }
 
     const product = formC.getFieldValue("product");
     if (product !== selectedProduct) {
       setSelectedProduct(product);
-      formC.setFieldValue("part", null);
+      // formC.setFieldValue("part", null);
     }
   };
   /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
