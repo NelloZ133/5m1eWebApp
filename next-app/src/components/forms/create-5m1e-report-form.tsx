@@ -17,7 +17,6 @@ import { IRequestForm, IChangeRequestForm } from "@/types/request-form.type";
 import { _5M1ESettingStore } from "@/store";
 import { IRequestProblemFormState } from "@/store/interface/request-problem-form.interface";
 import { IRequestChangePointFormState } from "@/store/interface/request-change-point-form.interface";
-// import { Moment } from "moment";
 
 interface IProps {
   formStore: IRequestProblemFormState | IRequestChangePointFormState;
@@ -59,6 +58,7 @@ const _5M1EReportForm: FC<IProps> = ({
   const [formC] = useForm<IChangeRequestForm>();
   const [attachmentList, setAttachmentList] = useState<UploadFile[]>([]);
   const [detailOtherInput, setDetailOtherInput] = useState<string>("");
+  const [disableKpi, setDisableKpi] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -152,6 +152,21 @@ const _5M1EReportForm: FC<IProps> = ({
       setSelectedProduct(product);
       formC.setFieldValue("part", null);
     }
+
+    let kpi: [string] = formC.getFieldValue("kpi");
+    if (kpi === undefined) {
+      return;
+    }
+    if (kpi?.some(checkKpi)) {
+      setDisableKpi(true);
+      formC.setFieldValue("kpi", ["No effect"]);
+    } else {
+      setDisableKpi(false);
+    }
+
+    function checkKpi(kpi: string): boolean {
+      return kpi == "No effect";
+    }
   };
 
   useEffect(() => {
@@ -163,14 +178,13 @@ const _5M1EReportForm: FC<IProps> = ({
     setSelectedItemDetail(null);
   }, [selectedItem]);
 
-
   if (formType === "change") {
     return (
       <Form
         form={formC}
         layout="vertical"
         className="form-5m1e-report"
-        scrollToFirstError
+        scrollToFirstError={true}
         onChange={handleFormValuesChange}
         onReset={handleFormValuesChange}
         onFinish={(v) => {
@@ -237,9 +251,9 @@ const _5M1EReportForm: FC<IProps> = ({
           </>
         ) : availableCategoryItemList().length ? (
           <Form.Item
-            label="List"
+            label="Topic"
             name="item"
-            rules={[{ required: true, message: "Please select list item" }]}
+            rules={[{ required: true, message: "Please select topic" }]}
             required
           >
             <Radio.Group>
@@ -318,7 +332,7 @@ const _5M1EReportForm: FC<IProps> = ({
               >
                 <DatePicker
                   showTime={{ format: "HH:mm" }}
-                  format="D/MM/Y HH:mm"
+                  format="DD/MM/YY HH:mm"
                 />
               </Form.Item>
               <Form.Item
@@ -334,6 +348,7 @@ const _5M1EReportForm: FC<IProps> = ({
                 <Radio.Group>
                   <Radio value="ok">OK</Radio>
                   <Radio value="ng">NG</Radio>
+                  <Radio value="none">During action</Radio>
                 </Radio.Group>
               </Form.Item>
             </div>
@@ -363,10 +378,17 @@ const _5M1EReportForm: FC<IProps> = ({
               >
                 <Checkbox.Group>
                   {kpiList().map((kpi, idx) => (
-                    <Checkbox key={`kpi-${idx}`} value={kpi}>
+                    <Checkbox
+                      key={`kpi-${idx}`}
+                      value={kpi}
+                      disabled={disableKpi}
+                    >
                       {kpi}
                     </Checkbox>
                   ))}
+                  <Checkbox key="kpi-none" value="No effect">
+                    No effect
+                  </Checkbox>
                 </Checkbox.Group>
               </Form.Item>
             </div>
@@ -459,11 +481,11 @@ const _5M1EReportForm: FC<IProps> = ({
         form={form}
         layout="vertical"
         className="form-5m1e-report"
-        scrollToFirstError
+        scrollToFirstError={true}
         onChange={handleFormValuesProblem}
         onReset={handleFormValuesProblem}
         onFinish={(v) => {
-          console.log(v);
+          // console.log(v);
           onFinish({
             ...v,
             attachments: attachmentList,
@@ -489,9 +511,9 @@ const _5M1EReportForm: FC<IProps> = ({
         )}
         {availableCategoryItemList().length ? (
           <Form.Item
-            label="List"
+            label="Topic"
             name="item"
-            rules={[{ required: true, message: "Please select list item" }]}
+            rules={[{ required: true, message: "Please select topic" }]}
             required
           >
             <Radio.Group>

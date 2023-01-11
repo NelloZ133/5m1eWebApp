@@ -6,41 +6,47 @@
       }
       main p {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        line-height: 1.6;
       }
       .subject {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 700;
         font-size: x-large;
         color: blue;
       }
       .description {
+        font-family: Tahoma, sans-serif;
         font-weight: 400;
         font-size: small;
         font-style: italic;
       }
       .regular-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 400;
         font-size: 16px;
-        /* font-style:  normal; */
+        line-height: 1.6;
       }
       .emphasize-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
         color: blue;
       }
       .prefix-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
-        /* text-decoration:  underline; */
+        line-height: 1.6;
       }
       .prefix-text-header {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
+        line-height: 1.6;
       }
       .signature {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: Verdana, sans-serif;
         font-weight: 600;
         font-size: small;
         font-style: italic;
@@ -57,18 +63,15 @@
 
     <main>
       <hr />
-      <p>
-        <span class="description"
-          >[English version is shown at bottom]<br /><br
-        /></span>
+      <span class="description"
+        >[English version is shown at bottom]<br /><br
+      /></span>
 
+      <p>
         <span class="regular-text">Dear all concerned<br /><br /></span>
 
         <span class="regular-text">ขณะนี้ได้มีการเปลี่ยนแปลงเกิดขึ้นที่ </span>
-        <span class="emphasize-text"
-          >{line_name}<br />
-          <br
-        /></span>
+        <span class="emphasize-text">{line_name}<br /><br /></span>
 
         <span class="prefix-text-header">รายละเอียดของคำร้อง<br /></span>
 
@@ -84,8 +87,10 @@
         <span class="prefix-text">ประเภท 5M1E: </span>
         <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
 
-        <span class="prefix-text">รายละเอียด: <br /></span>
+        <span class="prefix-text">ใคร: </span>
         <span class="regular-text">{act_person}<br /></span>
+
+        <span class="prefix-text">ทำอะไร, อย่างไร: <br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /></span>
 
@@ -113,18 +118,18 @@
         <span class="prefix-text">รับผิดชอบโดย: </span>
         <span class="regular-text">{responsible_person}<br /><br /></span>
 
-        <span class="prefix-text">Note: </span>
+        <span class="prefix-text">หมายเหตุ: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
-
-        <span class="description"
-          >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
-        /></span>
       </p>
-      <hr />
-      <p>
-        <span class="description">[English version]<br /><br /></span>
 
-        <span class="regular-text">There is a change in</span>
+      <span class="description"
+        >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
+      /></span>
+      <hr />
+      <span class="description">[English version]<br /><br /></span>
+
+      <p>
+        <span class="regular-text">Currently, there is a change in </span>
         <span class="emphasize-text">{line_name}</span>
         <span class="regular-text">.<br /><br /></span>
 
@@ -141,9 +146,11 @@
 
         <span class="prefix-text">5M1E Category: </span>
         <span class="regular-text">[{5m1e_category}]&emsp;{topic}<br /></span>
+        
+        <span class="prefix-text">Who: </span>
+        <span class="regular-text">{act_person}<br /></span>
 
         <span class="prefix-text">Detail: <br /></span>
-        <span class="regular-text">{act_person}<br /></span>
         <span class="regular-text">{detail}<br /></span>
         <span class="regular-text">{full_detail}<br /></span>
 
@@ -171,14 +178,13 @@
         <span class="prefix-text">Responsible by: </span>
         <span class="regular-text">{responsible_person}<br /><br /></span>
 
-        <span class="prefix-text">Note: </span>
+        <span class="prefix-text">Remark: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
-
-        <span class="description"
-          >This is automatic response of 5M1E report system, please don't reply
-          this mail.<br
-        /></span>
       </p>
+
+      <span class="description"
+        >This is automatic response of 5M1E report system, please don't reply to this mail.<br
+      /></span>
       <hr />
     </main>
 

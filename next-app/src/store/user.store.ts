@@ -1,6 +1,6 @@
 import { USER_STORAGE_KEY } from "@/constants";
 import { User } from "@/types/user.type";
-import create from "zustand";
+import { create } from "zustand";
 import { IUserState } from "./interface/user.interface";
 
 export const UserStore = create<IUserState>((set, get) => ({

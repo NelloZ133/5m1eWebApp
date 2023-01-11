@@ -105,7 +105,7 @@ export const RequestFilter: FC<IProps> = ({ onFinish }: IProps) => {
           <span />
           <span />
           <Form.Item>
-            <Button className="mx-1" htmlType="reset">
+            <Button className="mx-1 clear-filter" htmlType="reset">
               Clear filter
             </Button>
             <Button className="mx-1" type="primary" htmlType="submit">

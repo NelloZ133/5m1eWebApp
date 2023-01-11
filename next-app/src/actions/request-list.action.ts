@@ -9,7 +9,7 @@ export async function getAllRequest(): Promise<I5M1ERequestListResponse[]> {
   );
 
   setRequest(data);
-  console.log("all request = ", data);
+  // console.log("all request = ", data);
 
   return data;
 }

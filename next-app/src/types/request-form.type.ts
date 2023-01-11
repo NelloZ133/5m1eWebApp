@@ -1,5 +1,5 @@
 import { UploadFile } from "antd";
-import { Moment } from "moment";
+import { Dayjs } from "dayjs";
 
 import { ListItem } from "./5m1e-setting.type";
 
@@ -46,7 +46,6 @@ export interface IRequestForm {
   detail: string;
   detail_other: string;
   full_detail: string;
-  kpi: string[];
   product: string;
   line: number;
   process: number;
@@ -70,7 +69,7 @@ export interface IChangeRequestForm {
   process: number;
   machine: string;
   part: string;
-  act_time: Moment;
+  act_time: Dayjs;
   act_result: string;
   resp_person: string;
   attachments: UploadFile[];
@@ -101,7 +100,6 @@ export type RequestData = {
   detail: string;
   detailOther: string;
   fullDetail: string;
-  kpi: string[];
   product: string;
   lineId: number;
   processId: number;

@@ -6,41 +6,47 @@
       }
       main p {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        line-height: 1.6;
       }
       .subject {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 700;
         font-size: x-large;
         color: black;
       }
       .description {
+        font-family: Tahoma, sans-serif;
         font-weight: 400;
         font-size: small;
         font-style: italic;
       }
       .regular-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 400;
         font-size: 16px;
-        /* font-style:      normal; */
+        line-height: 1.6;
       }
       .emphasize-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
         color: blue;
       }
       .prefix-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
-        /* text-decoration:      underline; */
+        line-height: 1.6;
       }
       .prefix-text-header {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
+        line-height: 1.6;
       }
       .signature {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: Verdana, sans-serif;
         font-weight: 600;
         font-size: small;
         font-style: italic;
@@ -57,11 +63,11 @@
 
     <main>
       <hr />
-      <p>
-        <span class="description"
-          >[English version is shown at bottom]<br /><br
-        /></span>
+      <span class="description"
+        >[English version is shown at bottom]<br /><br
+      /></span>
 
+      <p>
         <span class="regular-text">Dear {checker_name}<br /><br /></span>
 
         <span class="regular-text"
@@ -89,20 +95,19 @@
         <span class="regular-text">กรุณาตรวจทานและอนุมัติ<br /></span>
 
         <span class="regular-text"
-          >โดยท่านสามารถให้คำอนุมัติได้จาก
-          <a href="https://www.google.com">ลิงก์</a> นี้<br
+          >โดยท่านสามารถให้คำอนุมัติได้จาก <a href="https://www.google.com">ลิงก์</a> นี้<br
         /></span>
 
         <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
-
-        <span class="description"
-          >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
-        /></span>
       </p>
-      <hr />
-      <p>
-        <span class="description">[English version]<br /><br /></span>
 
+      <span class="description"
+        >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
+      /></span>
+      <hr />
+      <span class="description">[English version]<br /><br /></span>
+
+      <p>
         <span class="regular-text"
           >You got a request to confirm about 5M1E change as below.<br /><br
         /></span>
@@ -130,19 +135,17 @@
         /></span>
 
         <span class="regular-text"
-          >You can give approval by click in this
-          <a href="https://www.google.com">link</a>.<br
+          >You can give approval by click in this <a href="https://www.google.com">link</a>.<br
         /></span>
 
         <span class="regular-text"
           >Thank you for your corporation.<br /><br
         /></span>
-
-        <span class="description"
-          >This is automatic response of 5M1E report system, please don't reply
-          this mail.<br
-        /></span>
       </p>
+
+      <span class="description"
+        >This is automatic response of 5M1E report system, please don't reply to this mail.<br
+      /></span>
       <hr />
     </main>
 

@@ -6,41 +6,47 @@
       }
       main p {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        line-height: 1.6;
       }
       .subject {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 700;
         font-size: x-large;
         color: red;
       }
       .description {
+        font-family: Tahoma, sans-serif;
         font-weight: 400;
         font-size: small;
         font-style: italic;
       }
       .regular-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 400;
         font-size: 16px;
-        /* font-style:   normal; */
+        line-height: 1.6;
       }
       .emphasize-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
         color: red;
       }
       .prefix-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
-        /* text-decoration:   underline; */
+        line-height: 1.6;
       }
       .prefix-text-header {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
+        line-height: 1.6;
       }
       .signature {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: Verdana, sans-serif;
         font-weight: 600;
         font-size: small;
         font-style: italic;
@@ -57,11 +63,11 @@
 
     <main>
       <hr />
-      <p>
-        <span class="description"
-          >[English version is shown at bottom]<br /><br
-        /></span>
+      <span class="description"
+        >[English version is shown at bottom]<br /><br
+      /></span>
 
+      <p>
         <span class="regular-text">Dear {requester_name}<br /><br /></span>
 
         <span class="regular-text">คำร้องขอเกี่ยวกับ 5M1E ของท่าน </span>
@@ -92,15 +98,15 @@
         <span class="regular-text">{full_detail}<br /><br /></span>
 
         <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
-
-        <span class="description"
-          >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
-        /></span>
       </p>
-      <hr />
-      <p>
-        <span class="description">[English version]<br /><br /></span>
 
+      <span class="description"
+        >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
+      /></span>
+      <hr />
+      <span class="description">[English version]<br /><br /></span>
+
+      <p>
         <span class="regular-text">Your 5M1E request has been </span>
         <span class="emphasize-text">rejected</span>
         <span class="regular-text">.<br /><br /></span>
@@ -108,7 +114,7 @@
         <span class="prefix-text">Checker: </span>
         <span class="regular-text">{checker_name}<br /></span>
 
-        <span class="prefix-text">Date &amp; Time: </span>
+        <span class="prefix-text">Rejected Date: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
         <span class="prefix-text">Reason: </span>
@@ -119,7 +125,7 @@
         <span class="prefix-text">Request No.: </span>
         <span class="regular-text">{request_no}<br /></span>
 
-        <span class="prefix-text">Date &amp; Time: </span>
+        <span class="prefix-text">Inform Date: </span>
         <span class="regular-text">{created_at}<br /></span>
 
         <span class="prefix-text">5M1E Category: </span>
@@ -135,12 +141,11 @@
         <span class="regular-text"
           >Thank you for your corporation.<br /><br
         /></span>
-
-        <span class="description"
-          >This is automatic response of 5M1E report system, please don't reply
-          this mail.<br
-        /></span>
       </p>
+
+      <span class="description"
+        >This is automatic response of 5M1E report system, please don't reply to this mail.<br
+      /></span>
       <hr />
     </main>
 

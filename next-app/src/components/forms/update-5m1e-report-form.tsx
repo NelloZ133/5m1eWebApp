@@ -9,7 +9,6 @@ import {
   Divider,
 } from "antd";
 import { FC, useEffect, useState } from "react";
-import moment from "moment";
 import {
   FileUpload,
   Select,
@@ -33,6 +32,7 @@ import environment from "@/util/environment";
 import { IRequestChangePointFormState } from "@/store/interface/request-change-point-form.interface";
 import { IRequestProblemFormState } from "@/store/interface/request-problem-form.interface";
 import { is5M1ERequest, is5M1EChangeRequest } from "@/functions";
+import dayjs from "dayjs";
 
 interface IProps {
   formStore: IRequestProblemFormState | IRequestChangePointFormState;
@@ -90,6 +90,7 @@ const Update5M1EReportForm: FC<IProps> = ({
   const [formC] = useForm<IChangeRequestForm>();
   const [attachmentList, setAttachmentList] = useState<UploadFile[]>([]);
   const [detailOtherInput, setDetailOtherInput] = useState<string>("");
+  const [disableKpi, setDisableKpi] = useState(false);
 
   useEffect(() => {
     setSelectedItem(searchListItem(request.request_data_value.item));
@@ -109,7 +110,6 @@ const Update5M1EReportForm: FC<IProps> = ({
     if (is5M1ERequest(request)) {
       const reportProblemForm: IRequestForm = {
         category: request.request_data_value.category,
-        kpi: request.request_data_value.kpi,
         note: request.request_data_value.note,
         machine: request.request_data_value.machine,
         attachments: [],
@@ -166,7 +166,10 @@ const Update5M1EReportForm: FC<IProps> = ({
         full_detail: request_r.request_data_value.fullDetail,
         act_person: request_r.request_data_value.actPerson,
         part: request_r.request_data_value.partNo,
-        act_time: moment(request_r.request_data_value.actTime, "D/MM/Y, HH:mm"),
+        act_time: dayjs(
+          request_r.request_data_value.actTime,
+          "DD/MM/YY, HH:mm"
+        ),
         act_result: request_r.request_data_value.actResult,
         resp_person: request_r.request_data_value.respPerson,
         item:
@@ -295,6 +298,18 @@ const Update5M1EReportForm: FC<IProps> = ({
       setSelectedProduct(product);
       // formC.setFieldValue("part", null);
     }
+
+    const kpi = formC.getFieldValue("kpi");
+    if (kpi?.some(checkKpi)) {
+      setDisableKpi(true);
+      formC.setFieldValue("kpi", "No effect");
+    } else {
+      setDisableKpi(false);
+    }
+
+    function checkKpi(kpi: string) {
+      return kpi == "No effect";
+    }
   };
   /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     CAUTION DO NOT USE "useEffect" to reset any selectedValue in this file!!!
@@ -314,7 +329,7 @@ const Update5M1EReportForm: FC<IProps> = ({
       <Form
         form={formC}
         disabled={!isEditing}
-        scrollToFirstError
+        scrollToFirstError={true}
         onChange={handleFormValuesChange}
         onReset={handleFormReset}
         onFinish={(v) => {
@@ -408,9 +423,9 @@ const Update5M1EReportForm: FC<IProps> = ({
           ) : null}
           {availableCategoryItemList().length ? (
             <Form.Item
-              label="List"
+              label="Topic"
               name="item"
-              rules={[{ required: true, message: "Please select list item" }]}
+              rules={[{ required: true, message: "Please select topic" }]}
               required
             >
               <Radio.Group>
@@ -481,7 +496,10 @@ const Update5M1EReportForm: FC<IProps> = ({
             ]}
             required
           >
-            <DatePicker showTime={{ format: "HH:mm" }} format="D/MM/Y HH:mm" />
+            <DatePicker
+              showTime={{ format: "HH:mm" }}
+              format="DD/MM/YY HH:mm"
+            />
           </Form.Item>
           <Form.Item
             label="Action Result"
@@ -496,6 +514,7 @@ const Update5M1EReportForm: FC<IProps> = ({
             <Radio.Group>
               <Radio value="ok">OK</Radio>
               <Radio value="ng">NG</Radio>
+              <Radio value="none">During action</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item
@@ -523,10 +542,13 @@ const Update5M1EReportForm: FC<IProps> = ({
           >
             <Checkbox.Group>
               {kpiList().map((kpi, idx) => (
-                <Checkbox key={`kpi-${idx}`} value={kpi}>
+                <Checkbox key={`kpi-${idx}`} value={kpi} disabled={disableKpi}>
                   {kpi}
                 </Checkbox>
               ))}
+              <Checkbox key="kpi-none" value="No effect">
+                No effect
+              </Checkbox>
             </Checkbox.Group>
           </Form.Item>
           <Form.Item
@@ -641,9 +663,9 @@ const Update5M1EReportForm: FC<IProps> = ({
           ) : null}
           {availableCategoryItemList().length ? (
             <Form.Item
-              label="List"
+              label="Topic"
               name="item"
-              rules={[{ required: true, message: "Please select list item" }]}
+              rules={[{ required: true, message: "Please select topic" }]}
               required
             >
               <Radio.Group>

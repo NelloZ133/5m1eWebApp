@@ -4,7 +4,7 @@ import {
   fetchRequestConfig,
 } from "@/actions";
 import { _5M1ERequestSelect } from "@/types/request.type";
-import create from "zustand";
+import { create } from "zustand";
 import { _5M1ERequestStore } from "./5m1e-request.store";
 import { I5M1EProblemPermissionState } from "./interface/5m1e-problem-permission.interface";
 import { I5M1EReportSettingState } from "./interface/5m1e-report-setting.interface";

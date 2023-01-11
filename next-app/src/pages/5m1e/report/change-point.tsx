@@ -90,7 +90,11 @@ const _5M1EChangePoint: NextPage = () => {
         backRoute="/5m1e"
         backable
       >
-        <_5M1EReportForm formStore={formStore} onFinish={onFormFinish} formType="change"/>
+        <_5M1EReportForm
+          formStore={formStore}
+          onFinish={onFormFinish}
+          formType="change"
+        />
       </Layout>
     </>
   );

@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { _5M1ESettingStore } from "./5m1e-setting.store";
 import { IBaseRequestConfigState } from "./interface/base-request-config.interface";
 import { IRequestConfigState } from "./interface/request-config.interface";
