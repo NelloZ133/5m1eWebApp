@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { I5M1ERequestListState } from "./interface/5m1e-request-list.interface";
 import { _5M1ERequestListSlice } from "./slices/5m1e-request-list.slice";
 

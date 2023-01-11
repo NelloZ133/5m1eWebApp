@@ -1,7 +1,6 @@
 import { getAllRequest, updateRequestForm } from "@/actions";
 import { RequestProblemIdParamName } from "@/constant";
 import { _5M1ESettingStore } from "@/store";
-import { LayoutStore } from "@/store/layout.store";
 import { RequestConfigStore } from "@/store/request-config.store";
 import { RequestTransition } from "@/types/request-config.type";
 import { _5M1ERequest, _5M1EChangeRequest } from "@/types/request.type";
@@ -127,7 +126,7 @@ export const ActionPanel: FC<IProps> = ({ request }: IProps) => {
           canDoActionByGivenTransition(request, transition)
         )
         .map((transition, index) => (
-          <div>
+          <>
             <Button
               className={`action-btn ${action[transition.action_id].type}`}
               key={`action-btn-${index}`}
@@ -136,7 +135,7 @@ export const ActionPanel: FC<IProps> = ({ request }: IProps) => {
               {action[transition.action_id].name}
             </Button>
             <Divider type="vertical" />
-          </div>
+          </>
         ))}
       {isRequestProblemFinished(
         transition?.[

@@ -154,11 +154,11 @@ async def _send_mail(
         else request_response[-1]["request_change_no"]
     )
     requester_name = requester["firstname"] + " " + requester["lastname"]
-    created_at = request_response[-1]["req_created_at"]
+    created_at = request_response[-1]["req_created_at"][:15]
     action_user_uuid = request_response[-1]["action_user_uuid"]
     action_user = await user_manager.get_by_user_uuid(action_user_uuid, db=db)
     checker_name = action_user["firstname"] + " " + action_user["lastname"]
-    action_created_at = request_response[-1]["action_created_at"]
+    action_created_at = request_response[-1]["action_created_at"][:15]
     reason = request_response[-1]["note"]
 
     request_data_value = request_response[-1]["request_data_value"]

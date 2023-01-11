@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { IRequestProblemFormState } from "./interface/request-problem-form.interface";
 import { RequestProblemFormSlice } from "./slices/request-problem-form.slice";
 

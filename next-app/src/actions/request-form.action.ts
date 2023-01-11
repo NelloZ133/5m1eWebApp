@@ -1,3 +1,4 @@
+import utc from 'dayjs/plugin/utc'
 import {
   RequestChangePointName,
   RequestProblemName,
@@ -49,7 +50,6 @@ async function draftRequestForm(
       detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
-      kpi: form.kpi,
       product: form.product,
       lineId: form.line,
       processId: form.process,
@@ -134,7 +134,6 @@ export async function updateRequestFormValue(
       detail: form.detail,
       detailOther: form.detail_other ?? "",
       fullDetail: form.full_detail,
-      kpi: form.kpi,
       product: form.product,
       lineId: form.line,
       processId: form.process,
@@ -229,7 +228,7 @@ async function draftChangeRequestForm(
       processId: form.process,
       machine: form.machine,
       partNo: form.part,
-      actTime: form.act_time.local().format("D/MM/Y, HH:mm"),
+      actTime: form.act_time.format("DD/MM/YY, HH:mm"),
       actResult: form.act_result,
       respPerson: form.resp_person,
       attachmentList: form.attachmentUrlList ?? [],
@@ -360,7 +359,7 @@ export async function updateChangeRequestFormValue(
       processId: form.process,
       machine: form.machine,
       partNo: form.part,
-      actTime: form.act_time.local().format("D/MM/Y, HH:mm"),
+      actTime: form.act_time.format("DD/MM/YY, HH:mm"),
       actResult: form.act_result,
       respPerson: form.resp_person,
       attachmentList: form.attachmentUrlList ?? [],

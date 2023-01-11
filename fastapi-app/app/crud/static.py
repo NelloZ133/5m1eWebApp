@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-import pandas as pd
+
 
 from app.functions import toArrayWithKey, toDictByColumnId, toDictArrayByColumnId
 

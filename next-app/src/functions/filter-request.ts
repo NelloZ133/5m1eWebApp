@@ -1,3 +1,4 @@
+import { is5M1EChangeRequest } from "@/functions";
 import { _5M1EChangeRequest } from "./../types/request.type";
 import { FilterRequestType } from "@/constant";
 import { _5M1ESettingStore } from "@/store";
@@ -78,7 +79,10 @@ export function isMatchKPI(
   request: _5M1ERequest | _5M1EChangeRequest,
   kpi: string[]
 ) {
-  return request.request_data_value.kpi?.some((v) => kpi.includes(v));
+  if (is5M1EChangeRequest(request)) {
+    return request.request_data_value.kpi?.some((v) => kpi.includes(v));
+  }
+  return false;
 }
 
 export function isMatchProduct(

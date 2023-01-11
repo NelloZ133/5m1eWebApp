@@ -1,7 +1,7 @@
 import { UserStore, _5M1ESettingStore } from "@/store";
 import { RequestConfigStore } from "@/store/request-config.store";
 import { _5M1ERequest, _5M1EChangeRequest } from "@/types/request.type";
-import { Tag, Timeline } from "antd";
+import { Tag, Timeline, Tooltip } from "antd";
 import { FC } from "react";
 
 interface IProps {
@@ -18,29 +18,38 @@ export const ActionHistory: FC<IProps> = ({ request }: IProps) => {
       user?.user_uuid === request.user_uuid ? "requester" : "appprover";
     return description?.replaceAll("<<requester>>", userDescription);
   };
+  console.log("actionHistory", request.actionList)
 
   return (
     <>
-      <Timeline mode="alternate">
+      <Timeline mode="left">
         {request.actionList.map((hAction, index) => (
           <Timeline.Item
             key={`action-history-${index}`}
             label={
-              userJoinRolePositionDict[hAction.action_user_uuid]?.firstname
+              <Tooltip
+                title={
+                  index === 0
+                    ? "Drafting the request"
+                    : getTransitionDescription(
+                        action[hAction.action_id]?.description
+                      )
+                }
+              >
+                <Tag>
+                  {index === 0 ? "Draft" : action[hAction.action_id]?.name}
+                </Tag>
+              </Tooltip>
             }
           >
-            <Tag>{index === 0 ? "Draft" : action[hAction.action_id]?.name}</Tag>
-            <div>
-              {index === 0
-                ? "Drafting the request"
-                : getTransitionDescription(
-                    action[hAction.action_id]?.description
-                  )}
-            </div>
+            <span>
+              {userJoinRolePositionDict[hAction.action_user_uuid]?.firstname}
+            </span>
             {isShowActionNote(transition[hAction.transition_id]) ? (
-              <div>
-                <b>Reason:</b> {hAction.note}
-              </div>
+              <p>
+                <b>Reason:</b> <span>{hAction.note}</span><br/>
+                <span>{hAction.action_created_at.substring(0,11)}</span>
+              </p>
             ) : null}
           </Timeline.Item>
         ))}

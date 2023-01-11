@@ -146,3 +146,6 @@ yarn-error.log*
 # nginx
 certs/
 *test*
+
+# database
+db_5m1e.tar

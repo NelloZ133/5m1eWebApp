@@ -6,41 +6,47 @@
       }
       main p {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        line-height: 1.6;
       }
       .subject {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 700;
         font-size: x-large;
         color: black;
       }
       .description {
+        font-family: Tahoma, sans-serif;
         font-weight: 400;
         font-size: small;
         font-style: italic;
       }
       .regular-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 400;
         font-size: 16px;
-        /* font-style:     normal; */
+        line-height: 1.6;
       }
       .emphasize-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
         color: blue;
       }
       .prefix-text {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
-        /* text-decoration:     underline; */
+        line-height: 1.6;
       }
       .prefix-text-header {
+        font-family: "Arial Unicode MS", sans-serif;
         font-weight: 600;
         font-size: 16px;
         text-decoration: underline;
+        line-height: 1.6;
       }
       .signature {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: Verdana, sans-serif;
         font-weight: 600;
         font-size: small;
         font-style: italic;
@@ -57,11 +63,11 @@
 
     <main>
       <hr />
-      <p>
-        <span class="description"
-          >[English version is shown at bottom]<br /><br
-        /></span>
+      <span class="description"
+        >[English version is shown at bottom]<br /><br
+      /></span>
 
+      <p>
         <span class="regular-text">Dear {supporter_name}<br /><br /></span>
 
         <span class="regular-text"
@@ -110,21 +116,21 @@
         <span class="prefix-text">Machine: </span>
         <span class="regular-text">{machine_no}<br /></span>
 
-        <span class="prefix-text">Note: </span>
+        <span class="prefix-text">หมายเหตุ: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text">กรุณาตรวจสอบตามที่มีการร้องขอ<br /></span>
 
         <span class="regular-text">ขอบคุณสำหรับความร่วมมือ<br /><br /></span>
-
-        <span class="description"
-          >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
-        /></span>
       </p>
-      <hr />
-      <p>
-        <span class="description">[English version]<br /><br /></span>
 
+      <span class="description"
+        >นี่เป็นข้อความอัตโนมัติของระบบการรายงาน 5M1E กรุณาอย่าตอบกลับ<br /><br
+      /></span>
+      <hr />
+      <span class="description">[English version]<br /><br /></span>
+
+      <p>
         <span class="regular-text">Dear {supporter_name}<br /><br /></span>
 
         <span class="regular-text"
@@ -134,7 +140,7 @@
         <span class="prefix-text">Requester: </span>
         <span class="regular-text">{manager_name}<br /></span>
 
-        <span class="prefix-text">Date & Time: </span>
+        <span class="prefix-text">Request Date: </span>
         <span class="regular-text">{action_created_at}<br /></span>
 
         <span class="prefix-text">Request: </span>
@@ -173,7 +179,7 @@
         <span class="prefix-text">Machine: </span>
         <span class="regular-text">{machine_no}<br /></span>
 
-        <span class="prefix-text">Note: </span>
+        <span class="prefix-text">Remark: </span>
         <span class="regular-text">{requester_note}<br /><br /></span>
 
         <span class="regular-text"
@@ -183,12 +189,11 @@
         <span class="regular-text"
           >Thank you for your corperation<br /><br
         /></span>
-
-        <span class="description"
-          >This is automatic response of 5M1E report system, please don't reply
-          this mail.<br
-        /></span>
       </p>
+
+      <span class="description"
+        >This is automatic response of 5M1E report system, please don't reply to this mail.<br
+      /></span>
       <hr />
     </main>
 

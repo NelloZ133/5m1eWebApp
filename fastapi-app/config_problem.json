@@ -89,7 +89,7 @@
   },
   "state": {
     "1": {
-      "name": "Waiting Submit",
+      "name": "During Confirm",
       "description": "waiting submit problem",
       "type": "Start",
       "request_process": "5M1E_problem"
@@ -107,7 +107,7 @@
       "request_process": "5M1E_problem"
     },
     "4": {
-      "name": "Waiting Select Sup.",
+      "name": "Selecting Supporter",
       "description": "waiting MGR to select supporter",
       "type": "Completed",
       "request_process": "5M1E_problem"

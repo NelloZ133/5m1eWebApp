@@ -1,16 +1,17 @@
 import { RequestConfigStore, _5M1ESettingStore } from "@/store";
 import { _5M1EChangeRequest, _5M1ERequest } from "@/types/request.type";
 import { AvailableChangeCategory } from "@/constant";
-import { Space, Tag, Tooltip } from "antd";
+import { Tag, Tooltip } from "antd";
 import { ColumnType } from "antd/lib/table";
-import moment from "moment";
+import dayjs from "dayjs";
+import { is5M1EChangeRequest } from "@/functions";
 
 export function RequestColumnList(): ColumnType<
   _5M1ERequest | _5M1EChangeRequest
 >[] {
   const { requestProcessDict, lineDict, getUserJoinRolePositionByUUID } =
     _5M1ESettingStore.getState();
-  const { state, action } = RequestConfigStore.getState();
+  const { state } = RequestConfigStore.getState();
 
   function tagColorSetting(value: string): string {
     let color: string = "";
@@ -35,14 +36,12 @@ export function RequestColumnList(): ColumnType<
       color = "#697586";
     } else if (value === AvailableChangeCategory[7]) {
       color = "default";
-    } else if (value === "Waiting Submit") {
-      color = "default";
     } else if (value === "Waiting Check") {
       color = "#ffca3a";
-    } else if (value === "Waiting Select Sup.") {
-      color = "#1982c4";
+    } else if (value === "Selecting Supporter") {
+      color = "#3195d4";
     } else if (value === "Waiting Review") {
-      color = "#8c69af";
+      color = "#a47fc9";
     } else if (value === "Cancelled") {
       color = "#ff595e";
     } else if (value === "Completed") {
@@ -84,7 +83,7 @@ export function RequestColumnList(): ColumnType<
       sorter: (a, b) => a.req_created_at.localeCompare(b.req_created_at),
       render: (_, record) => (
         <div className="col-default col-created">
-          {moment(record.req_created_at).format("D-MMM-Y, HH:mm")}
+          {dayjs(record.req_created_at).format("D-MMM-YYYY, HH:mm")}
         </div>
       ),
     },
@@ -141,15 +140,20 @@ export function RequestColumnList(): ColumnType<
       title: "KPI",
       dataIndex: "kpi",
       key: "kpi",
-      render: (_, record) => (
-        <div className="col-default col-kpi">
-          {record.request_data_value.kpi?.map((kpi) => (
-            <Tooltip title={kpi}>
-              <Tag>{kpi[0]}</Tag>
-            </Tooltip>
-          ))}
-        </div>
-      ),
+      render: (_, record) => {
+        if (is5M1EChangeRequest(record)) {
+          return (
+            <div className="col-default col-kpi">
+              {record.request_data_value.kpi?.map((kpi, idx) => (
+                <Tooltip key={idx} title={kpi}>
+                  <Tag>{kpi[0]}</Tag>
+                </Tooltip>
+              ))}
+            </div>
+          );
+        }
+        return;
+      },
     },
     {
       title: "Product",

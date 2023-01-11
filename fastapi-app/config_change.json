@@ -90,7 +90,7 @@
   },
   "state": {
     "11": {
-      "name": "Waiting Submit",
+      "name": "During Action",
       "description": "waiting submit change point",
       "type": "Start",
       "request_process": "5M1E_change"
